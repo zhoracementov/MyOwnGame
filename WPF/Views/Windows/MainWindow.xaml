@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        DataContext="{Binding MainWindowViewModel, Source={StaticResource ViewModelsLocator}}"
+        Title="{Binding Title}"
+        Height="450" Width="800">
     <Grid>
 
     </Grid>

@@ -2,8 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WPF"
+             xmlns:vm="clr-namespace:WPF.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <vm:ViewModelsLocator x:Key="ViewModelsLocator"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
