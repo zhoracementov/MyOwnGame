@@ -6,8 +6,6 @@ namespace WPF.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-        public string Title => App.CurrentDirectory;
-
         private INavigationService navigationService;
         public INavigationService NavigationService
         {
@@ -18,13 +16,18 @@ namespace WPF.ViewModels
 
         public MainWindowViewModel(INavigationService navigationService)
         {
-            NavigationService = navigationService
-                ;
-            NavigationService.NavigateTo<MainMenuViewModel>();
+            NavigationService = navigationService;
+
             NavigateToMenuCommand = new RelayCommand(x =>
             {
                 NavigationService.NavigateTo<MainMenuViewModel>();
             });
+
+            //main menu as based window
+            if (NavigateToMenuCommand.CanExecute(null))
+            {
+                NavigateToMenuCommand.Execute(null);
+            }
         }
     }
 }

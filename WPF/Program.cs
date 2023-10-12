@@ -9,12 +9,14 @@ namespace WPF
 {
     public static class Program
     {
+        public static int ExitCode;
+
         [STAThread]
         public static void Main()
         {
             var app = new App();
             app.InitializeComponent();
-            app.Run();
+            ExitCode = app.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] agrs) => Host
@@ -30,6 +32,8 @@ namespace WPF
         public static void ConfigurateServices(HostBuilderContext host, IServiceCollection services) => services
                 .AddSingleton<MainWindowViewModel>()
                 .AddSingleton<MainMenuViewModel>()
+                .AddSingleton<NewGameViewModel>()
+                .AddSingleton<GameEditorViewModel>()
                 .AddSingleton<INavigationService, NavigationService>()
                 .AddSingleton<Func<Type, ViewModel>>(sp => vmt => (ViewModel)sp.GetRequiredService(vmt));
         //.ConfigureWritable<GameSettings>(host.Configuration.GetSection(nameof(GameSettings)), App.SettingsFileName);

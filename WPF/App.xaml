@@ -11,6 +11,15 @@
             <DataTemplate DataType="{x:Type TypeName=vm:MainMenuViewModel}">
                 <v:MainMenuView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=vm:NewGameViewModel}">
+                <v:NewGameView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=vm:GameViewModel}">
+                <v:GameView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=vm:GameEditorViewModel}">
+                <v:GameEditorView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

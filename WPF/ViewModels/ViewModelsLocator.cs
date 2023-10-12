@@ -6,6 +6,8 @@ namespace WPF.ViewModels
     {
         public MainWindowViewModel MainWindowViewModel => GetViewModel<MainWindowViewModel>();
         public MainMenuViewModel MainMenuViewModel => GetViewModel<MainMenuViewModel>();
+        public NewGameViewModel NewGameViewModel => GetViewModel<NewGameViewModel>();
+        public GameEditorViewModel GameEditorViewModel => GetViewModel<GameEditorViewModel>();
 
         private TViewModel GetViewModel<TViewModel>() where TViewModel : ViewModel
         {
