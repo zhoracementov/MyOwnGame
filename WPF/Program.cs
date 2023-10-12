@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using WPF.Services;
 using WPF.ViewModels;
 
 namespace WPF
@@ -28,6 +29,8 @@ namespace WPF
 
         public static void ConfigurateServices(HostBuilderContext host, IServiceCollection services) => services
                 .AddSingleton<MainWindowViewModel>()
+                .AddSingleton<MainMenuViewModel>()
+                .AddSingleton<INavigationService, NavigationService>()
                 .AddSingleton<Func<Type, ViewModel>>(sp => vmt => (ViewModel)sp.GetRequiredService(vmt));
         //.ConfigureWritable<GameSettings>(host.Configuration.GetSection(nameof(GameSettings)), App.SettingsFileName);
     }

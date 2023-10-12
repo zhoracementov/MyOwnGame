@@ -5,6 +5,7 @@ namespace WPF.ViewModels
     internal class ViewModelsLocator
     {
         public MainWindowViewModel MainWindowViewModel => GetViewModel<MainWindowViewModel>();
+        public MainMenuViewModel MainMenuViewModel => GetViewModel<MainMenuViewModel>();
 
         private TViewModel GetViewModel<TViewModel>() where TViewModel : ViewModel
         {

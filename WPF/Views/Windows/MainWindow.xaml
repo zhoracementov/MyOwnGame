@@ -8,7 +8,7 @@
         DataContext="{Binding MainWindowViewModel, Source={StaticResource ViewModelsLocator}}"
         Title="{Binding Title}"
         Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <Border>
+        <ContentControl Content="{Binding NavigationService.CurrentViewModel}"/>
+    </Border>
 </Window>
