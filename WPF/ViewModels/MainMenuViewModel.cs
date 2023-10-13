@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using WPF.Commands;
-using WPF.Services;
+using WPF.Navigation.Services;
 
 namespace WPF.ViewModels
 {
@@ -15,7 +15,7 @@ namespace WPF.ViewModels
         {
             CloseAppCommand = new RelayCommand(x =>
             {
-                Application.Current.Shutdown(Program.ExitCode);
+                Application.Current.Shutdown();
             });
 
             MoveToNewGameCommand = new RelayCommand(x =>

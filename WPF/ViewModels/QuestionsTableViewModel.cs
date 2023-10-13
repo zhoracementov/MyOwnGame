@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using WPF.Models;
+﻿using WPF.Models;
 
 namespace WPF.ViewModels
 {
@@ -14,12 +13,18 @@ namespace WPF.ViewModels
 
         public QuestionsTableViewModel()
         {
-            QuestionsTable = new QuestionsTable(new List<QuestionsTableItem>
+            QuestionsTable = new QuestionsTable(new QuestionsLine[]
             {
-                new QuestionsTableItem("1", "1", "1"), new QuestionsTableItem("2", "2", "2"),
-                new QuestionsTableItem("3", "3", "3"), new QuestionsTableItem("4", "4", "4"),
-                new QuestionsTableItem("5", "5", "5"), new QuestionsTableItem("6", "6", "6"),
-            }, 2, 3);
+                new QuestionsLine("Основы програмиронивая", new QuestionsTableItem[]
+                {
+                    new QuestionsTableItem("Какой термин обозначает набор команд, выполняемых компьютером?", 100, true, "Программа"),
+                    new QuestionsTableItem("Как называется управляющая конструкция, позволяющая повторять выполнение определенного блока кода до выполнения заданного условия?", 200, true, "Цикл"),
+                    new QuestionsTableItem("Как называется процесс перевода исходного кода программы на языке программирования в машинный код?", 300, true, "Компиляция"),
+                    new QuestionsTableItem("Какой оператор позволяет установить условие выполнения блока кода", 400, true, "If", "если"),
+                    new QuestionsTableItem("Как называется функция, которая вызывает саму себя?", 500, true, "Рекурсия"),
+                    new QuestionsTableItem("Какой оператор используется для увеличения значения переменной на 1?", 600, true, "Increment", "инкеремент")
+                })
+            });
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using WPF.ViewModels;
 
-namespace WPF.Services
+namespace WPF.Navigation.Services
 {
     public interface INavigationService
     {

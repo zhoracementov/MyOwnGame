@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using WPF.Commands;
-using WPF.Services;
+using WPF.Navigation.Services;
 
 namespace WPF.ViewModels
 {
@@ -12,6 +12,7 @@ namespace WPF.ViewModels
             get => navigationService;
             set => Set(ref navigationService, value);
         }
+
         public ICommand NavigateToMenuCommand { get; }
 
         public MainWindowViewModel(INavigationService navigationService)

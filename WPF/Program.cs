@@ -2,31 +2,29 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using WPF.Services;
+using WPF.Navigation.Services;
 using WPF.ViewModels;
 
 namespace WPF
 {
     public static class Program
     {
-        public static int ExitCode;
-
         [STAThread]
         public static void Main()
         {
             var app = new App();
             app.InitializeComponent();
-            ExitCode = app.Run();
+            app.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] agrs) => Host
             .CreateDefaultBuilder(agrs)
-            .UseContentRoot(App.DataDirectory)
+            .UseContentRoot(App.UserDataDirectory)
             .ConfigureAppConfiguration(ConfigureAppConfiguration)
             .ConfigureServices(ConfigurateServices);
 
         public static void ConfigureAppConfiguration(HostBuilderContext host, IConfigurationBuilder cfg) => cfg
-            .SetBasePath(App.DataDirectory);
+            .SetBasePath(App.UserDataDirectory);
         //.AddJsonFile(App.SettingsFileName, optional: false, reloadOnChange: true);
 
         public static void ConfigurateServices(HostBuilderContext host, IServiceCollection services) => services

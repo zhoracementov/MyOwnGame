@@ -34,7 +34,7 @@ namespace WPF
             host.Dispose();
         }
 
-        public static string DataDirectory =>
+        public static string UserDataDirectory =>
                 Path.Combine(CurrentDirectory, ConfigurationManager.AppSettings["userdata"]);
 
         public static string CurrentDirectory => IsDesignMode

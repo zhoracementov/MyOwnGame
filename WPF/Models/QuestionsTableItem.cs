@@ -1,18 +1,39 @@
-﻿namespace WPF.Models
+﻿using System;
+using System.Linq;
+using System.Text.RegularExpressions;
+using WPF.Exceptions;
+
+namespace WPF.Models
 {
     public class QuestionsTableItem
     {
-        public string Title { get; }
-        public string Description { get; }
-        public string Answer { get; }
-        public bool IsSolved { get; set; }
+        private readonly string[] _answers;
 
-        public QuestionsTableItem(string title, string description, string answer, bool isSolved = false)
+        public string Description { get; }
+        public int Cost { get; }
+        public bool IsEnabled { get; set; }
+
+        public QuestionsTableItem(string description, int cost, bool isEnabled, params string[] answers)
         {
-            Title = title;
+            _answers = answers.ToArray();
+
+            if (_answers.Length == 0)
+                throw new ZeroAnswerForQuestionException();
+
+            if (string.IsNullOrWhiteSpace(description))
+                throw new ArgumentException();
+
+            Cost = cost;
             Description = description;
-            Answer = answer;
-            IsSolved = isSolved;
+            IsEnabled = isEnabled;
+        }
+
+        public bool CheckAnswer(string answerTest)
+        {
+            return _answers
+                .Any(answerTrue => answerTest
+                .Equals(Regex.Replace(answerTrue, @"\s+", string.Empty),
+                StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

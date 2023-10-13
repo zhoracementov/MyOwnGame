@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using WPF.ViewModels;
 
-namespace WPF.Services
+namespace WPF.Navigation.Services
 {
     // navigation between windows implementation
     public class NavigationService : INavigationService, INotifyPropertyChanged
