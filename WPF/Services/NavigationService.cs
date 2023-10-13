@@ -5,8 +5,10 @@ using WPF.ViewModels;
 
 namespace WPF.Services
 {
+    // navigation between windows implementation
     public class NavigationService : INavigationService, INotifyPropertyChanged
     {
+        //getting view model from services method
         private readonly Func<Type, ViewModel> viewModelFactory;
 
         private ViewModel currentViewModel;

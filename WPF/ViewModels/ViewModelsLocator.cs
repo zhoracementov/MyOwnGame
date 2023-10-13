@@ -2,12 +2,14 @@
 
 namespace WPF.ViewModels
 {
-    internal class ViewModelsLocator
+    public class ViewModelsLocator
     {
         public MainWindowViewModel MainWindowViewModel => GetViewModel<MainWindowViewModel>();
         public MainMenuViewModel MainMenuViewModel => GetViewModel<MainMenuViewModel>();
         public NewGameViewModel NewGameViewModel => GetViewModel<NewGameViewModel>();
         public GameEditorViewModel GameEditorViewModel => GetViewModel<GameEditorViewModel>();
+        public GameViewModel GameViewModel => GetViewModel<GameViewModel>();
+        public QuestionsTableViewModel QuestionsTableViewModel => GetViewModel<QuestionsTableViewModel>();
 
         private TViewModel GetViewModel<TViewModel>() where TViewModel : ViewModel
         {

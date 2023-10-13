@@ -1,6 +1,6 @@
 ﻿namespace WPF.Services
 {
-    class GameProcessService
+    public class GameProcessService
     {
     }
 }

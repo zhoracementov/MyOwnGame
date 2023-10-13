@@ -4,7 +4,7 @@ namespace WPF.Services
 {
     public interface INavigationService
     {
-        public ViewModel CurrentViewModel { get; }
+        ViewModel CurrentViewModel { get; }
         void NavigateTo<TViewModel>() where TViewModel : ViewModel;
     }
 }

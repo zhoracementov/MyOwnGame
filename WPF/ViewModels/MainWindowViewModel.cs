@@ -6,21 +6,21 @@ namespace WPF.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-        private INavigationService navigationService;
-        public INavigationService NavigationService
-        {
-            get => navigationService;
-            set => Set(ref navigationService, value);
-        }
+        //private INavigationService navigationService;
+        //public INavigationService NavigationService
+        //{
+        //    get => navigationService;
+        //    set => Set(ref navigationService, value);
+        //}
         public ICommand NavigateToMenuCommand { get; }
 
         public MainWindowViewModel(INavigationService navigationService)
         {
-            NavigationService = navigationService;
+            //NavigationService = navigationService;
 
             NavigateToMenuCommand = new RelayCommand(x =>
             {
-                NavigationService.NavigateTo<MainMenuViewModel>();
+                navigationService.NavigateTo<MainMenuViewModel>();
             });
 
             //main menu as based window

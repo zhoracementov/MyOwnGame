@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WPF.ViewModels
+﻿namespace WPF.ViewModels
 {
-    class GameViewModel : ViewModel
+    public class GameViewModel : ViewModel
     {
     }
 }
