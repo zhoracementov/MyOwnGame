@@ -23,8 +23,8 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button Content="New Game" Command="{Binding StartNewGameCommand}" Grid.Row="0"/>
-                <Button Content="Game Editor" Command="{Binding GameEditCommand}" Grid.Row="1"/>
+                <Button Content="New Game" Command="{Binding MoveToNewGameCommand}" Grid.Row="0"/>
+                <Button Content="Game Editor" Command="{Binding MoveToGameEditCommand}" Grid.Row="1"/>
                 <Button Content="Exit" Command="{Binding CloseAppCommand}" Grid.Row="2"/>
             </Grid>
         </Grid>

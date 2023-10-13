@@ -8,8 +8,8 @@ namespace WPF.ViewModels
     public class MainMenuViewModel : ViewModel
     {
         public ICommand CloseAppCommand { get; }
-        public ICommand StartNewGameCommand { get; }
-        public ICommand GameEditCommand { get; }
+        public ICommand MoveToNewGameCommand { get; }
+        public ICommand MoveToGameEditCommand { get; }
 
         public MainMenuViewModel(INavigationService navigationService)
         {
@@ -18,12 +18,12 @@ namespace WPF.ViewModels
                 Application.Current.Shutdown(Program.ExitCode);
             });
 
-            StartNewGameCommand = new RelayCommand(x =>
+            MoveToNewGameCommand = new RelayCommand(x =>
             {
                 navigationService.NavigateTo<NewGameViewModel>();
             });
 
-            GameEditCommand = new RelayCommand(x =>
+            MoveToGameEditCommand = new RelayCommand(x =>
             {
                 navigationService.NavigateTo<GameEditorViewModel>();
             });

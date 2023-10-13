@@ -20,22 +20,24 @@ namespace WPF
         }
 
         public static IHostBuilder CreateHostBuilder(string[] agrs) => Host
-                .CreateDefaultBuilder(agrs)
-                .UseContentRoot(App.DataDirectory)
-                .ConfigureAppConfiguration(ConfigureAppConfiguration)
-                .ConfigureServices(ConfigurateServices);
+            .CreateDefaultBuilder(agrs)
+            .UseContentRoot(App.DataDirectory)
+            .ConfigureAppConfiguration(ConfigureAppConfiguration)
+            .ConfigureServices(ConfigurateServices);
 
         public static void ConfigureAppConfiguration(HostBuilderContext host, IConfigurationBuilder cfg) => cfg
-                .SetBasePath(App.DataDirectory);
+            .SetBasePath(App.DataDirectory);
         //.AddJsonFile(App.SettingsFileName, optional: false, reloadOnChange: true);
 
         public static void ConfigurateServices(HostBuilderContext host, IServiceCollection services) => services
-                .AddSingleton<MainWindowViewModel>()
-                .AddSingleton<MainMenuViewModel>()
-                .AddSingleton<NewGameViewModel>()
-                .AddSingleton<GameEditorViewModel>()
-                .AddSingleton<INavigationService, NavigationService>()
-                .AddSingleton<Func<Type, ViewModel>>(sp => vmt => (ViewModel)sp.GetRequiredService(vmt));
+            .AddSingleton<MainWindowViewModel>()
+            .AddSingleton<MainMenuViewModel>()
+            .AddSingleton<NewGameViewModel>()
+            .AddSingleton<GameEditorViewModel>()
+            .AddSingleton<GameViewModel>()
+            .AddSingleton<QuestionsTableViewModel>()
+            .AddSingleton<INavigationService, NavigationService>()
+            .AddSingleton<Func<Type, ViewModel>>(sp => type => (ViewModel)sp.GetRequiredService(type));
         //.ConfigureWritable<GameSettings>(host.Configuration.GetSection(nameof(GameSettings)), App.SettingsFileName);
     }
 }

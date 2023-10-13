@@ -11,7 +11,7 @@ namespace WPF.Services.Serialization
         public abstract void Serialize<T>(T obj, string fileName);
         public abstract Task SerializeAsync<T>(T obj, string fileName);
 
-        public virtual string GetFileName(string fileName) =>
+        public string GetFileName(string fileName) =>
             !fileName.EndsWith(FileFormat) ? fileName + FileFormat : fileName;
     }
 }
