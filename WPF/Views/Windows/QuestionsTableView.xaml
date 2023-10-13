@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WPF.Views.Windows"
+             xmlns:c="clr-namespace:WPF.Converters"
              mc:Ignorable="d"
              DataContext="{Binding QuestionsTableViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -23,8 +23,8 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="8*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
-                            <TextBlock Text="{Binding Title}" Background="AntiqueWhite" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Grid Grid.Column="0" Background="AntiqueWhite">
+                            <TextBlock Text="{Binding Title}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"/>
                         </Grid>
                         <Grid Grid.Column="1" Background="Aqua">
                         <ItemsControl ItemsSource="{Binding GameItems}">
@@ -35,7 +35,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Content="{Binding Cost}" IsEnabled="{Binding IsEnabled}"/>
+                                        <Button Content="{Binding Cost}" IsEnabled="{Binding IsSolved, Converter={StaticResource InverseBoolConverter}}"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

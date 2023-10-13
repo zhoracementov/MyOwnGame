@@ -4,10 +4,12 @@
              xmlns:vm="clr-namespace:WPF.ViewModels"
              xmlns:v="clr-namespace:WPF.Views.Windows"
              xmlns:w="clr-namespace:WPF"
+             xmlns:c="clr-namespace:WPF.Converters"
              StartupUri="Views\Windows\MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <vm:ViewModelsLocator x:Key="ViewModelsLocator"/>
+            <c:InverseBooleanConverter x:Key="InverseBoolConverter"/>
             <DataTemplate DataType="{x:Type TypeName=vm:MainMenuViewModel}">
                 <v:MainMenuView/>
             </DataTemplate>

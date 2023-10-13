@@ -5,19 +5,18 @@ using WPF.Exceptions;
 
 namespace WPF.Models
 {
-    public class QuestionsTableItem
+    public class QuestionsLineItem
     {
-        private readonly string[] _answers;
-
-        public string Description { get; }
         public int Cost { get; }
-        public bool IsEnabled { get; set; }
+        public string Description { get; }
+        public string[] Answers { get; }
+        public bool IsSolved { get; set; }
 
-        public QuestionsTableItem(string description, int cost, bool isEnabled, params string[] answers)
+        public QuestionsLineItem(string description, int cost, bool isSolved, params string[] answers)
         {
-            _answers = answers.ToArray();
+            Answers = answers.ToArray();
 
-            if (_answers.Length == 0)
+            if (Answers.Length == 0)
                 throw new ZeroAnswerForQuestionException();
 
             if (string.IsNullOrWhiteSpace(description))
@@ -25,12 +24,12 @@ namespace WPF.Models
 
             Cost = cost;
             Description = description;
-            IsEnabled = isEnabled;
+            IsSolved = isSolved;
         }
 
         public bool CheckAnswer(string answerTest)
         {
-            return _answers
+            return Answers
                 .Any(answerTrue => answerTest
                 .Equals(Regex.Replace(answerTrue, @"\s+", string.Empty),
                 StringComparison.InvariantCultureIgnoreCase));
