@@ -1,18 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using WPF.Exceptions;
 
 namespace WPF.Models
 {
-    public class QuestionsLineItem
+    public class QuestionItem
     {
         public int Cost { get; }
         public string Description { get; }
         public string[] Answers { get; }
-        public bool IsSolved { get; set; }
 
-        public QuestionsLineItem(string description, int cost, bool isSolved, params string[] answers)
+        public QuestionItem(int cost, string description, IEnumerable<string> answers)
         {
             Answers = answers.ToArray();
 
@@ -24,7 +24,12 @@ namespace WPF.Models
 
             Cost = cost;
             Description = description;
-            IsSolved = isSolved;
+        }
+
+        public QuestionItem(int cost, string description, params string[] answers)
+            : this(cost, description, (IEnumerable<string>)answers)
+        {
+            //...
         }
 
         public bool CheckAnswer(string answerTest)

@@ -7,8 +7,6 @@
         mc:Ignorable="d"
         DataContext="{Binding MainWindowViewModel, Source={StaticResource ViewModelsLocator}}"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        WindowState="Maximized"
         Background="#aaaaaa"
         Height="450" Width="800">
     <Window.InputBindings>

@@ -8,19 +8,20 @@ namespace WPF.Models
     public class QuestionsTable
     {
         public string Name { get; }
-        public ObservableCollection<QuestionsLine> Table { get; }
-
-        public QuestionsTable(string name, params QuestionsLine[] table) : this(name, (IEnumerable<QuestionsLine>)table)
-        {
-            //...
-        }
+        public ObservableCollection<QuestionsLine> TableItems { get; }
 
         public QuestionsTable(string name, IEnumerable<QuestionsLine> table)
         {
             Name = name;
-            Table = new ObservableCollection<QuestionsLine>(table);
+            TableItems = new ObservableCollection<QuestionsLine>(table);
 
-            new JsonObjectSerializer().Serialize(this, Path.Combine(App.UserDataDirectory, $"{Name}.json"));
+            var ser = new JsonObjectSerializer();
+            ser.Serialize(this, Path.Combine(App.UserDataDirectory, $"{Name}{ser.FileFormat}"));
+        }
+
+        public QuestionsTable(string name, params QuestionsLine[] table) : this(name, (IEnumerable<QuestionsLine>)table)
+        {
+            //...
         }
     }
 }
