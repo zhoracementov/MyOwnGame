@@ -1,42 +1,24 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace WPF.ViewModels
+﻿namespace WPF.ViewModels
 {
     public class GameViewModel : ViewModel
     {
-        public static readonly TimeSpan DefaultTiming = new TimeSpan(0, 0, 60);
-        public static readonly TimeSpan DefaultStep = TimeSpan.FromSeconds(1);
-
-        private bool isGetAnswerWindowAvailable;
-        public bool IsGetAnswerWindowAvailable
+        private int costSum;
+        public int CostSum
         {
-            get => isGetAnswerWindowAvailable;
-            set => Set(ref isGetAnswerWindowAvailable, value);
+            get => costSum;
+            set => Set(ref costSum, value);
         }
 
-        private TimeSpan timeBefore;
-        public TimeSpan TimeBefore
+        private string lastAnswer;
+        public string LastAnswer
         {
-            get => timeBefore;
-            set => Set(ref timeBefore, value);
+            get => lastAnswer;
+            set => Set(ref lastAnswer, value);
         }
 
         public GameViewModel()
         {
 
-        }
-
-        public async Task OpenTiming(TimeSpan timer)
-        {
-            IsGetAnswerWindowAvailable = true;
-            TimeBefore = timer;
-
-            while (TimeBefore >= DefaultStep)
-            {
-                await Task.Delay(DefaultStep);
-                TimeBefore -= DefaultStep;
-            }
         }
     }
 }

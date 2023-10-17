@@ -39,8 +39,7 @@
                                         <Grid DataContext="{Binding Converter={StaticResource QuestionItemModelToViemModelConverter}}">
                                             <Button Content="{Binding QuestionItem.Cost}"
                                                     Command="{Binding TapToAnswerCommand}"
-                                                    IsEnabled="{Binding IsActive, Converter={StaticResource InverseBoolConverter}}"
-                                                    />
+                                                    IsEnabled="{Binding IsActive}"/>
                                         </Grid>
                                     </DataTemplate>
                             </ItemsControl.ItemTemplate>

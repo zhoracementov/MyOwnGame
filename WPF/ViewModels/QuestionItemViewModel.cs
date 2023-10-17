@@ -14,7 +14,7 @@ namespace WPF.ViewModels
             set => Set(ref questionItem, value);
         }
 
-        private bool isActive;
+        private bool isActive = true;
         public bool IsActive
         {
             get => isActive;
@@ -23,14 +23,21 @@ namespace WPF.ViewModels
 
         public ICommand TapToAnswerCommand { get; }
 
-        public QuestionItemViewModel(INavigationService navigationService, GameViewModel gameViewModel)
+        public QuestionItemViewModel(INavigationService navigationService, GameViewModel gameViewModel, AnswerWindowViewModel answerWindowViewModel)
         {
             TapToAnswerCommand = new RelayCommand(async x =>
             {
                 if (navigationService.CurrentViewModel == gameViewModel)
                 {
-                    IsActive = true;
-                    await gameViewModel.OpenTiming(GameViewModel.DefaultTiming);
+                    IsActive = false;
+                    var answer = await answerWindowViewModel.OpenTiming(AnswerWindowViewModel.DefaultTiming, QuestionItem);
+
+                    if (QuestionItem.CheckAnswer(answer))
+                    {
+                        gameViewModel.CostSum += QuestionItem.Cost;
+                    }
+
+                    gameViewModel.LastAnswer = answer;
                 }
             });
         }

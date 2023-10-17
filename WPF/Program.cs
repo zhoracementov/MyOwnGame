@@ -34,6 +34,7 @@ namespace WPF
             .AddSingleton<GameEditorViewModel>()
             .AddSingleton<GameViewModel>()
             .AddSingleton<QuestionsTableViewModel>()
+            .AddSingleton<AnswerWindowViewModel>()
             .AddTransient<QuestionItemViewModel>()
             .AddSingleton<INavigationService, NavigationService>()
             .AddSingleton<Func<Type, ViewModel>>(sp => type => (ViewModel)sp.GetRequiredService(type));

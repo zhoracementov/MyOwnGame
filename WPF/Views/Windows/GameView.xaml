@@ -9,19 +9,23 @@
              DataContext="{Binding GameViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <v:QuestionsTableView/>
-        <Grid Visibility="{Binding IsGetAnswerWindowAvailable, Converter={StaticResource BoolToVisibilityConverter}}">
-            <Border Background="Black" Opacity="0.6"/>
-            <Border Margin="100" CornerRadius="10" Background="White">
-                <Grid>
-                    <TextBlock Text="{Binding TimeBefore}"
-                           FontSize="72"
-                           Background="Red"
-                           Foreground="White"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-                </Grid>
-            </Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding CostSum}"/>
+                <TextBlock Text="{Binding LastAnswer}" Grid.Row="1"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <v:QuestionsTableView/>
+            </Grid>
         </Grid>
+        <v:AnswerWindowView/>
     </Grid>
 </UserControl>
