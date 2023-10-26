@@ -48,8 +48,14 @@ namespace WPF.ViewModels
             CloseCommand = new RelayCommand(x =>
             {
                 IsAvailable = false;
-                cancellationTokenSource.Cancel();
+
+                cancellationTokenSource?.Cancel();
             });
+        }
+
+        public async Task<string> OpenTiming(QuestionItem questionItem)
+        {
+            return await OpenTiming(DefaultTiming, questionItem);
         }
 
         public async Task<string> OpenTiming(TimeSpan timer, QuestionItem questionItem)
@@ -62,6 +68,7 @@ namespace WPF.ViewModels
 
             using (cancellationTokenSource = new CancellationTokenSource(timer))
             {
+                cancellationTokenSource.CancelAfter(timer + DefaultWaitDelay);
                 while (TimeBefore >= DefaultWaitDelay && !cancellationTokenSource.IsCancellationRequested)
                 {
                     try
@@ -76,6 +83,8 @@ namespace WPF.ViewModels
                     TimeBefore -= DefaultWaitDelay;
                 }
             }
+
+            cancellationTokenSource = null;
 
             return EnteredAnswerText;
         }

@@ -1,9 +1,8 @@
-﻿using System.Threading;
+﻿using System.Windows;
 using System.Windows.Input;
 using WPF.Commands;
 using WPF.Models;
 using WPF.Navigation.Services;
-using WPF.Services;
 
 namespace WPF.ViewModels
 {
@@ -13,7 +12,11 @@ namespace WPF.ViewModels
         public QuestionItem QuestionItem
         {
             get => questionItem;
-            set => Set(ref questionItem, value);
+            set
+            {
+                if (Set(ref questionItem, value) && questionItem.IsClosed != null)
+                    IsActive = questionItem.IsClosed == false;
+            }
         }
 
         private bool isActive = true;
@@ -25,16 +28,17 @@ namespace WPF.ViewModels
 
         public ICommand TapToAnswerCommand { get; }
 
-        public QuestionItemViewModel(INavigationService navigationService,
-            GameViewModel gameViewModel, AnswerWindowViewModel answerWindowViewModel)
+        public QuestionItemViewModel(INavigationService navigationService, GameViewModel gameViewModel,
+            AnswerWindowViewModel answerWindowViewModel, QuestionsTableViewModel questionsTableViewModel)
         {
             TapToAnswerCommand = new RelayCommand(async x =>
             {
                 if (navigationService.CurrentViewModel == gameViewModel)
                 {
                     IsActive = false;
+                    QuestionItem.IsClosed = true;
 
-                    var answer = await answerWindowViewModel.OpenTiming(AnswerWindowViewModel.DefaultTiming, QuestionItem);
+                    var answer = await answerWindowViewModel.OpenTiming(QuestionItem);
 
                     if (QuestionItem.CheckAnswer(answer))
                     {
@@ -42,6 +46,15 @@ namespace WPF.ViewModels
                     }
 
                     gameViewModel.LastAnswer = answer;
+
+                    if (questionsTableViewModel.QuestionsTable.IsCompleted())
+                    {
+                        MessageBox.Show("Game Over!");
+                    }
+                    else
+                    {
+                        //questionsTableViewModel.Update();
+                    }
                 }
             });
         }

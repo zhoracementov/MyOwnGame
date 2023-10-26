@@ -11,7 +11,7 @@ namespace WPF.Services.Serialization
     {
         private static JsonSerializerOptions DefaultOptions => new JsonSerializerOptions
         {
-            DefaultIgnoreCondition = JsonIgnoreCondition.Never,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
             Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
             PropertyNameCaseInsensitive = true,
             WriteIndented = true,

@@ -8,9 +8,10 @@ namespace WPF.Models
 {
     public class QuestionItem
     {
-        public int Cost { get; }
-        public string Description { get; }
-        public string[] Answers { get; }
+        public int Cost { get; set; }
+        public string Description { get; set; }
+        public string[] Answers { get; set; }
+        public bool? IsClosed { get; set; }
 
         public QuestionItem(int cost, string description, IEnumerable<string> answers)
         {
@@ -30,6 +31,19 @@ namespace WPF.Models
             : this(cost, description, (IEnumerable<string>)answers)
         {
             //...
+        }
+
+        //public QuestionItem(int cost, string description, string[] answers, bool? isClosed)
+        //{
+        //    this.Cost = cost;
+        //    this.Description = description;
+        //    this.Answers = answers;
+        //    this.IsClosed = isClosed;
+        //}
+
+        public QuestionItem()
+        {
+
         }
 
         public bool CheckAnswer(string answerTest)
