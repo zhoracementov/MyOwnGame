@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WPF.Commands;
@@ -8,8 +9,9 @@ namespace WPF.ViewModels
 {
     public class AnswerWindowViewModel : ViewModel
     {
-        public static readonly TimeSpan DefaultTiming = new TimeSpan(0, 0, 60);
-        public static readonly TimeSpan DefaultStep = TimeSpan.FromSeconds(1);
+        public static readonly TimeSpan DefaultTiming = TimeSpan.FromSeconds(60);
+        public static readonly TimeSpan DefaultWaitDelay = TimeSpan.FromSeconds(1);
+        private static CancellationTokenSource cancellationTokenSource;
 
         private bool iAvailable;
         public bool IsAvailable
@@ -46,6 +48,7 @@ namespace WPF.ViewModels
             CloseCommand = new RelayCommand(x =>
             {
                 IsAvailable = false;
+                cancellationTokenSource.Cancel();
             });
         }
 
@@ -57,10 +60,21 @@ namespace WPF.ViewModels
             EnteredAnswerText = string.Empty;
             CurrentQuestionText = string.Concat(questionItem.Cost, Environment.NewLine, questionItem.Description);
 
-            while (TimeBefore >= DefaultStep && IsAvailable)
+            using (cancellationTokenSource = new CancellationTokenSource(timer))
             {
-                await Task.Delay(DefaultStep);
-                TimeBefore -= DefaultStep;
+                while (TimeBefore >= DefaultWaitDelay && !cancellationTokenSource.IsCancellationRequested)
+                {
+                    try
+                    {
+                        await Task.Delay(DefaultWaitDelay, cancellationTokenSource.Token);
+                    }
+                    catch (TaskCanceledException)
+                    {
+                        break;
+                    }
+
+                    TimeBefore -= DefaultWaitDelay;
+                }
             }
 
             return EnteredAnswerText;

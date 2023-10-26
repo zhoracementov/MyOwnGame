@@ -1,7 +1,9 @@
-﻿using System.Windows.Input;
+﻿using System.Threading;
+using System.Windows.Input;
 using WPF.Commands;
 using WPF.Models;
 using WPF.Navigation.Services;
+using WPF.Services;
 
 namespace WPF.ViewModels
 {
@@ -23,13 +25,15 @@ namespace WPF.ViewModels
 
         public ICommand TapToAnswerCommand { get; }
 
-        public QuestionItemViewModel(INavigationService navigationService, GameViewModel gameViewModel, AnswerWindowViewModel answerWindowViewModel)
+        public QuestionItemViewModel(INavigationService navigationService,
+            GameViewModel gameViewModel, AnswerWindowViewModel answerWindowViewModel)
         {
             TapToAnswerCommand = new RelayCommand(async x =>
             {
                 if (navigationService.CurrentViewModel == gameViewModel)
                 {
                     IsActive = false;
+
                     var answer = await answerWindowViewModel.OpenTiming(AnswerWindowViewModel.DefaultTiming, QuestionItem);
 
                     if (QuestionItem.CheckAnswer(answer))
