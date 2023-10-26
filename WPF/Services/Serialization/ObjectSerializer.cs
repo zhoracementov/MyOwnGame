@@ -2,7 +2,7 @@
 
 namespace WPF.Services.Serialization
 {
-    public abstract class ObjectSerializer
+    public abstract class ObjectSerializer : IObjectSerializer
     {
         public abstract string FileFormat { get; }
 

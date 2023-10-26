@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using WPF.Navigation.Services;
+using WPF.Services;
 using WPF.ViewModels;
 
 namespace WPF
@@ -36,6 +37,7 @@ namespace WPF
             .AddSingleton<QuestionsTableViewModel>()
             .AddSingleton<AnswerWindowViewModel>()
             .AddTransient<QuestionItemViewModel>()
+            .AddSingleton<BrushesRouletteService>()
             .AddSingleton<INavigationService, NavigationService>()
             .AddSingleton<Func<Type, ViewModel>>(sp => type => (ViewModel)sp.GetRequiredService(type));
         //.ConfigureWritable<GameSettings>(host.Configuration.GetSection(nameof(GameSettings)), App.SettingsFileName);

@@ -7,6 +7,9 @@
              mc:Ignorable="d"
              DataContext="{Binding QuestionsTableViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <c:BrushNameToBrushConverter x:Key="BrushNameConverter"/>
+    </UserControl.Resources>
     <Grid>
         <ItemsControl ItemsSource="{Binding QuestionsTable.TableItems}">
             <ItemsControl.ItemsPanel>
@@ -25,7 +28,11 @@
                             <ColumnDefinition Width="8*"/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Background="AntiqueWhite">
-                            <TextBlock Text="{Binding LineTitle}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding LineTitle}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"/>
                         </Grid>
                         <Grid Grid.Column="1">
                         <ItemsControl ItemsSource="{Binding LineItems}">
