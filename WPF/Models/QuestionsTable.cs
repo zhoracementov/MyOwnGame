@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using WPF.Services.Serialization;
 
 namespace WPF.Models
@@ -9,15 +10,17 @@ namespace WPF.Models
     public class QuestionsTable
     {
         public string Name { get; set; }
-        public ObservableCollection<QuestionsLine> TableItems { get; set; }
+        public ObservableCollection<QuestionsLine> TableLines { get; set; }
+
+        public QuestionsTable()
+        {
+            //...
+        }
 
         public QuestionsTable(string name, IEnumerable<QuestionsLine> table)
         {
             Name = name;
-            TableItems = new ObservableCollection<QuestionsLine>(table);
-
-            //var ser = new JsonObjectSerializer();
-            //ser.Serialize(this, Path.Combine(App.UserDataDirectory, $"{Name}{ser.FileFormat}"));
+            TableLines = new ObservableCollection<QuestionsLine>(table);
         }
 
         public QuestionsTable(string name, params QuestionsLine[] table) : this(name, (IEnumerable<QuestionsLine>)table)
@@ -25,30 +28,19 @@ namespace WPF.Models
             //...
         }
 
-        //public QuestionsTable(string name, ObservableCollection<QuestionsLine> tableItems)
-        //{
-        //    this.Name = name;
-        //    this.TableItems = tableItems;
-        //}
-
-        public QuestionsTable()
+        public static async Task<QuestionsTable> LoadAsync(string filePath, IObjectSerializer objectSerializer)
         {
-
+            return await objectSerializer.DeserializeAsync<QuestionsTable>(filePath);
         }
 
-        public static QuestionsTable LoadFromFile(string filePath, IObjectSerializer objectSerializer)
+        public async Task SaveAsync(string filePath, IObjectSerializer objectSerializer)
         {
-            return objectSerializer.Deserialize<QuestionsTable>(filePath);
-        }
-
-        public static void SaveToFile()
-        {
-            throw new NotImplementedException();
+            await objectSerializer.SerializeAsync(this, filePath);
         }
 
         public bool IsCompleted()
         {
-            return TableItems.SelectMany(x => x.LineItems).All(x => x.IsClosed == true);
+            return TableLines.SelectMany(x => x.LineItems).All(x => x.IsClosed == true);
         }
     }
 }

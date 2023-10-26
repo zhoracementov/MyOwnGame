@@ -50,6 +50,7 @@ namespace WPF.ViewModels
                     if (questionsTableViewModel.QuestionsTable.IsCompleted())
                     {
                         MessageBox.Show("Game Over!");
+                        navigationService.NavigateTo<MainMenuViewModel>();
                     }
                     else
                     {

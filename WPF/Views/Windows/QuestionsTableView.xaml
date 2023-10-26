@@ -11,12 +11,12 @@
         <c:BrushNameToBrushConverter x:Key="BrushNameConverter"/>
     </UserControl.Resources>
     <Grid>
-        <ItemsControl ItemsSource="{Binding QuestionsTable.TableItems}">
+        <ItemsControl ItemsSource="{Binding QuestionsTable.TableLines}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid DataContext="{Binding}"
                         Columns="1"
-                        Rows="{Binding QuestionsTableViewModel.QuestionsTable.TableItems.Count, Source={StaticResource ViewModelsLocator}}">
+                        Rows="{Binding QuestionsTableViewModel.QuestionsTable.TableLines.Count, Source={StaticResource ViewModelsLocator}}">
                     </UniformGrid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>

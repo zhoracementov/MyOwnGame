@@ -13,6 +13,11 @@ namespace WPF.Models
         public string[] Answers { get; set; }
         public bool? IsClosed { get; set; }
 
+        public QuestionItem()
+        {
+            //...
+        }
+
         public QuestionItem(int cost, string description, IEnumerable<string> answers)
         {
             Answers = answers.ToArray();
@@ -31,19 +36,6 @@ namespace WPF.Models
             : this(cost, description, (IEnumerable<string>)answers)
         {
             //...
-        }
-
-        //public QuestionItem(int cost, string description, string[] answers, bool? isClosed)
-        //{
-        //    this.Cost = cost;
-        //    this.Description = description;
-        //    this.Answers = answers;
-        //    this.IsClosed = isClosed;
-        //}
-
-        public QuestionItem()
-        {
-
         }
 
         public bool CheckAnswer(string answerTest)

@@ -26,13 +26,11 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="32"
-                       Foreground="White"/>
+                       Foreground="Black"/>
             <ScrollViewer Grid.Row="1">
                 <ListView ItemsSource="{Binding Saves}"
                           DisplayMemberPath="Name"
                           Background="Transparent"
-                          Foreground="LightGray"
-                          BorderBrush="Transparent"
                           SelectedItem="{Binding SelectedSave}"
                           FontSize="20">
                 </ListView>
