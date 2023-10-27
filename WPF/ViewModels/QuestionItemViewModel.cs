@@ -1,8 +1,11 @@
-﻿using System.Windows;
+﻿using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using WPF.Commands;
 using WPF.Models;
 using WPF.Navigation.Services;
+using WPF.Services;
 
 namespace WPF.ViewModels
 {
@@ -29,7 +32,8 @@ namespace WPF.ViewModels
         public ICommand TapToAnswerCommand { get; }
 
         public QuestionItemViewModel(INavigationService navigationService, GameViewModel gameViewModel,
-            AnswerWindowViewModel answerWindowViewModel, QuestionsTableViewModel questionsTableViewModel)
+            AnswerWindowViewModel answerWindowViewModel, QuestionsTableViewModel questionsTableViewModel,
+            PlayerRouletteService playerRouletteService)
         {
             TapToAnswerCommand = new RelayCommand(async x =>
             {
@@ -40,20 +44,24 @@ namespace WPF.ViewModels
 
                     var answer = await answerWindowViewModel.OpenTiming(QuestionItem);
 
-                    if (QuestionItem.CheckAnswer(answer))
+                    if (QuestionItem.IsTrueAnswer(answer))
                     {
-                        gameViewModel.CostSum += QuestionItem.Cost;
+                        playerRouletteService.AddScore(QuestionItem.Cost);
                     }
 
                     gameViewModel.LastAnswer = answer;
 
                     if (questionsTableViewModel.QuestionsTable.IsCompleted())
                     {
-                        MessageBox.Show("Game Over!");
+                        MessageBox.Show(
+                            string.Format("Game Over!\n\rScore Table:\n\r{0}",
+                            string.Join(Environment.NewLine, playerRouletteService.GetPlayersSortedByScore().Select(x => x.Name))));
+
                         navigationService.NavigateTo<MainMenuViewModel>();
                     }
                     else
                     {
+                        playerRouletteService.Move();
                         //questionsTableViewModel.Update();
                     }
                 }

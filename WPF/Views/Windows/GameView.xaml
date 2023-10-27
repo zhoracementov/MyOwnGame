@@ -19,7 +19,6 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="{Binding CostSum}"/>
                 <TextBlock Text="{Binding LastAnswer}" Grid.Row="1"/>
             </Grid>
             <Grid Grid.Column="1">

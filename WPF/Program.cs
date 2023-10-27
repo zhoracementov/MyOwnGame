@@ -38,6 +38,7 @@ namespace WPF
             .AddSingleton<AnswerWindowViewModel>()
             .AddTransient<QuestionItemViewModel>()
             .AddSingleton<BrushesRouletteService>()
+            .AddSingleton<PlayerRouletteService>()
             .AddSingleton<INavigationService, NavigationService>()
             .AddSingleton<Func<Type, ViewModel>>(sp => type => (ViewModel)sp.GetRequiredService(type));
         //.ConfigureWritable<GameSettings>(host.Configuration.GetSection(nameof(GameSettings)), App.SettingsFileName);

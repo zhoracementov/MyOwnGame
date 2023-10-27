@@ -38,7 +38,7 @@ namespace WPF.Models
             //...
         }
 
-        public bool CheckAnswer(string answerTest)
+        public bool IsTrueAnswer(string answerTest)
         {
             return Answers
                 .Any(answerTrue => answerTest

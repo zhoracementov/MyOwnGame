@@ -1,13 +1,10 @@
-﻿namespace WPF.ViewModels
+﻿using WPF.Services;
+
+namespace WPF.ViewModels
 {
     public class GameViewModel : ViewModel
     {
-        private int costSum;
-        public int CostSum
-        {
-            get => costSum;
-            set => Set(ref costSum, value);
-        }
+        public PlayerRouletteService PlayerRouletteService { get; set; }
 
         private string lastAnswer;
         public string LastAnswer
@@ -16,9 +13,9 @@
             set => Set(ref lastAnswer, value);
         }
 
-        public GameViewModel()
+        public GameViewModel(PlayerRouletteService playerRouletteService)
         {
-
+            PlayerRouletteService = playerRouletteService;
         }
     }
 }
