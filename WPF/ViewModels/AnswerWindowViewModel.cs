@@ -60,8 +60,8 @@ namespace WPF.ViewModels
             EnteredAnswerText = string.Empty;
             CurrentQuestionText = string.Concat(questionItem.Cost, Environment.NewLine, questionItem.Description);
 
-            timer = new AsyncTimer();
-            await timer.Start(() => TimeBefore -= delayTime);
+            timer = new AsyncTimer(() => TimeBefore -= delayTime);
+            await timer.Start();
 
             return EnteredAnswerText;
         }
