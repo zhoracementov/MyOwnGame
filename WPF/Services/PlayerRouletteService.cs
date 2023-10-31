@@ -14,16 +14,16 @@ namespace WPF.Services
         {
             players = new Queue<Player>();
 
-            var pl1 = new Player("First", "Red");
-            var pl2 = new Player("Second", "Blue");
-            var pl3 = new Player("First 2", "Red");
-            var pl4 = new Player("Second 2", "Blue");
+            var pl1 = new Player("1", "Red");
+            var pl2 = new Player("2", "Blue");
+            //var pl3 = new Player("3", "Red");
+            //var pl4 = new Player("4", "Blue");
 
             //players = new Queue<Player>();
             players.Enqueue(pl1);
             players.Enqueue(pl2);
-            players.Enqueue(pl3);
-            players.Enqueue(pl4);
+            //players.Enqueue(pl3);
+            //players.Enqueue(pl4);
 
             Current = players.Peek();
         }
@@ -46,7 +46,7 @@ namespace WPF.Services
 
         public IEnumerable<Player> GetPlayersSortedByScore()
         {
-            return players.OrderBy(x => x.Score).ThenBy(x => x.Name);
+            return players.OrderBy(x => x.Score)/*.ThenBy(x => x.Name)*/;
         }
     }
 }

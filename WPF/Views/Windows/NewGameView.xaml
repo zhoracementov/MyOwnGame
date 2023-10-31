@@ -42,6 +42,7 @@
         </Grid>
         <Grid Grid.Column="1" Margin="50">
             <v:QuestionsTableView/>
+            <Grid Background="Transparent"/>
         </Grid>
     </Grid>
 </UserControl>
