@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WPF.Commands;
 using WPF.Models;
+using WPF.Services;
 
 namespace WPF.ViewModels
 {
     public class AnswerWindowViewModel : ViewModel
     {
-        public static readonly TimeSpan DefaultTiming = TimeSpan.FromSeconds(60);
-        public static readonly TimeSpan DefaultWaitDelay = TimeSpan.FromSeconds(1);
-        private static CancellationTokenSource cancellationTokenSource;
+        private AsyncTimer timer;
 
         private bool iAvailable;
         public bool IsAvailable
@@ -48,42 +46,22 @@ namespace WPF.ViewModels
             CloseCommand = new RelayCommand(x =>
             {
                 IsAvailable = false;
-                cancellationTokenSource?.Cancel();
+                timer?.Cancel();
             });
         }
 
-        public async Task<string> OpenTiming(QuestionItem questionItem)
+        public async Task<string> WaitAnswerAsync(QuestionItem questionItem)
         {
-            return await OpenTiming(questionItem, DefaultTiming, DefaultWaitDelay);
-        }
+            var delayTime = AsyncTimer.DefaultDelay;
+            var waitTime = AsyncTimer.DefaultWait;
 
-        public async Task<string> OpenTiming(QuestionItem questionItem, TimeSpan timer, TimeSpan delayTime)
-        {
             IsAvailable = true;
-            TimeBefore = timer;
-
+            TimeBefore = waitTime;
             EnteredAnswerText = string.Empty;
             CurrentQuestionText = string.Concat(questionItem.Cost, Environment.NewLine, questionItem.Description);
 
-            using (cancellationTokenSource = new CancellationTokenSource(timer))
-            {
-                cancellationTokenSource.CancelAfter(timer + delayTime);
-                while (TimeBefore >= delayTime && !cancellationTokenSource.IsCancellationRequested)
-                {
-                    try
-                    {
-                        await Task.Delay(delayTime, cancellationTokenSource.Token);
-                    }
-                    catch (TaskCanceledException)
-                    {
-                        break;
-                    }
-
-                    TimeBefore -= delayTime;
-                }
-            }
-
-            cancellationTokenSource = null;
+            timer = new AsyncTimer();
+            await timer.Start(() => TimeBefore -= delayTime);
 
             return EnteredAnswerText;
         }

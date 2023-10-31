@@ -42,7 +42,7 @@ namespace WPF.ViewModels
                     IsActive = false;
                     QuestionItem.IsClosed = true;
 
-                    var answer = await answerWindowViewModel.OpenTiming(QuestionItem);
+                    var answer = await answerWindowViewModel.WaitAnswerAsync(QuestionItem);
 
                     if (QuestionItem.IsTrueAnswer(answer))
                     {
