@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using WPF.Exceptions;
 
 namespace WPF.Models
 {
@@ -10,7 +6,7 @@ namespace WPF.Models
     {
         public int Cost { get; set; }
         public string Description { get; set; }
-        public string[] Answers { get; set; }
+        public string Answer { get; set; }
         public bool? IsClosed { get; set; }
 
         public QuestionItem()
@@ -18,32 +14,18 @@ namespace WPF.Models
             //...
         }
 
-        public QuestionItem(int cost, string description, IEnumerable<string> answers)
+        public QuestionItem(int cost, string description, string answer)
         {
-            Answers = answers.ToArray();
+            Answer = answer;
 
-            if (Answers.Length == 0)
-                throw new ZeroAnswerForQuestionException();
+            if (string.IsNullOrWhiteSpace(answer))
+                throw new ArgumentException();
 
             if (string.IsNullOrWhiteSpace(description))
                 throw new ArgumentException();
 
             Cost = cost;
             Description = description;
-        }
-
-        public QuestionItem(int cost, string description, params string[] answers)
-            : this(cost, description, (IEnumerable<string>)answers)
-        {
-            //...
-        }
-
-        public bool IsTrueAnswer(string answerTest)
-        {
-            return Answers
-                .Any(answerTrue => answerTest
-                .Equals(Regex.Replace(answerTrue, @"\s+", string.Empty),
-                StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

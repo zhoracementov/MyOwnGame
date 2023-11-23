@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using WPF.Commands;
-using WPF.Navigation.Services;
+using WPF.Services.Navigation;
 
 namespace WPF.ViewModels
 {

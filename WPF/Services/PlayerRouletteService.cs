@@ -16,7 +16,7 @@ namespace WPF.Services
 
             var pl1 = new Player("1", "Red");
             var pl2 = new Player("2", "Blue");
-            //var pl3 = new Player("3", "Red");
+            //var pl3 = new Player("3", "Yellow");
             //var pl4 = new Player("4", "Blue");
 
             //players = new Queue<Player>();
@@ -46,7 +46,7 @@ namespace WPF.Services
 
         public IEnumerable<Player> GetPlayersSortedByScore()
         {
-            return players.OrderBy(x => x.Score)/*.ThenBy(x => x.Name)*/;
+            return players.OrderByDescending(x => x.Score)/*.ThenBy(x => x.Name)*/;
         }
     }
 }

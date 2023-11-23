@@ -45,6 +45,7 @@
                                 <DataTemplate>
                                         <Grid DataContext="{Binding Converter={StaticResource QuestionItemModelToViemModelConverter}}">
                                             <Button Content="{Binding QuestionItem.Cost}"
+                                                    FontSize="36"
                                                     Command="{Binding TapToAnswerCommand}"
                                                     IsEnabled="{Binding IsActive}"/>
                                         </Grid>

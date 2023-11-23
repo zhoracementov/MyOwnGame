@@ -17,14 +17,12 @@ namespace WPF.Services
 
         public AsyncTimer(Action callbackAction, TimeSpan delay, TimeSpan wait)
         {
+            if (callbackAction is null)
+                throw new NullReferenceException(nameof(callbackAction));
+
             this.callbackAction = callbackAction;
             this.delay = delay;
             this.wait = wait;
-        }
-
-        public AsyncTimer(Action callbackAction) : this(callbackAction, DefaultDelay, DefaultWait)
-        {
-            //...
         }
 
         public async Task Start()

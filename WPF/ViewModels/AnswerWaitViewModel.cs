@@ -7,7 +7,7 @@ using WPF.Services;
 
 namespace WPF.ViewModels
 {
-    public class AnswerWindowViewModel : ViewModel
+    public class AnswerWaitViewModel : ViewModel
     {
         private AsyncTimer timer;
 
@@ -25,13 +25,6 @@ namespace WPF.ViewModels
             set => Set(ref timeBefore, value);
         }
 
-        private string enteredAnswerText;
-        public string EnteredAnswerText
-        {
-            get => enteredAnswerText;
-            set => Set(ref enteredAnswerText, value);
-        }
-
         private string currentQuestionText;
         public string CurrentQuestionText
         {
@@ -39,31 +32,31 @@ namespace WPF.ViewModels
             set => Set(ref currentQuestionText, value);
         }
 
-        public ICommand CloseCommand { get; }
+        public ICommand AnswerGivenCommand { get; }
 
-        public AnswerWindowViewModel()
+        public AnswerWaitViewModel()
         {
-            CloseCommand = new RelayCommand(x =>
+            AnswerGivenCommand = new RelayCommand(x =>
             {
                 IsAvailable = false;
                 timer?.Cancel();
             });
         }
 
-        public async Task<string> WaitAnswerAsync(QuestionItem questionItem)
+        public async Task WaitAnswerAsync(QuestionItem questionItem)
         {
             var delayTime = AsyncTimer.DefaultDelay;
             var waitTime = AsyncTimer.DefaultWait;
 
             IsAvailable = true;
             TimeBefore = waitTime;
-            EnteredAnswerText = string.Empty;
+
             CurrentQuestionText = string.Concat(questionItem.Cost, Environment.NewLine, questionItem.Description);
 
-            timer = new AsyncTimer(() => TimeBefore -= delayTime);
+            timer = new AsyncTimer(() => TimeBefore -= delayTime, delayTime, waitTime);
             await timer.Start();
 
-            return EnteredAnswerText;
+            IsAvailable = false;
         }
     }
 }

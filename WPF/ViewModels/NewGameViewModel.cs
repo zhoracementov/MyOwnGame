@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using WPF.Commands;
 using WPF.Models;
-using WPF.Navigation.Services;
+using WPF.Services.Navigation;
 using WPF.Services.Serialization;
 
 namespace WPF.ViewModels

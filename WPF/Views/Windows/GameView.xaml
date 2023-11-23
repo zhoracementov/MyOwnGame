@@ -19,12 +19,12 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="{Binding LastAnswer}" Grid.Row="1"/>
             </Grid>
             <Grid Grid.Column="1">
                 <v:QuestionsTableView/>
             </Grid>
         </Grid>
         <v:AnswerWindowView/>
+        <v:AnswerGivenView/>
     </Grid>
 </UserControl>
