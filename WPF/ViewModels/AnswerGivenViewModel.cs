@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WPF.Commands;
@@ -10,14 +9,8 @@ namespace WPF.ViewModels
 {
     public class AnswerGivenViewModel : ViewModel
     {
+        private readonly GameViewModel gameViewModel;
         private AsyncTimer timer;
-
-        private bool iAvailable;
-        public bool IsAvailable
-        {
-            get => iAvailable;
-            set => Set(ref iAvailable, value);
-        }
 
         private string answerText;
         public string AnswerText
@@ -31,7 +24,7 @@ namespace WPF.ViewModels
 
         private bool result;
 
-        public AnswerGivenViewModel()
+        public AnswerGivenViewModel(GameViewModel gameViewModel)
         {
             IsTrueAnswerCommand = new RelayCommand(x =>
             {
@@ -44,17 +37,18 @@ namespace WPF.ViewModels
                 result = false;
                 timer?.Cancel();
             });
+
+            this.gameViewModel = gameViewModel;
         }
 
         public async Task<bool> GetResult(QuestionItem questionItem)
         {
+            gameViewModel.AnswerViewModel = this;
+
             AnswerText = questionItem.Answer;
-            IsAvailable = true;
 
             timer = new AsyncTimer(() => { }, AsyncTimer.DefaultDelay, new TimeSpan(0, 0, 0, -1, -1));
             await timer.Start();
-
-            IsAvailable = false;
 
             return result;
         }

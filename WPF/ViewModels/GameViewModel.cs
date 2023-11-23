@@ -4,11 +4,17 @@ namespace WPF.ViewModels
 {
     public class GameViewModel : ViewModel
     {
-        public PlayerRouletteService PlayerRouletteService { get; set; }
 
-        public GameViewModel(PlayerRouletteService playerRouletteService)
+        private ViewModel answerViewModel;
+        public ViewModel AnswerViewModel
         {
-            PlayerRouletteService = playerRouletteService;
+            get => answerViewModel;
+            set => Set(ref answerViewModel, value);
+        }
+
+        public GameViewModel()
+        {
+
         }
     }
 }

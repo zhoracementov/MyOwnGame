@@ -43,12 +43,16 @@ namespace WPF.ViewModels
                 IsActive = false;
                 QuestionItem.IsClosed = true;
 
+                //gameViewModel.AnswerViewModel = answerWindowViewModel;
                 await answerWindowViewModel.WaitAnswerAsync(QuestionItem);
 
+                //gameViewModel.AnswerViewModel = answerGivenViewModel;
                 if (await answerGivenViewModel.GetResult(questionItem))
                 {
                     playerRouletteService.AddScore(QuestionItem.Cost);
                 }
+
+                gameViewModel.AnswerViewModel = null;
 
                 if (questionsTableViewModel.QuestionsTable.IsCompleted())
                 {

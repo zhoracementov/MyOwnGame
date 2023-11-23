@@ -24,7 +24,10 @@
                 <v:QuestionsTableView/>
             </Grid>
         </Grid>
-        <v:AnswerWindowView/>
-        <v:AnswerGivenView/>
+        <Grid>
+            <ContentControl Content="{Binding AnswerViewModel}"/>
+        </Grid>
+        <!--<v:AnswerWindowView/>
+        <v:AnswerGivenView/>-->
     </Grid>
 </UserControl>

@@ -12,6 +12,12 @@
             <c:InverseBooleanConverter x:Key="InverseBoolConverter"/>
             <c:QuestionItemM2VMConverter x:Key="QuestionItemModelToViemModelConverter"/>
             <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <DataTemplate DataType="{x:Type TypeName=vm:AnswerGivenViewModel}">
+                <v:AnswerGivenView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=vm:AnswerWaitViewModel}">
+                <v:AnswerWindowView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type TypeName=vm:MainMenuViewModel}">
                 <v:MainMenuView/>
             </DataTemplate>
