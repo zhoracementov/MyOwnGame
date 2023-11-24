@@ -14,7 +14,12 @@
     <Window.InputBindings>
         <KeyBinding Key="Esc" Command="{Binding NavigateBackCommand}"/>
     </Window.InputBindings>
-    <Border>
-        <ContentControl Content="{Binding NavigationService.CurrentViewModel}"/>
-    </Border>
+    <Grid>
+        <Border>
+            <ContentControl Content="{Binding NavigationService.CurrentViewModel}"/>
+        </Border>
+        <Grid>
+            <ContentControl Content="{Binding MessageViewModel}"/>
+        </Grid>
+    </Grid>
 </Window>

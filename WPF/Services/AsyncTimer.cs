@@ -29,6 +29,7 @@ namespace WPF.Services
         public async Task<bool> Start()
         {
             exitCode = true;
+
             using (cancellationTokenSource = new CancellationTokenSource(wait + delay))
             {
                 while (!cancellationTokenSource.IsCancellationRequested)
@@ -52,9 +53,9 @@ namespace WPF.Services
             return exitCode;
         }
 
-        public void Cancel()
+        public void Cancel(bool exitCode = false)
         {
-            exitCode = false;
+            this.exitCode = exitCode;
             cancellationTokenSource?.Cancel();
         }
     }

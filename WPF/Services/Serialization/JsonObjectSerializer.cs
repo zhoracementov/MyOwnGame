@@ -9,7 +9,7 @@ namespace WPF.Services.Serialization
 {
     public class JsonObjectSerializer : ObjectSerializer
     {
-        private static readonly JsonSerializerOptions defaultOptions = new JsonSerializerOptions
+        public static JsonSerializerOptions DefaultOptions => new JsonSerializerOptions
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
             Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
@@ -18,12 +18,11 @@ namespace WPF.Services.Serialization
         };
 
         private readonly JsonSerializerOptions jsonSerializerOptions;
-
         public override string FileFormat => ".json";
 
         public JsonObjectSerializer(JsonSerializerOptions jsonSerializerOptions = null)
         {
-            this.jsonSerializerOptions = jsonSerializerOptions ?? defaultOptions;
+            this.jsonSerializerOptions = jsonSerializerOptions ?? DefaultOptions;
             this.jsonSerializerOptions.Converters.Add(new TwoDimStringArrayJsonConverter());
         }
 

@@ -24,9 +24,6 @@
                 <v:QuestionsTableView/>
             </Grid>
         </Grid>
-        <Grid>
-            <ContentControl Content="{Binding MessageViewModel}"/>
-        </Grid>
         <!--<v:AnswerWindowView/>
         <v:AnswerGivenView/>-->
     </Grid>

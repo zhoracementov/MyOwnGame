@@ -31,7 +31,7 @@ namespace WPF.ViewModels
 
         public ICommand TapToAnswerCommand { get; }
 
-        public QuestionItemViewModel(INavigationService navigationService, GameViewModel gameViewModel,
+        public QuestionItemViewModel(INavigationService navigationService, MainWindowViewModel mainWindowViewModel,
             QuestionsTableViewModel questionsTableViewModel, PlayerRouletteService playerRouletteService)
         {
             TapToAnswerCommand = new RelayCommand(async x =>
@@ -39,12 +39,12 @@ namespace WPF.ViewModels
                 IsActive = false;
                 QuestionItem.IsClosed = true;
 
-                var skip = await gameViewModel.OpenWaitAsnwerWindow(QuestionItem);
+                var skip = await mainWindowViewModel.OpenWaitAsnwerWindow(QuestionItem);
 
-                if (await gameViewModel.GetResponceFromGivenWindow(questionItem))
+                if (await mainWindowViewModel.OpenMessageChooseWindow(questionItem.Answer))
                     playerRouletteService.AddScore(QuestionItem);
 
-                gameViewModel.CloseAnswerWindow();
+                mainWindowViewModel.CloseMessageWindow();
 
                 if (questionsTableViewModel.QuestionsTable.IsCompleted())
                 {
