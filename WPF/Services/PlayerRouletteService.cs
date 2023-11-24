@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using WPF.Models;
 
 namespace WPF.Services
@@ -39,14 +38,14 @@ namespace WPF.Services
             players.Enqueue(Current);
         }
 
-        public void AddScore(int cost)
+        public void AddScore(QuestionItem questionItem)
         {
-            Current.Score += cost;
+            Current.Score += questionItem.Cost;
         }
 
-        public IEnumerable<Player> GetPlayersSortedByScore()
+        public IEnumerable<Player> GetPlayers()
         {
-            return players.OrderByDescending(x => x.Score)/*.ThenBy(x => x.Name)*/;
+            return players;
         }
     }
 }

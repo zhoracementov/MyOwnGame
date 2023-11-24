@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace WPF.Views.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для AnswerGivenView.xaml
+    /// Логика взаимодействия для MessageChooseView.xaml
     /// </summary>
-    public partial class AnswerGivenView : UserControl
+    public partial class MessageChooseView : UserControl
     {
-        public AnswerGivenView()
+        public MessageChooseView()
         {
             InitializeComponent();
         }

@@ -25,7 +25,7 @@
             </Grid>
         </Grid>
         <Grid>
-            <ContentControl Content="{Binding AnswerViewModel}"/>
+            <ContentControl Content="{Binding MessageViewModel}"/>
         </Grid>
         <!--<v:AnswerWindowView/>
         <v:AnswerGivenView/>-->

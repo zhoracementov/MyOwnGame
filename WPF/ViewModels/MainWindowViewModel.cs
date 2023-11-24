@@ -13,22 +13,25 @@ namespace WPF.ViewModels
             set => Set(ref navigationService, value);
         }
 
-        public ICommand NavigateToMenuCommand { get; }
+        public ICommand NavigateBackCommand { get; }
 
-        public MainWindowViewModel(INavigationService navigationService)
+        public MainWindowViewModel(INavigationService navigationService, GameViewModel gameViewModel)
         {
             NavigationService = navigationService;
 
-            NavigateToMenuCommand = new RelayCommand(x =>
+            NavigateBackCommand = new RelayCommand(async x =>
             {
-                NavigationService.NavigateTo<MainMenuViewModel>();
+                if (navigationService.CurrentViewModel != gameViewModel)
+                {
+                    NavigationService.NavigateTo<MainMenuViewModel>();
+                }
+                else
+                {
+                    var choose = await gameViewModel.OpenMessageWasteWindow();
+                }
             });
 
-            //main menu as based window
-            if (NavigateToMenuCommand.CanExecute(null))
-            {
-                NavigateToMenuCommand.Execute(null);
-            }
+            NavigationService.NavigateTo<MainMenuViewModel>();
         }
     }
 }

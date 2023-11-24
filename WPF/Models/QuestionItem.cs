@@ -19,10 +19,10 @@ namespace WPF.Models
             Answer = answer;
 
             if (string.IsNullOrWhiteSpace(answer))
-                throw new ArgumentException();
+                throw new ArgumentException(nameof(answer));
 
             if (string.IsNullOrWhiteSpace(description))
-                throw new ArgumentException();
+                throw new ArgumentException(nameof(description));
 
             Cost = cost;
             Description = description;

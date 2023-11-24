@@ -52,4 +52,7 @@
             </Grid>
         </Border>
     </Grid>
+    <UserControl.InputBindings>
+        <KeyBinding Key="End" Command="{Binding AnswerGivenCommand}"/>
+    </UserControl.InputBindings>
 </UserControl>

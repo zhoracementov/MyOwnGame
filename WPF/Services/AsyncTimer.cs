@@ -11,11 +11,12 @@ namespace WPF.Services
 
         private readonly Action callbackAction;
         private CancellationTokenSource cancellationTokenSource;
+        private bool exitCode;
 
         private readonly TimeSpan delay;
         private readonly TimeSpan wait;
 
-        public AsyncTimer(Action callbackAction, TimeSpan delay, TimeSpan wait)
+        public AsyncTimer(TimeSpan delay, TimeSpan wait, Action callbackAction)
         {
             if (callbackAction is null)
                 throw new NullReferenceException(nameof(callbackAction));
@@ -25,8 +26,9 @@ namespace WPF.Services
             this.wait = wait;
         }
 
-        public async Task Start()
+        public async Task<bool> Start()
         {
+            exitCode = true;
             using (cancellationTokenSource = new CancellationTokenSource(wait + delay))
             {
                 while (!cancellationTokenSource.IsCancellationRequested)
@@ -39,16 +41,20 @@ namespace WPF.Services
                     {
                         break;
                     }
-
-                    callbackAction.Invoke();
+                    finally
+                    {
+                        callbackAction.Invoke();
+                    }
                 }
             }
 
             cancellationTokenSource = null;
+            return exitCode;
         }
 
         public void Cancel()
         {
+            exitCode = false;
             cancellationTokenSource?.Cancel();
         }
     }

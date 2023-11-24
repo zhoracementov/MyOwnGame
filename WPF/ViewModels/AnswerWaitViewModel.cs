@@ -9,8 +9,6 @@ namespace WPF.ViewModels
 {
     public class AnswerWaitViewModel : ViewModel
     {
-        private readonly GameViewModel gameViewModel;
-
         private AsyncTimer timer;
 
         private TimeSpan timeBefore;
@@ -21,7 +19,6 @@ namespace WPF.ViewModels
         }
 
         private string currentQuestionText;
-
         public string CurrentQuestionText
         {
             get => currentQuestionText;
@@ -30,29 +27,26 @@ namespace WPF.ViewModels
 
         public ICommand AnswerGivenCommand { get; }
 
-        public AnswerWaitViewModel(GameViewModel gameViewModel)
+        public AnswerWaitViewModel()
         {
-            AnswerGivenCommand = new RelayCommand(x =>
-            {
-                timer?.Cancel();
-            });
-
-            this.gameViewModel = gameViewModel;
+            AnswerGivenCommand = new RelayCommand(x => timer.Cancel());
         }
 
-        public async Task WaitAnswerAsync(QuestionItem questionItem)
+        public async Task<bool> WaitAnswerAsync(QuestionItem questionItem)
         {
-            gameViewModel.AnswerViewModel = this;
-
             var delayTime = AsyncTimer.DefaultDelay;
             var waitTime = AsyncTimer.DefaultWait;
 
             TimeBefore = waitTime;
 
-            CurrentQuestionText = string.Concat(questionItem.Cost, Environment.NewLine, questionItem.Description);
+            CurrentQuestionText = string.Concat(
+                questionItem.Cost,
+                Environment.NewLine,
+                Environment.NewLine,
+                questionItem.Description);
 
-            timer = new AsyncTimer(() => TimeBefore -= delayTime, delayTime, waitTime);
-            await timer.Start();
+            timer ??= new AsyncTimer(delayTime, waitTime, () => TimeBefore -= delayTime);
+            return await timer.Start();
         }
     }
 }

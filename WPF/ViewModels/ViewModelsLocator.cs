@@ -11,7 +11,7 @@ namespace WPF.ViewModels
         public GameViewModel GameViewModel => GetViewModel<GameViewModel>();
         public QuestionsTableViewModel QuestionsTableViewModel => GetViewModel<QuestionsTableViewModel>();
         public AnswerWaitViewModel AnswerWindowViewModel => GetViewModel<AnswerWaitViewModel>();
-        public AnswerGivenViewModel AnswerGivenViewModel => GetViewModel<AnswerGivenViewModel>();
+        public MessageChooseViewModel MessageChooseViewModel => GetViewModel<MessageChooseViewModel>();
 
         private TViewModel GetViewModel<TViewModel>() where TViewModel : ViewModel
         {

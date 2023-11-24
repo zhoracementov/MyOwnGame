@@ -2,8 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using WPF.Services.Navigation;
 using WPF.Services;
+using WPF.Services.Navigation;
 using WPF.ViewModels;
 
 namespace WPF
@@ -36,7 +36,7 @@ namespace WPF
             .AddSingleton<GameViewModel>()
             .AddSingleton<QuestionsTableViewModel>()
             .AddSingleton<AnswerWaitViewModel>()
-            .AddSingleton<AnswerGivenViewModel>()
+            .AddSingleton<MessageChooseViewModel>()
             .AddTransient<QuestionItemViewModel>()
             .AddSingleton<BrushesRouletteService>()
             .AddSingleton<PlayerRouletteService>()
