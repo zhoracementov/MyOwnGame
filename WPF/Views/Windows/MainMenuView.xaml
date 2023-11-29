@@ -6,28 +6,43 @@
              xmlns:local="clr-namespace:WPF.Views.Windows"
              mc:Ignorable="d" 
              DataContext="{Binding MainMenuViewModel, Source={StaticResource ViewModelsLocator}}"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
+             d:DesignHeight="1000" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <!-- Цвет текста -->
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <!-- Шрифт -->
+            <Setter Property="FontSize" Value="18"/>
+            <!-- Размер шрифта для кнопок -->
+            <Setter Property="Padding" Value="15,10"/>
+            <!-- Отступы -->
+            <Setter Property="Margin" Value="10"/>
+            <!-- Отступы вокруг кнопки -->
+            <Setter Property="Background" Value="#FF007ACC"/>
+            <!-- Красивый фон -->
+            <Setter Property="Height" Value="100"/>
+            <!-- Увеличьте высоту кнопки -->
+            <Setter Property="Width" Value="300"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
-            <Grid Margin="5, 75">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Button Content="New Game" Command="{Binding MoveToNewGameCommand}" Grid.Row="0"/>
-                <Button Content="Game Editor" Command="{Binding MoveToGameEditCommand}" Grid.Row="1"/>
-                <Button Content="Exit" Command="{Binding CloseAppCommand}" Grid.Row="2"/>
-            </Grid>
+        <Rectangle Fill="White" Grid.Row="0"/>
+        <Image Source="C:\Users\milko\source\repos\MyOwnGame\WPF\bin\Debug\game.jpg" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20" Width="400"/>
+        <Rectangle Fill="White" Grid.Row="1"/>
+        <Grid Grid.Row="1" Margin="150">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Content="New Game" Command="{Binding MoveToNewGameCommand}" Grid.Row="0" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Game Editor" Command="{Binding MoveToGameEditCommand}" Grid.Row="1" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Exit" Command="{Binding CloseAppCommand}" Grid.Row="2" Style="{StaticResource MenuButtonStyle}"/>
         </Grid>
     </Grid>
 </UserControl>
