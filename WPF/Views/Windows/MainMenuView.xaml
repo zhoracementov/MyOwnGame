@@ -28,7 +28,7 @@
     </UserControl.Resources>
     <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Rectangle Fill="White" Grid.Row="0"/>
