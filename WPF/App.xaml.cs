@@ -18,11 +18,28 @@ namespace WPF
         public static IHost Host => host ??= Program.CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
 
         protected override async void OnStartup(StartupEventArgs e)
-        {
+        {            
             IsDesignMode = false;
+            CreateSubDirectories();
+
             base.OnStartup(e);
 
             await Host.StartAsync().ConfigureAwait(false);
+        }
+
+        protected void CreateSubDirectories()
+        {
+            var dirToCreate = new string[]
+            {
+                UserDataDirectory,
+                SavesDataDirectory
+            };
+
+            foreach (var path in dirToCreate)
+            {
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+            }
         }
 
         protected override async void OnExit(ExitEventArgs e)
