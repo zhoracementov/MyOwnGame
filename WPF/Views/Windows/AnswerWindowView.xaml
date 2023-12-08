@@ -55,7 +55,7 @@
                             FontSize="26"
                             Background="ForestGreen"
                             Foreground="White"
-                            BorderBrush="Transparent" Click="Button_Click"/>
+                            BorderBrush="Transparent"/>
                 </Grid>
             </Grid>
         </Border>
