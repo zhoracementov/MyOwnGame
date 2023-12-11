@@ -11,6 +11,5 @@
             Name = name;
             BrushColor = brushColor;
         }
-        //fsdfsd
     }
 }

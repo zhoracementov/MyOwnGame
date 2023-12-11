@@ -32,7 +32,7 @@ namespace WPF
             var dirToCreate = new string[]
             {
                 UserDataDirectory,
-                SavesDataDirectory
+                SavesDataDirectory,
             };
 
             foreach (var path in dirToCreate)
@@ -58,6 +58,9 @@ namespace WPF
                 Path.Combine(UserDataDirectory, ConfigurationManager.AppSettings["savesdata"]);
         public static string SettingsFileName =>
                 Path.Combine(UserDataDirectory, ConfigurationManager.AppSettings["settings"]);
+
+        public static string PlaceholderPicturePath =>
+                Path.Combine(UserDataDirectory, ConfigurationManager.AppSettings["placeholder"]);
 
         public static string CurrentDirectory => IsDesignMode
                 ? Path.GetDirectoryName(GetSourceCodePath())

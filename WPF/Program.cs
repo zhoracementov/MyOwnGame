@@ -27,7 +27,7 @@ namespace WPF
 
         public static void ConfigureAppConfiguration(HostBuilderContext host, IConfigurationBuilder cfg) => cfg
             .SetBasePath(App.UserDataDirectory)
-            .AddJsonFile(App.SettingsFileName, optional: false, reloadOnChange: true);
+            .AddJsonFile(App.SettingsFileName, optional: true, reloadOnChange: true);
 
         public static void ConfigurateServices(HostBuilderContext host, IServiceCollection services) => services
             .AddSingleton<MainWindowViewModel>()
@@ -46,8 +46,10 @@ namespace WPF
             .Configure<GameSettings>(host.Configuration)
             .Configure<GameSettings>(opt =>
             {
-                //opt.WaitingAnswerTimeSpan = TimeSpan.FromMinutes(2);
+                if (opt.AnswerWaitingTimeSpan <= TimeSpan.Zero)
+                {
+                    opt.AnswerWaitingTimeSpan = TimeSpan.FromMinutes(1);
+                }
             });
-            //.ConfigureWritable<GameSettings>(host.Configuration.GetSection(nameof(GameSettings)), App.SettingsFileName);
     }
 }

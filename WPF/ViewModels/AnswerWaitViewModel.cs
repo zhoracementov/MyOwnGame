@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WPF.Commands;
@@ -11,6 +12,7 @@ namespace WPF.ViewModels
     public class AnswerWaitViewModel : ViewModel
     {
         private AsyncTimer timer;
+        private readonly IOptions<GameSettings> gameOptions;
 
         private TimeSpan timeBefore;
         public TimeSpan TimeBefore
@@ -20,12 +22,24 @@ namespace WPF.ViewModels
         }
 
         private string currentQuestionText;
-        private readonly IOptions<GameSettings> gameOptions;
-
         public string CurrentQuestionText
         {
             get => currentQuestionText;
             set => Set(ref currentQuestionText, value);
+        }
+
+        private bool isPictureInQuestion;
+        public bool IsPictureInQuestion
+        {
+            get => isPictureInQuestion;
+            set => Set(ref isPictureInQuestion, value);
+        }
+
+        private string currentPicturePath;
+        public string CurrentPicturePath
+        {
+            get => currentPicturePath;
+            set => Set(ref currentPicturePath, value);
         }
 
         public ICommand AnswerGivenCommand { get; }
@@ -43,7 +57,23 @@ namespace WPF.ViewModels
 
             TimeBefore = waitTime;
 
-            CurrentQuestionText = string.Concat(
+            if (string.IsNullOrEmpty(questionItem.PicturePath))
+            {
+                IsPictureInQuestion = false;
+            }
+            else
+            {
+                var picPath = Path.Combine(App.SavesDataDirectory, questionItem.PicturePath);
+
+                IsPictureInQuestion = File.Exists(picPath);
+
+                if (isPictureInQuestion)
+                    CurrentPicturePath = picPath;
+            }
+
+            CurrentQuestionText = IsPictureInQuestion
+                ? questionItem.Cost.ToString()
+                : string.Concat(
                 questionItem.Cost,
                 Environment.NewLine,
                 Environment.NewLine,
