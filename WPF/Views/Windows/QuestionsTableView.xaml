@@ -50,7 +50,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                         <Grid DataContext="{Binding Converter={StaticResource QuestionItemModelToViemModelConverter}}">
-                                            <Button Content="{Binding QuestionItem.Cost}"
+                                            <Button Content="{Binding Cost}"
                                                     FontSize="36"
                                                     BorderThickness="2"
                                                     BorderBrush="Transparent"

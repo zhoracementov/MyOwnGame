@@ -17,16 +17,32 @@ namespace WPF.ViewModels
             get => questionItem;
             set
             {
-                if (Set(ref questionItem, value) && questionItem.IsClosed != null)
-                    IsActive = questionItem.IsClosed == false;
+                if (Set(ref questionItem, value))
+                {
+                    IsActive = true;
+                }
             }
         }
 
-        private bool isActive = true;
+        private int? cost;
+        public int? Cost
+        {
+            get => cost;
+            set => Set(ref cost, value);
+        }
+
+        private bool isActive;
         public bool IsActive
         {
             get => isActive;
-            set => Set(ref isActive, value);
+            //set => Set(ref isActive, value);
+            set
+            {
+                if (Set(ref isActive, value))
+                {
+                    Cost = value ? questionItem.Cost : (int?)null;
+                }
+            }
         }
 
         public ICommand TapToAnswerCommand { get; }
