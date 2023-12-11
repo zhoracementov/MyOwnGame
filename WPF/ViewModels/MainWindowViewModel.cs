@@ -47,11 +47,12 @@ namespace WPF.ViewModels
                     if (messageViewModel != messageChooseGameWindow)
                     {
                         var responce = await OpenMessageChooseWindow("Escape from this game? Progress will be wasted");
+                        
                         CloseMessageWindow();
 
                         if (responce)
                         {
-                            NavigationService.NavigateTo<NewGameViewModel>();
+                            NavigationService.NavigateTo<MainMenuViewModel>();
                             newGameViewModel.UpdateTable();
                         }
                     }

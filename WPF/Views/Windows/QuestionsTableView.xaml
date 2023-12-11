@@ -14,26 +14,32 @@
         <ItemsControl ItemsSource="{Binding QuestionsTable.TableLines}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid DataContext="{Binding}"
-                        Columns="1"
-                        Rows="{Binding QuestionsTableViewModel.QuestionsTable.TableLines.Count, Source={StaticResource ViewModelsLocator}}">
-                    </UniformGrid>
+                    <StackPanel DataContext="{Binding}" VerticalAlignment="Center"/>
+                    <!--<StackPanel
+                        DataContext="{Binding}"
+                        --><!--Columns="1"
+                        Rows="{Binding QuestionsTableViewModel.QuestionsTable.TableLines.Count, Source={StaticResource ViewModelsLocator}}">--><!--
+                    </StackPanel>-->
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid MinHeight="150">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="7*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Background="AntiqueWhite">
+                        <Border Grid.Column="0"
+                                Background="DodgerBlue"
+                                BorderBrush="Transparent"
+                                BorderThickness="2">
                             <TextBlock Text="{Binding LineTitle}"
+                                       FontSize="20"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        TextAlignment="Center"
                                        TextWrapping="Wrap"/>
-                        </Grid>
+                        </Border>
                         <Grid Grid.Column="1">
                         <ItemsControl ItemsSource="{Binding LineItems}">
                             <ItemsControl.ItemsPanel>
@@ -46,6 +52,9 @@
                                         <Grid DataContext="{Binding Converter={StaticResource QuestionItemModelToViemModelConverter}}">
                                             <Button Content="{Binding QuestionItem.Cost}"
                                                     FontSize="36"
+                                                    BorderThickness="2"
+                                                    BorderBrush="Transparent"
+                                                    Background="DodgerBlue"
                                                     Command="{Binding TapToAnswerCommand}"
                                                     IsEnabled="{Binding IsActive}"/>
                                         </Grid>
