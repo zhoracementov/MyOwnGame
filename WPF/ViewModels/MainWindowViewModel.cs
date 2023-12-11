@@ -28,14 +28,15 @@ namespace WPF.ViewModels
         public ICommand NavigateBackCommand { get; }
 
         public MainWindowViewModel(INavigationService navigationService, GameViewModel gameViewModel,
-            AnswerWaitViewModel answerWaitWindowViewModel, MessageChooseViewModel messageWasteGameWindow)
+            AnswerWaitViewModel answerWaitWindowViewModel, MessageChooseViewModel messageChooseGameWindow,
+            NewGameViewModel newGameViewModel)
         {
             NavigationService = navigationService;
 
             this.answerWaitWindowViewModel = answerWaitWindowViewModel;
-            this.messageWasteGameWindow = messageWasteGameWindow;
+            messageWasteGameWindow = messageChooseGameWindow;
 
-            NavigateBackCommand = new RelayCommand(x =>
+            NavigateBackCommand = new RelayCommand(async x =>
             {
                 if (navigationService.CurrentViewModel != gameViewModel)
                 {
@@ -43,13 +44,17 @@ namespace WPF.ViewModels
                 }
                 else
                 {
-                    //var choose = await OpenMessageChooseWindow("Want to escape? Progess will be wasted.");
-                    //CloseMessageWindow();
+                    if (messageViewModel != messageChooseGameWindow)
+                    {
+                        var responce = await OpenMessageChooseWindow("Escape from this game? Progress will be wasted");
+                        CloseMessageWindow();
 
-                    //if (choose)
-                    //{
-                    //    NavigationService.NavigateTo<MainMenuViewModel>();
-                    //}
+                        if (responce)
+                        {
+                            NavigationService.NavigateTo<NewGameViewModel>();
+                            newGameViewModel.UpdateTable();
+                        }
+                    }
                 }
             });
 
