@@ -21,48 +21,49 @@
                     <RowDefinition Height="4*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0"
-                           Grid.Column="1"
+                <Grid Grid.Row="0"
+                      Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
                            Text="{Binding TimeBefore, StringFormat=\{0:hh\\:mm\\:ss\}}"
                            FontSize="56"
                            Background="Red"
                            Foreground="White"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1"
+                           Text="{Binding Cost}"
+                           FontSize="56"
+                           Background="Red"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+                </Grid>
                 <!--<ScrollViewer Grid.Row="1"
                            Grid.Column="1"
                            Grid.ColumnSpan="1"
                            Grid.RowSpan="1">-->
-                <DockPanel Background="#04085b"
-                           LastChildFill="True"
-                           Grid.Row="1"
-                           Grid.Column="1"
-                           Grid.ColumnSpan="1"
-                           Grid.RowSpan="1">
-                        <TextBlock DockPanel.Dock="Top"
-                           Text="{Binding CurrentQuestionText}"
-                           TextWrapping="WrapWithOverflow"
-                           FontSize="46"
-                           TextAlignment="Center"
-                           Foreground="White"/>
-                        <Image Visibility="{Binding IsPictureInQuestion, Converter={StaticResource BoolToVisibilityConverter}}"
-                               Margin="10"
-                               Stretch="Uniform"
-                               DockPanel.Dock="Bottom">
-                            <Image.Source>
-                                <Binding Path="CurrentPicturePath">
-                                    <Binding.TargetNullValue>
-                                        <Grid></Grid>
-                                    </Binding.TargetNullValue>
-                                </Binding>
-                            </Image.Source>
-                        </Image>
-                    </DockPanel>
+                <Grid Background="#04085b"
+                      Grid.Row="1"
+                      Grid.Column="1"
+                      Grid.ColumnSpan="1"
+                      Grid.RowSpan="1">
+                    <TextBlock Text="{Binding CurrentQuestionText}"
+                               TextWrapping="WrapWithOverflow"
+                               FontSize="46"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Foreground="White"/>
+                    <Image Visibility="{Binding IsPictureInQuestion, Converter={StaticResource BoolToVisibilityConverter}}"
+                           Margin="10"
+                           Stretch="Uniform"
+                           Source="{Binding CurrentPicturePath}"/>
+                </Grid>
                 <!--</ScrollViewer>-->
-                <!--<Button Grid.Row="2" Grid.Column="3"
-                        Margin="10"
-                        Content="Enter"
-                        Command="{Binding CloseCommand}"/>-->
                 <Grid Grid.Row="2" Grid.Column="1">
                     <Button Content="Answer given"
                             Command="{Binding AnswerGivenCommand}"

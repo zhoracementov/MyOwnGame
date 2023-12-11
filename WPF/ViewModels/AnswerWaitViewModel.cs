@@ -21,6 +21,13 @@ namespace WPF.ViewModels
             set => Set(ref timeBefore, value);
         }
 
+        private int cost;
+        public int Cost
+        {
+            get => cost;
+            set => Set(ref cost, value);
+        }
+
         private string currentQuestionText;
         public string CurrentQuestionText
         {
@@ -56,10 +63,12 @@ namespace WPF.ViewModels
             var waitTime = gameOptions.Value.AnswerWaitingTimeSpan;
 
             TimeBefore = waitTime;
+            Cost = questionItem.Cost;
 
             if (string.IsNullOrEmpty(questionItem.PicturePath))
             {
                 IsPictureInQuestion = false;
+                CurrentQuestionText = questionItem.Description;
             }
             else
             {
@@ -67,17 +76,11 @@ namespace WPF.ViewModels
 
                 IsPictureInQuestion = File.Exists(picPath);
 
-                if (isPictureInQuestion)
+                if (IsPictureInQuestion)
                     CurrentPicturePath = picPath;
-            }
 
-            CurrentQuestionText = IsPictureInQuestion
-                ? questionItem.Cost.ToString()
-                : string.Concat(
-                questionItem.Cost,
-                Environment.NewLine,
-                Environment.NewLine,
-                questionItem.Description);
+                CurrentQuestionText = string.Empty;
+            }
 
             timer ??= new AsyncTimer(delayTime, waitTime, () => TimeBefore -= delayTime);
             return await timer.Start();

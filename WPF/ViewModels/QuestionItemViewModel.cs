@@ -31,8 +31,9 @@ namespace WPF.ViewModels
 
         public ICommand TapToAnswerCommand { get; }
 
-        public QuestionItemViewModel(INavigationService navigationService, MainWindowViewModel mainWindowViewModel,
-            QuestionsTableViewModel questionsTableViewModel, PlayerRouletteService playerRouletteService)
+        public QuestionItemViewModel(INavigationService navigationService,
+            MainWindowViewModel mainWindowViewModel, QuestionsTableViewModel questionsTableViewModel,
+            PlayerRouletteService playerRouletteService, NewGameViewModel newGameViewModel)
         {
             TapToAnswerCommand = new RelayCommand(async x =>
             {
@@ -55,6 +56,7 @@ namespace WPF.ViewModels
                         .OrderByDescending(x => x.Score)
                         .Select(x => $"{x.Name}:\t{x.Score}"))));
 
+                    newGameViewModel.UpdateTable();
                     navigationService.NavigateTo<MainMenuViewModel>();
                 }
                 else
