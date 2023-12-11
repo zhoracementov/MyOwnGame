@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using WPF.Commands;
 using WPF.Models;
@@ -50,7 +49,7 @@ namespace WPF.ViewModels
 
             if (Saves.Count == 0)
             {
-                MessageBox.Show("Go to editor!)");
+                //MessageBox.Show("Go to editor!)");
             }
             else
             {

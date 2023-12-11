@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WPF.Commands;
@@ -19,6 +20,8 @@ namespace WPF.ViewModels
         }
 
         private string currentQuestionText;
+        private readonly IOptions<GameSettings> gameOptions;
+
         public string CurrentQuestionText
         {
             get => currentQuestionText;
@@ -27,15 +30,16 @@ namespace WPF.ViewModels
 
         public ICommand AnswerGivenCommand { get; }
 
-        public AnswerWaitViewModel()
+        public AnswerWaitViewModel(IOptions<GameSettings> gameOptions)
         {
             AnswerGivenCommand = new RelayCommand(x => timer.Cancel());
+            this.gameOptions = gameOptions;
         }
 
         public async Task<bool> WaitAnswerAsync(QuestionItem questionItem)
         {
             var delayTime = AsyncTimer.DefaultDelay;
-            var waitTime = AsyncTimer.DefaultWait;
+            var waitTime = gameOptions.Value.AnswerWaitingTimeSpan;
 
             TimeBefore = waitTime;
 

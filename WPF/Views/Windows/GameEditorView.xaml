@@ -8,6 +8,9 @@
              DataContext="{Binding GameEditorViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <TextBlock Text="In progress..."
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="76"/>
     </Grid>
 </UserControl>

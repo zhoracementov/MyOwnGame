@@ -56,6 +56,8 @@ namespace WPF
 
         public static string SavesDataDirectory =>
                 Path.Combine(UserDataDirectory, ConfigurationManager.AppSettings["savesdata"]);
+        public static string SettingsFileName =>
+                Path.Combine(UserDataDirectory, ConfigurationManager.AppSettings["settings"]);
 
         public static string CurrentDirectory => IsDesignMode
                 ? Path.GetDirectoryName(GetSourceCodePath())

@@ -20,7 +20,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
             </Grid>
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Margin="25">
                 <v:QuestionsTableView/>
             </Grid>
         </Grid>

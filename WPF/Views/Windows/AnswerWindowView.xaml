@@ -48,13 +48,7 @@
                 <Grid Grid.Row="2" Grid.Column="1">
                     <Button Content="Answer given"
                             Command="{Binding AnswerGivenCommand}"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Width="750" Height="150"
-                            FontFamily="Segoe UI"
                             FontSize="26"
-                            Background="ForestGreen"
-                            Foreground="White"
                             BorderBrush="Transparent"/>
                 </Grid>
             </Grid>

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using WPF.Models;
 using WPF.Services;
 using WPF.Services.Navigation;
 using WPF.ViewModels;
@@ -25,8 +26,8 @@ namespace WPF
             .ConfigureServices(ConfigurateServices);
 
         public static void ConfigureAppConfiguration(HostBuilderContext host, IConfigurationBuilder cfg) => cfg
-            .SetBasePath(App.UserDataDirectory);
-        //.AddJsonFile(App.SettingsFileName, optional: false, reloadOnChange: true);
+            .SetBasePath(App.UserDataDirectory)
+            .AddJsonFile(App.SettingsFileName, optional: false, reloadOnChange: true);
 
         public static void ConfigurateServices(HostBuilderContext host, IServiceCollection services) => services
             .AddSingleton<MainWindowViewModel>()
@@ -41,7 +42,12 @@ namespace WPF
             .AddSingleton<BrushesRouletteService>()
             .AddSingleton<PlayerRouletteService>()
             .AddSingleton<INavigationService, NavigationService>()
-            .AddSingleton<Func<Type, ViewModel>>(sp => type => (ViewModel)sp.GetRequiredService(type));
-        //.ConfigureWritable<GameSettings>(host.Configuration.GetSection(nameof(GameSettings)), App.SettingsFileName);
+            .AddSingleton<Func<Type, ViewModel>>(sp => type => (ViewModel)sp.GetRequiredService(type))
+            .Configure<GameSettings>(host.Configuration)
+            .Configure<GameSettings>(opt =>
+            {
+                //opt.WaitingAnswerTimeSpan = TimeSpan.FromMinutes(2);
+            });
+            //.ConfigureWritable<GameSettings>(host.Configuration.GetSection(nameof(GameSettings)), App.SettingsFileName);
     }
 }
