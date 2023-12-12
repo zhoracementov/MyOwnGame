@@ -9,8 +9,6 @@ namespace WPF.Services
 {
     public class BrushesRouletteService
     {
-        public const string FileName = "Brushes.json";
-
         private readonly string filePath;
         private readonly Queue<string> brushes;
 
@@ -26,8 +24,22 @@ namespace WPF.Services
 
         public BrushesRouletteService()
         {
-            filePath = Path.Combine(App.UserDataDirectory, FileName);
-            brushes = new Queue<string>(LoadBasicColors(new JsonObjectSerializer()));
+            filePath = App.BrushesFile;
+
+            IEnumerable<string> colors;
+            var json = new JsonObjectSerializer();
+
+            if (!File.Exists(filePath))
+            {
+                colors = GetAllColors();
+                json.Serialize(colors, filePath);
+            }
+            else
+            {
+                colors = LoadBasicColors(json);
+            }
+
+            brushes = new Queue<string>(colors);
         }
 
         public IEnumerable<string> LoadBasicColors(IObjectSerializer objectSerializer)
