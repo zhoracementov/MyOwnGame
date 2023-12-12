@@ -74,7 +74,7 @@ namespace WPF.ViewModels
             {
                 var picPath = Path.Combine(App.SavesDataDirectory, questionItem.PicturePath);
 
-                IsPictureInQuestion = File.Exists(picPath);
+                IsPictureInQuestion = questionItem.PicturePath != null && File.Exists(picPath);
 
                 if (IsPictureInQuestion)
                     CurrentPicturePath = picPath;

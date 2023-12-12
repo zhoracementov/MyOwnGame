@@ -60,8 +60,9 @@
                                Foreground="White"/>
                     <Image Visibility="{Binding IsPictureInQuestion, Converter={StaticResource BoolToVisibilityConverter}}"
                            Margin="10"
-                           Stretch="Uniform"
-                           Source="{Binding CurrentPicturePath}"/>
+                           Source="{Binding CurrentPicturePath}"
+                           Stretch="Uniform">
+                    </Image>
                 </Grid>
                 <!--</ScrollViewer>-->
                 <Grid Grid.Row="2" Grid.Column="1">

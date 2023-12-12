@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using WPF.Commands;
 using WPF.Models;
-using WPF.Services;
 using WPF.Services.Navigation;
 
 namespace WPF.ViewModels
@@ -47,9 +43,8 @@ namespace WPF.ViewModels
 
         public ICommand TapToAnswerCommand { get; }
 
-        public QuestionItemViewModel(INavigationService navigationService,
-            MainWindowViewModel mainWindowViewModel, QuestionsTableViewModel questionsTableViewModel,
-            PlayerRouletteService playerRouletteService, NewGameViewModel newGameViewModel)
+        public QuestionItemViewModel(INavigationService navigationService, MainWindowViewModel mainWindowViewModel,
+            QuestionsTableViewModel questionsTableViewModel, NewGameViewModel newGameViewModel, PlayersViewModel playersViewModel)
         {
             TapToAnswerCommand = new RelayCommand(async x =>
             {
@@ -59,25 +54,26 @@ namespace WPF.ViewModels
                 var skip = await mainWindowViewModel.OpenWaitAsnwerWindow(QuestionItem);
 
                 if (await mainWindowViewModel.OpenMessageChooseWindow(questionItem.Answer))
-                    playerRouletteService.AddScore(QuestionItem);
+                    playersViewModel.SuccessfullyAnswered(QuestionItem);
 
-                mainWindowViewModel.CloseMessageWindow();
+                    mainWindowViewModel.CloseMessageWindow();
 
                 if (questionsTableViewModel.QuestionsTable.IsCompleted())
                 {
-                    MessageBox.Show(
-                        string.Format("Game Over!\n\rScore Table:\n\r{0}",
-                        string.Join(Environment.NewLine, playerRouletteService
-                        .GetPlayers()
-                        .OrderByDescending(x => x.Score)
-                        .Select(x => $"{x.Name}:\t{x.Score}"))));
+                    //MessageBox.Show(
+                    //    string.Format("Game Over!\n\rScore Table:\n\r{0}",
+                    //    string.Join(Environment.NewLine, playerRouletteService
+                    //    .GetPlayers()
+                    //    .OrderByDescending(x => x.Score)
+                    //    .Select(x => $"{x.Name}:\t{x.Score}"))));
 
                     newGameViewModel.UpdateTable();
+                    playersViewModel.ResetPlayers();
                     navigationService.NavigateTo<MainMenuViewModel>();
                 }
                 else
                 {
-                    playerRouletteService.Move();
+                    //playerRouletteService.Move();
                     //questionsTableViewModel.Update();
                 }
             });

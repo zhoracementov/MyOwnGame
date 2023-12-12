@@ -21,7 +21,12 @@
                 </Grid.RowDefinitions>
             </Grid>
             <Grid Grid.Column="1">
-                <v:QuestionsTableView/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <v:QuestionsTableView Grid.Row="0"/>
+                <v:PlayersView Grid.Row="1"/>
             </Grid>
         </Grid>
         <!--<v:AnswerWindowView/>

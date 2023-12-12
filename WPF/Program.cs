@@ -40,7 +40,7 @@ namespace WPF
             .AddSingleton<MessageChooseViewModel>()
             .AddTransient<QuestionItemViewModel>()
             .AddSingleton<BrushesRouletteService>()
-            .AddSingleton<PlayerRouletteService>()
+            .AddSingleton<PlayersViewModel>()
             .AddSingleton<INavigationService, NavigationService>()
             .AddSingleton<Func<Type, ViewModel>>(sp => type => (ViewModel)sp.GetRequiredService(type))
             .Configure<GameSettings>(host.Configuration)

@@ -8,41 +8,41 @@
              DataContext="{Binding NewGameViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="8*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Saves"
-                       Grid.Row="0"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="32"
-                       Foreground="Black"/>
-            <ScrollViewer Grid.Row="1">
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   Text="Saves"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="32"
+                   Foreground="White">
+        </TextBlock>
+        <ScrollViewer Grid.Column="0" Grid.Row="1">
                 <ListView ItemsSource="{Binding Saves}"
                           DisplayMemberPath="Name"
                           Background="Transparent"
                           SelectedItem="{Binding SelectedSave}"
                           FontSize="20">
                 </ListView>
-            </ScrollViewer>
-            <Button Grid.Row="2"
-                    Content="Start"
-                    Command="{Binding MoveToGameCommand}"
-                    Margin="25"/>
-        </Grid>
-        <Grid Grid.Column="1" Margin="50">
+        </ScrollViewer>
+        <Button Grid.Row="3"
+                Content="Start"
+                Command="{Binding MoveToGameCommand}">
+        </Button>
+        <Grid Grid.Column="1" Grid.Row="1">
             <v:QuestionsTableView/>
             <Grid Background="Transparent"/>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <v:PlayersView/>
         </Grid>
     </Grid>
 </UserControl>
