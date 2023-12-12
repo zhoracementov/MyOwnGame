@@ -23,7 +23,7 @@ namespace WPF.Services.Serialization
         public JsonObjectSerializer(JsonSerializerOptions jsonSerializerOptions = null)
         {
             this.jsonSerializerOptions = jsonSerializerOptions ?? DefaultOptions;
-            this.jsonSerializerOptions.Converters.Add(new TwoDimStringArrayJsonConverter());
+            //this.jsonSerializerOptions.Converters.Add(new TwoDimStringArrayJsonConverter());
         }
 
         public override T Deserialize<T>(string fileName)
