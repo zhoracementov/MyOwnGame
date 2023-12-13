@@ -28,6 +28,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Upload Assets
-        run: |
-          echo "Build directory: $GITHUB_WORKSPACE"
+      - name: Publish Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: '$BUILD_PATH/bin/Release/*'
