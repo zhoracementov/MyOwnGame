@@ -21,13 +21,15 @@ jobs:
         run: dotnet restore
 
       - name: Build project
-        run: dotnet build --configuration Release --output ./publish -p:PublishSingleFile=true  --self-contained false
+        run: dotnet build --configuration Debug
       
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: Release-file
-          path: ./publish
+      - name: Publish
+        run: dotnet publish --configuration Debug --output ./dir -p:PublishSingleFile=true --self-contained false
 
-      - name: files
-        run: ls -R
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.0
+        with:
+          name: Release-fileArtifacts
+          path: dir/**
+          if-no-files-found: error
+          retention_days: 90
