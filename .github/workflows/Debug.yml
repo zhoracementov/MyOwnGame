@@ -33,7 +33,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: '$BUILD_PATH/bin/Release/*'
           files: './bin/Release/*'
           name: Release ${{ github.run_number }}
           tag_name: ${{ github.run_number }}
