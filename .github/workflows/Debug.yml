@@ -30,4 +30,4 @@ jobs:
     steps:
       - name: Upload Assets
         run: |
-          echo Build directory: $GITHUB_WORKSPACE"
+          echo "Build directory: $GITHUB_WORKSPACE"
