@@ -28,38 +28,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v0.${{github.run_number}}
-        release_name: Release v0.${{github.run_number}}
-        draft: false
-        prerelease: false
-    
-    - name: Upload Assets
-      id: upload_assets
-      uses: actions/upload-artifact@v2
-      with:
-        name: release-assets
-        path: ./bin/Release
-
-    - name: Get Artifact URL
-      id: artifact_url
-      run: echo "::set-output name=url::$(github workflow run ${GITHUB_WORKFLOW} --json artifacts_url | jq -r '.artifacts_url')"
-  
-    - name: Comment with Artifact URL
-      uses: actions/github-script@v4
-      with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const artifactURL = '${{ steps.artifact_url.outputs.url }}';
-            const comment = 'The release artifacts can be downloaded from: ${artifactURL}';
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            })
+      - name: Upload Assets
+        run: |
+          echo Build directory: $GITHUB_WORKSPACE"
