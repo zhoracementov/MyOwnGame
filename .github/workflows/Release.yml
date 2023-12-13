@@ -20,16 +20,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-<<<<<<< Updated upstream
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
-          body: |
-            Automatic Release
-            Workflow Run ID: ${{ github.event.workflow_run.id }}
-            [See artifacts](${{ github.event.workflow_run.artifacts_url }})
-          draft: false
-          prerelease: false
-=======
           tag_name: ${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
->>>>>>> Stashed changes
