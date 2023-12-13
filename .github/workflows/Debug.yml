@@ -1,4 +1,4 @@
-name: .NET
+name: Build and Publish .NET Release
 
 on:
   push:
@@ -21,15 +21,17 @@ jobs:
         run: dotnet restore
 
       - name: Build project
-        run: dotnet build --configuration Debug
+        run: dotnet build --configuration Debug --output ./bin/Release -p:PublishSingleFile=true --self-contained false
       
-      - name: Publish
-        run: dotnet publish --configuration Debug -p:PublishSingleFile=true --self-contained false
-
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.0
+      - name: Publish Release
+        id: publish
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.OWNGAME_ACCESS_TOKEN }}
         with:
-          name: Debug
-          path: ${{ github.workspace }}
-          if-no-files-found: error
-          retention-days: 90
+          files: |
+            ./bin/Release/**
+          tag_name: ${{ github.sha }}
+          release_name: Release ${{ github.sha }}
+          body: |
+            This is an automatically generated release.
