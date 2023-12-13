@@ -34,3 +34,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: '$BUILD_PATH/bin/Release/*'
+          name: Release ${{ github.run_number }}
+          tag_name: ${{ github.run_number }}
+          body: This is an automatically generated release.
