@@ -27,9 +27,9 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish artifacts
-      run: dotnet publish --configuration Debug --output ./publish -p:PublishSingleFile=true --self-contained false
+      run: dotnet publish --configuration Debug -p:PublishSingleFile=true --self-contained false
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
         name: Debug
-        path: ./
+        path: ./publish/Debug
