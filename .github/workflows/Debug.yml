@@ -21,18 +21,13 @@ jobs:
         run: dotnet restore
 
       - name: Build project
-        run: dotnet build --configuration Release -p:PublishSingleFile=true  --self-contained false
-
-      - name: Unload artifacts
+        run: dotnet build --configuration Release --output ./publish -p:PublishSingleFile=true  --self-contained false
+      
+      - name: Archive artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: Release
-          path: .next/
+          name: Release-file
+          path: ./publish
 
-      - name: Download
-        uses: actions/download-artifact@v3
-        with:
-          name: Release
-          
-      - name: Test artifact download
+      - name: files
         run: ls -R
