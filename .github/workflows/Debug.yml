@@ -53,7 +53,7 @@ jobs:
     - name: Comment with Artifact URL
       uses: actions/github-script@v4
       with:
-          github-token: ${{ secrets.OWNGAME_ACCESS_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const artifactURL = '${{ steps.artifact_url.outputs.url }}';
             const comment = 'The release artifacts can be downloaded from: ${artifactURL}';
