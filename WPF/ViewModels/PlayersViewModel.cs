@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using WPF.Commands;
+using WPF.Extenstions.EnumerablePickExtentions;
 using WPF.Models;
 
 namespace WPF.ViewModels
@@ -46,7 +47,7 @@ namespace WPF.ViewModels
             ResetPlayersCommand = new RelayCommand(x => ResetPlayers());
 
             players = new Queue<Player>();
-            
+
             var curr = new Player("Current", "Red");
             var prev = new Player("Previous", "Yellow");
             var next = new Player("Next", "Green");
@@ -56,6 +57,8 @@ namespace WPF.ViewModels
             players.Enqueue(curr);
             players.Enqueue(next);
             players.Enqueue(loh);
+
+            //players = new Queue<Player>(players.ShakeAll());
 
             PreviousPlayer = players.Dequeue();
             CurrentPlayer = players.Dequeue();

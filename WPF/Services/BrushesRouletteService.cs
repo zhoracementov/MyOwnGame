@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Windows.Media;
-using WPF.Extenstions;
+using WPF.Extenstions.EnumerablePickExtentions;
 using WPF.Services.Serialization;
 
 namespace WPF.Services

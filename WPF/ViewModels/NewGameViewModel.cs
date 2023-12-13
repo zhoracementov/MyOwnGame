@@ -42,6 +42,9 @@ namespace WPF.ViewModels
                 if (questionsTableViewModel.QuestionsTable is null || questionsTableViewModel.QuestionsTable.TableLines.Count == 0)
                     throw new ArgumentException();
 
+                if (SelectedSave is null)
+                    return;
+
                 navigationService.NavigateTo<GameViewModel>();
             });
 

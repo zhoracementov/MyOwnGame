@@ -53,6 +53,9 @@ namespace WPF.ViewModels
 
         public AnswerWaitViewModel(IOptions<GameSettings> gameOptions)
         {
+            //todo: make something with it
+            CurrentPicturePath = "/Styles/placeholder.png";
+
             AnswerGivenCommand = new RelayCommand(x => timer.Cancel());
             this.gameOptions = gameOptions;
         }
