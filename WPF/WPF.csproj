@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <None Remove="Styles\game.jpg" />
+    <None Remove="Styles\placeholder.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Styles\game.jpg" />
+    <Resource Include="Styles\game.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Styles\placeholder.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

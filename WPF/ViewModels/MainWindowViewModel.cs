@@ -46,7 +46,7 @@ namespace WPF.ViewModels
                 {
                     if (messageViewModel != messageChooseGameWindow)
                     {
-                        var responce = await OpenMessageChooseWindow("Escape from this game? Progress will be wasted.");
+                        var responce = await OpenMessageChooseWindow("Escape from this game? Progress will be lost.");
                         
                         CloseMessageWindow();
 

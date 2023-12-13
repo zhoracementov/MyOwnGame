@@ -33,7 +33,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image Source="/Styles/game.jpg" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Image Source="/Styles/game.jpg" Grid.Row="0" Stretch="Uniform"/>
         <Button Content="New Game" Command="{Binding MoveToNewGameCommand}" Grid.Row="1" Style="{StaticResource MenuButtonStyle}"/>
         <Button Content="Game Editor" Command="{Binding MoveToGameEditCommand}" Grid.Row="2" Style="{StaticResource MenuButtonStyle}"/>
         <Button Content="Exit" Command="{Binding CloseAppCommand}" Grid.Row="3" Style="{StaticResource MenuButtonStyle}"/>

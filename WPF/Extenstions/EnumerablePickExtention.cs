@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WPF.Extenstions
+namespace WPF.Extenstions.EnumerablePickExtentions
 {
     internal static class EnumerablePickExtention
     {
