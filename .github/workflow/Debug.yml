@@ -25,9 +25,9 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Publish artifacts
-      run: dotnet publish --configuration Release --output ./publish
+      run: dotnet publish --configuration Release --output ./publish -p:PublishSingleFile=true --self-contained false
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: my_app
+        name: Debug
         path: ./publish
