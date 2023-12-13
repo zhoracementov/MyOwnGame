@@ -29,9 +29,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.OWNGAME_ACCESS_TOKEN }}
         with:
-          files: |
-            ./bin/Release/**
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
-          body: |
-            This is an automatically generated release.
+          files: ./bin/Release/**
+          tag_name: ${{ github.run_number }}
+          name: Release ${{ github.run_number }}
+          body: This is an automatically generated release.
