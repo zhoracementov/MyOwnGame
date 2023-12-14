@@ -24,7 +24,7 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Publish project
-        run: dotnet build --configuration Debug  -p:PublishSingleFile=true --self-contained false
+        run: dotnet publish --configuration Debug  -p:PublishSingleFile=true --self-contained false
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
