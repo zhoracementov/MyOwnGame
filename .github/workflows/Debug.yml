@@ -2,9 +2,9 @@ name: Build and Publish .NET Release
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "workflow" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "workflow" ]
 
 jobs:
   build:
@@ -28,6 +28,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Upload Assets
-        run: |
-          echo "Build directory: $GITHUB_WORKSPACE"
+      - name: Publish Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: './bin/Release'
+          name: Release ${{ github.run_number }}
+          tag_name: ${{ github.run_number }}
+          body: This is an automatically generated release.
