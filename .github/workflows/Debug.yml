@@ -20,20 +20,11 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build project
+      - name: Publish project
         run: dotnet build --configuration Debug --output ./bin/Release -p:PublishSingleFile=true --self-contained false
 
-  create-realise:
-    name: Create Release
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Publish Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
         with:
-          files: './bin/Release'
-          name: Release ${{ github.run_number }}
-          tag_name: ${{ github.run_number }}
-          body: This is an automatically generated release.
+          name: Debug
+          path: ./publish
