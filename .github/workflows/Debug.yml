@@ -1,10 +1,10 @@
-name: Build and Publish .NET Release
+name: Getting archive with workflow run
 
 on:
   push:
-    branches: [ "workflow" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "workflow" ]
+    branches: [ "master" ]
 
 jobs:
   build:
