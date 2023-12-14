@@ -20,8 +20,11 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
+      - name: Build project
+        run: dotnet build --no-restore
+
       - name: Publish project
-        run: dotnet build --configuration Debug --output ./bin/Release -p:PublishSingleFile=true --self-contained false
+        run: dotnet build --configuration Debug  -p:PublishSingleFile=true --self-contained false
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
