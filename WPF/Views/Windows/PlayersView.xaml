@@ -47,12 +47,12 @@
                     Command="{Binding AddNewPlayerCommand}"
                     Style="{StaticResource AddButtonStyle}"
                     Margin="5"
-                    Padding="10"/>
+                    Padding="10" Click="AddPlayer"/>
             <Button Content="Удалить участника"
                     Command="{Binding RemovePlayerCommand}"
                     Style="{StaticResource RemoveButtonStyle}"
                     Margin="5"
-                    Padding="10"/>
+                    Padding="10" Click="RemovePlayer"/>
         </StackPanel>
     </Grid>
 </UserControl>

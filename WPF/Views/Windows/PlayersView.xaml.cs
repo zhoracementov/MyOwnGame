@@ -22,5 +22,17 @@ namespace WPF.Views.Windows
         {
             InitializeComponent();
         }
+
+        private void AddPlayer(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemovePlayer(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+       
     }
 }
