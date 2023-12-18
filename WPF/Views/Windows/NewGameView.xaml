@@ -14,32 +14,53 @@
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
+
+        <Style x:Key="GrayButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="StylishTextBlock" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="ListViewItem">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="8*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="8*"/>
-        </Grid.ColumnDefinitions>
+        
         <TextBlock Grid.Row="0"
-                   Grid.Column="0"
-                   Text="Saves"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   FontSize="32"
-                   Foreground="White">
+           Grid.Column="0"
+           Text="Saves"
+           Style="{StaticResource StylishTextBlock}">
         </TextBlock>
-        <ScrollViewer Grid.Column="0" Grid.Row="1">
-                <ListView ItemsSource="{Binding Saves}"
-                          DisplayMemberPath="Name"
-                          Background="Transparent"
-                          SelectedItem="{Binding SelectedSave}"
-                          FontSize="20">
-                </ListView>
+        <ScrollViewer Grid.Column="0" Grid.Row="1" Background="LightBlue">
+            <!-- Здесь измененный фон -->
+            <ListView ItemsSource="{Binding Saves}"
+                  DisplayMemberPath="Name"
+                  Background="Transparent"
+                  SelectedItem="{Binding SelectedSave}"
+                  FontSize="20"
+                  ItemContainerStyle="{StaticResource {x:Type ListViewItem}}">
+            </ListView>
         </ScrollViewer>
         <Button Grid.Row="3"
         Content="Start"
