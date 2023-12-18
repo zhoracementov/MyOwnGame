@@ -10,13 +10,9 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
-            <!-- Здесь изменено на Auto -->
             <ColumnDefinition Width="250"/>
-            <!-- Здесь изменено на Auto -->
             <ColumnDefinition Width="250"/>
-            <!-- Здесь изменено на Auto -->
             <ColumnDefinition Width="*"/>
-            <!-- Здесь изменено на *, чтобы занять оставшееся пространство -->
         </Grid.ColumnDefinitions>
         <UniformGrid Grid.Column="0" Background="{Binding PreviousPlayer.BrushColor, Converter={StaticResource BrushNameToBrushConverter}}" Rows="2">
             <TextBlock Text="{Binding PreviousPlayer.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
