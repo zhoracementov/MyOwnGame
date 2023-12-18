@@ -26,7 +26,7 @@
             <TextBlock Text="{Binding NextPlayer.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
             <TextBlock Text="{Binding NextPlayer.Score}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
         </UniformGrid>
-        <StackPanel Grid.Column="3" Orientation="Vertical">
+        <StackPanel Grid.Column="3" Orientation="Horizontal">
             <Button Content="Добавить участника"
                     Command="{Binding AddNewPlayerCommand}"
                     Margin="5"
