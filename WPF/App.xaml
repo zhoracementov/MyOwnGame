@@ -40,6 +40,9 @@
             <DataTemplate DataType="{x:Type TypeName=vm:PlayersViewModel}">
                 <v:PlayersView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=vm:CancelWaitViewModel}">
+                <v:CancelWaitView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

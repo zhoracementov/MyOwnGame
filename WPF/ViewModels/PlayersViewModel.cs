@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using WPF.Commands;
-using WPF.Extenstions.EnumerablePickExtentions;
 using WPF.Models;
 
 namespace WPF.ViewModels
 {
     public class PlayersViewModel : ViewModel
     {
-        private readonly Queue<Player> players;
+        private readonly List<Player> players;
+        private int currentPlayerIndex;
 
         private Player previousPlayer;
         public Player PreviousPlayer
@@ -39,31 +39,30 @@ namespace WPF.ViewModels
             set => Set(ref lastQuestion, value);
         }
 
+        public IEnumerable<Player> Players => players;
+
         public ICommand AddNewPlayerCommand { get; }
+        public ICommand RemovePlayerCommand { get; }
         public ICommand ResetPlayersCommand { get; }
 
         public PlayersViewModel()
         {
             ResetPlayersCommand = new RelayCommand(x => ResetPlayers());
 
-            players = new Queue<Player>();
+            players = new List<Player>();
 
             var curr = new Player("Current", "Red");
             var prev = new Player("Previous", "Yellow");
             var next = new Player("Next", "Green");
             var loh = new Player("LOH", "Brown");
 
-            players.Enqueue(prev);
-            players.Enqueue(curr);
-            players.Enqueue(next);
-            players.Enqueue(loh);
+            players.Add(prev);
+            players.Add(curr);
+            players.Add(next);
+            players.Add(loh);
 
-            //players = new Queue<Player>(players.ShakeAll());
-
-            PreviousPlayer = players.Dequeue();
-            CurrentPlayer = players.Dequeue();
-            NextPlayer = players.Dequeue();
-
+            currentPlayerIndex = 1;
+            SwapPlayersQueue(currentPlayerIndex);
         }
 
         public void AddPlayer()
@@ -76,25 +75,21 @@ namespace WPF.ViewModels
             LastQuestion = questionItem;
             CurrentPlayer.Score += LastQuestion.Cost;
 
-            SwapPlayersQueue();
+            SwapPlayersQueue(currentPlayerIndex++);
         }
 
-        public void SwapPlayersQueue()
+        public void SwapPlayersQueue(int index)
         {
-            players.Enqueue(PreviousPlayer);
-            PreviousPlayer = CurrentPlayer;
-            CurrentPlayer = NextPlayer;
-            NextPlayer = players.Dequeue();
+            PreviousPlayer = players[(index - 1) % players.Count];
+            CurrentPlayer = players[index % players.Count];
+            NextPlayer = players[(index + 1) % players.Count];
         }
 
         public void ResetPlayers()
         {
-            var count = players.Count;
-            for (int i = 0; i < count; i++)
+            foreach (var player in players)
             {
-                var pop = players.Dequeue();
-                pop.Score = 0;
-                players.Enqueue(pop);
+                player.Score = 0;
             }
         }
     }

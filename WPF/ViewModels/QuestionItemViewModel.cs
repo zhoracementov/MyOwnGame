@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Linq;
+using System.Windows.Input;
 using WPF.Commands;
 using WPF.Models;
 using WPF.Services.Navigation;
@@ -51,21 +53,19 @@ namespace WPF.ViewModels
                 IsActive = false;
                 QuestionItem.IsClosed = true;
 
-                var skip = await mainWindowViewModel.OpenWaitAsnwerWindow(QuestionItem);
+                var skip = await mainWindowViewModel.OpenWaitAnswerWindow(QuestionItem);
 
                 if (await mainWindowViewModel.OpenMessageChooseWindow(questionItem.Answer))
                     playersViewModel.SuccessfullyAnswered(QuestionItem);
 
-                    mainWindowViewModel.CloseMessageWindow();
-
                 if (questionsTableViewModel.QuestionsTable.IsCompleted())
                 {
-                    //MessageBox.Show(
-                    //    string.Format("Game Over!\n\rScore Table:\n\r{0}",
-                    //    string.Join(Environment.NewLine, playerRouletteService
-                    //    .GetPlayers()
-                    //    .OrderByDescending(x => x.Score)
-                    //    .Select(x => $"{x.Name}:\t{x.Score}"))));
+                    var message = string.Format("Game Over!\n\rScore Table:\n\r{0}",
+                        string.Join(Environment.NewLine, playersViewModel.Players
+                        .OrderByDescending(x => x.Score)
+                        .Select(x => $"{x.Name}:\t{x.Score}")));
+
+                    await mainWindowViewModel.OpenCancelWaitWindow(message);
 
                     newGameViewModel.UpdateTable();
                     playersViewModel.ResetPlayers();
@@ -76,6 +76,8 @@ namespace WPF.ViewModels
                     //playerRouletteService.Move();
                     //questionsTableViewModel.Update();
                 }
+
+                mainWindowViewModel.CloseMessageWindow();
             });
         }
     }

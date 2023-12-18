@@ -9,7 +9,8 @@ namespace WPF.ViewModels
     public class MainWindowViewModel : ViewModel
     {
         private readonly AnswerWaitViewModel answerWaitWindowViewModel;
-        private readonly MessageChooseViewModel messageWasteGameWindow;
+        private readonly MessageChooseViewModel messageChooseGameWindow;
+        private readonly CancelWaitViewModel cancelWaitViewModel;
 
         private ViewModel messageViewModel;
         public ViewModel MessageViewModel
@@ -29,12 +30,13 @@ namespace WPF.ViewModels
 
         public MainWindowViewModel(INavigationService navigationService, GameViewModel gameViewModel,
             AnswerWaitViewModel answerWaitWindowViewModel, MessageChooseViewModel messageChooseGameWindow,
-            NewGameViewModel newGameViewModel)
+            NewGameViewModel newGameViewModel, CancelWaitViewModel cancelWaitViewModel)
         {
             NavigationService = navigationService;
 
             this.answerWaitWindowViewModel = answerWaitWindowViewModel;
-            messageWasteGameWindow = messageChooseGameWindow;
+            this.messageChooseGameWindow = messageChooseGameWindow;
+            this.cancelWaitViewModel = cancelWaitViewModel;
 
             NavigateBackCommand = new RelayCommand(async x =>
             {
@@ -62,7 +64,7 @@ namespace WPF.ViewModels
             NavigationService.NavigateTo<MainMenuViewModel>();
         }
 
-        public async Task<bool> OpenWaitAsnwerWindow(QuestionItem questionItem)
+        public async Task<bool> OpenWaitAnswerWindow(QuestionItem questionItem)
         {
             MessageViewModel = answerWaitWindowViewModel;
             return await answerWaitWindowViewModel.WaitAnswerAsync(questionItem);
@@ -70,8 +72,14 @@ namespace WPF.ViewModels
 
         public async Task<bool> OpenMessageChooseWindow(string messageText)
         {
-            MessageViewModel = messageWasteGameWindow;
-            return await messageWasteGameWindow.GetResponce(messageText);
+            MessageViewModel = messageChooseGameWindow;
+            return await messageChooseGameWindow.GetResponce(messageText);
+        }
+
+        public async Task<bool> OpenCancelWaitWindow(string messageText)
+        {
+            MessageViewModel = cancelWaitViewModel;
+            return await cancelWaitViewModel.Wait(messageText);
         }
 
         public void CloseMessageWindow()
