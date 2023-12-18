@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         WindowStyle="None"
-        Background="#04085b"
+        Background="#06163c"
         Height="450" Width="800">
     <Window.InputBindings>
         <KeyBinding Key="Esc" Command="{Binding NavigateBackCommand}"/>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WPF.Commands;
 using WPF.Models;
@@ -8,28 +9,11 @@ namespace WPF.ViewModels
 {
     public class PlayersViewModel : ViewModel
     {
-        private readonly List<Player> players;
-        private int currentPlayerIndex;
-
-        private Player previousPlayer;
-        public Player PreviousPlayer
+        private ObservableCollection<Player> players;
+        public ObservableCollection<Player> Players
         {
-            get => previousPlayer;
-            set => Set(ref previousPlayer, value);
-        }
-
-        private Player currentPlayer;
-        public Player CurrentPlayer
-        {
-            get => currentPlayer;
-            set => Set(ref currentPlayer, value);
-        }
-
-        private Player nextPlayer;
-        public Player NextPlayer
-        {
-            get => nextPlayer;
-            set => Set(ref nextPlayer, value);
+            get => players;
+            set => Set(ref players, value);
         }
 
         private QuestionItem lastQuestion;
@@ -39,7 +23,19 @@ namespace WPF.ViewModels
             set => Set(ref lastQuestion, value);
         }
 
-        public IEnumerable<Player> Players => players;
+        private int currentIndex;
+        public int CurrentIndex
+        {
+            get => currentIndex;
+            set
+            {
+                var val = value % Players.Count;
+                if (Set(ref currentIndex, val))
+                {
+                    //...
+                }
+            }
+        }
 
         public ICommand AddNewPlayerCommand { get; }
         public ICommand RemovePlayerCommand { get; }
@@ -49,7 +45,7 @@ namespace WPF.ViewModels
         {
             ResetPlayersCommand = new RelayCommand(x => ResetPlayers());
 
-            players = new List<Player>();
+            players = new ObservableCollection<Player>();
 
             var curr = new Player("Current", "Red");
             var prev = new Player("Previous", "Yellow");
@@ -61,8 +57,8 @@ namespace WPF.ViewModels
             players.Add(next);
             players.Add(loh);
 
-            currentPlayerIndex = 1;
-            SwapPlayersQueue(currentPlayerIndex);
+            CurrentIndex = 1;
+            //SwapPlayersQueue(CurrentIndex);
         }
 
         public void AddPlayer()
@@ -73,21 +69,22 @@ namespace WPF.ViewModels
         public void SuccessfullyAnswered(QuestionItem questionItem)
         {
             LastQuestion = questionItem;
-            CurrentPlayer.Score += LastQuestion.Cost;
+            Players[CurrentIndex].Score += LastQuestion.Cost;
 
-            SwapPlayersQueue(currentPlayerIndex++);
+            //SwapPlayersQueue(CurrentIndex++);
+            CurrentIndex++;
         }
 
-        public void SwapPlayersQueue(int index)
-        {
-            PreviousPlayer = players[(index - 1) % players.Count];
-            CurrentPlayer = players[index % players.Count];
-            NextPlayer = players[(index + 1) % players.Count];
-        }
+        //public void SwapPlayersQueue(int index)
+        //{
+        //    PreviousPlayer = players[(index - 1) % players.Count];
+        //    CurrentPlayer = players[index % players.Count];
+        //    NextPlayer = players[(index + 1) % players.Count];
+        //}
 
         public void ResetPlayers()
         {
-            foreach (var player in players)
+            foreach (var player in Players)
             {
                 player.Score = 0;
             }

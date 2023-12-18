@@ -30,7 +30,7 @@ namespace WPF.ViewModels
 
         public MainWindowViewModel(INavigationService navigationService, GameViewModel gameViewModel,
             AnswerWaitViewModel answerWaitWindowViewModel, MessageChooseViewModel messageChooseGameWindow,
-            NewGameViewModel newGameViewModel, CancelWaitViewModel cancelWaitViewModel)
+            NewGameViewModel newGameViewModel, CancelWaitViewModel cancelWaitViewModel, PlayersViewModel playersViewModel)
         {
             NavigationService = navigationService;
 
@@ -56,6 +56,7 @@ namespace WPF.ViewModels
                         {
                             NavigationService.NavigateTo<MainMenuViewModel>();
                             newGameViewModel.UpdateTable();
+                            playersViewModel.ResetPlayers();
                         }
                     }
                 }

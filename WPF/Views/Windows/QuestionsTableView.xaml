@@ -3,28 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:c="clr-namespace:WPF.Converters"
              mc:Ignorable="d"
              DataContext="{Binding QuestionsTableViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <c:BrushNameToBrushConverter x:Key="BrushNameConverter"/>
-    </UserControl.Resources>
     <Grid>
         <ItemsControl ItemsSource="{Binding QuestionsTable.TableLines}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel DataContext="{Binding}" VerticalAlignment="Center"/>
-                    <!--<StackPanel
-                        DataContext="{Binding}"
-                        --><!--Columns="1"
-                        Rows="{Binding QuestionsTableViewModel.QuestionsTable.TableLines.Count, Source={StaticResource ViewModelsLocator}}">--><!--
-                    </StackPanel>-->
+                    <UniformGrid DataContext="{Binding}"
+                        Columns="1"
+                        Rows="{Binding QuestionsTableViewModel.QuestionsTable.TableLines.Count, Source={StaticResource ViewModelsLocator}}">
+                    </UniformGrid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid MinHeight="150">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="7*"/>
@@ -32,9 +26,9 @@
                         <Border Grid.Column="0"
                                 Background="DodgerBlue"
                                 BorderBrush="Transparent"
-                                BorderThickness="2">
+                                BorderThickness="3">
                             <TextBlock Text="{Binding LineTitle}"
-                                       FontSize="20"
+                                       FontSize="26"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        TextAlignment="Center"
@@ -51,8 +45,8 @@
                                 <DataTemplate>
                                         <Grid DataContext="{Binding Converter={StaticResource QuestionItemModelToViemModelConverter}}">
                                             <Button Content="{Binding Cost}"
-                                                    FontSize="36"
-                                                    BorderThickness="2"
+                                                    FontSize="52"
+                                                    BorderThickness="3"
                                                     BorderBrush="Transparent"
                                                     Background="DodgerBlue"
                                                     Command="{Binding TapToAnswerCommand}"

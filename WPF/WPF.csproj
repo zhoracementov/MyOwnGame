@@ -12,8 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Styles\game.jpg" />
-    <None Remove="Styles\placeholder.png" />
+	  <None Remove="Styles\game.jpg" />
+	  <None Remove="Styles\game.png" />
+	  <None Remove="Styles\placeholder.png" />
+	  <None Remove="Styles\arrow-down.png" />
+	  <None Remove="Styles\arrow-left.png" />
+	  <None Remove="Styles\arrow-right.png" />
+	  <None Remove="Styles\arrow-top.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,12 +29,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Styles\game.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Styles\placeholder.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+	  <Resource Include="Styles\game.jpg">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Styles\game.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Styles\placeholder.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Styles\arrow-down.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Styles\arrow-left.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Styles\arrow-right.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Styles\arrow-top.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
   </ItemGroup>
 
 </Project>

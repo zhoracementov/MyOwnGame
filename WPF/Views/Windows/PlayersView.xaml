@@ -24,35 +24,6 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <UniformGrid Grid.Column="0" Background="{Binding PreviousPlayer.BrushColor, Converter={StaticResource BrushNameToBrushConverter}}" Rows="2">
-            <TextBlock Text="{Binding PreviousPlayer.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
-            <TextBlock Text="{Binding PreviousPlayer.Score}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
-        </UniformGrid>
-        <UniformGrid Grid.Column="1" Background="{Binding CurrentPlayer.BrushColor, Converter={StaticResource BrushNameToBrushConverter}}" Rows="2">
-            <TextBlock Text="{Binding CurrentPlayer.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
-            <TextBlock Text="{Binding CurrentPlayer.Score}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
-        </UniformGrid>
-        <UniformGrid Grid.Column="2" Background="{Binding NextPlayer.BrushColor, Converter={StaticResource BrushNameToBrushConverter}}" Rows="2">
-            <TextBlock Text="{Binding NextPlayer.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
-            <TextBlock Text="{Binding NextPlayer.Score}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
-        </UniformGrid>
-        <StackPanel Grid.Column="3" Orientation="Horizontal">
-            <Button Content="Добавить участника"
-                    Command="{Binding AddNewPlayerCommand}"
-                    Style="{StaticResource AddButtonStyle}"
-                    Margin="5"
-                    Padding="10"/>
-            <Button Content="Удалить участника"
-                    Command="{Binding RemovePlayerCommand}"
-                    Style="{StaticResource RemoveButtonStyle}"
-                    Margin="5"
-                    Padding="10"/>
-        </StackPanel>
+        
     </Grid>
 </UserControl>

@@ -46,20 +46,22 @@
             <RowDefinition Height="8*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        
+
         <TextBlock Grid.Row="0"
            Grid.Column="0"
            Text="Saves"
            Style="{StaticResource StylishTextBlock}">
         </TextBlock>
-        <ScrollViewer Grid.Column="0" Grid.Row="1" Background="LightBlue">
-            <!-- Здесь измененный фон -->
+        <ScrollViewer Grid.Column="0"
+                      Grid.Row="1"
+                      Background="LightBlue"
+                      Template="{DynamicResource ScrollViewerControlTemplate}">
             <ListView ItemsSource="{Binding Saves}"
-                  DisplayMemberPath="Name"
-                  Background="Transparent"
-                  SelectedItem="{Binding SelectedSave}"
-                  FontSize="20"
-                  ItemContainerStyle="{StaticResource {x:Type ListViewItem}}">
+                      IsSynchronizedWithCurrentItem="True"
+                      DisplayMemberPath="Name"
+                      Background="Transparent"
+                      SelectedItem="{Binding SelectedSave}"
+                      FontSize="20">
             </ListView>
         </ScrollViewer>
         <Button Grid.Row="3"
@@ -71,8 +73,8 @@
             <v:QuestionsTableView/>
             <Grid Background="Transparent"/>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="1">
+        <!--<Grid Grid.Row="0" Grid.Column="1">
             <v:PlayersView/>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>

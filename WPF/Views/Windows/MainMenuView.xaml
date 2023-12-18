@@ -5,27 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF.Views.Windows"
              mc:Ignorable="d" 
-             DataContext="{Binding MainMenuViewModel, Source={StaticResource ViewModelsLocator}}"
-             Height="450" Width="800">
-    <UserControl.Resources>
-        <Style x:Key="MenuButtonStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="White"/>
-
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-
-            <Setter Property="FontSize" Value="18"/>
-
-            <Setter Property="Padding" Value="15,10"/>
-
-            <Setter Property="Margin" Value="10"/>
-
-            <Setter Property="Background" Value="#FF007ACC"/>
-
-            <Setter Property="Height" Value="100"/>
-
-            <Setter Property="Width" Value="300"/>
-        </Style>
-    </UserControl.Resources>
+             DataContext="{Binding MainMenuViewModel, Source={StaticResource ViewModelsLocator}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -33,9 +13,26 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image Source="/Styles/game.jpg" Grid.Row="0" Stretch="Uniform"/>
-        <Button Content="New Game" Command="{Binding MoveToNewGameCommand}" Grid.Row="1" Style="{StaticResource MenuButtonStyle}"/>
-        <Button Content="Game Editor" Command="{Binding MoveToGameEditCommand}" Grid.Row="2" Style="{StaticResource MenuButtonStyle}"/>
-        <Button Content="Exit" Command="{Binding CloseAppCommand}" Grid.Row="3" Style="{StaticResource MenuButtonStyle}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="4">
+            <UniformGrid Rows="4">
+                <Image  Source="/Styles/game.png"
+                        Stretch="Fill"
+                        Grid.Row="0"/>
+                <Button Content="New Game"
+                        Command="{Binding MoveToNewGameCommand}"
+                        Grid.Row="1"/>
+                <Button Content="Game Editor"
+                        Command="{Binding MoveToGameEditCommand}"
+                        Grid.Row="2"/>
+                <Button Content="Exit"
+                        Command="{Binding CloseAppCommand}"
+                        Grid.Row="3"/>
+            </UniformGrid>
+        </Grid>
     </Grid>
 </UserControl>
