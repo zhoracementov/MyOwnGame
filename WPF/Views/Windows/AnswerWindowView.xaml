@@ -46,26 +46,29 @@
                            Grid.Column="1"
                            Grid.ColumnSpan="1"
                            Grid.RowSpan="1">-->
-                <Grid Background="#04085b"
-                      Grid.Row="1"
-                      Grid.Column="1"
-                      Grid.ColumnSpan="1"
-                      Grid.RowSpan="1">
-                    <TextBlock Text="{Binding CurrentQuestionText}"
-                               TextWrapping="WrapWithOverflow"
-                               FontSize="46"
-                               TextAlignment="Center"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Foreground="White"/>
-                    <Image Visibility="{Binding IsPictureInQuestion, Converter={StaticResource BoolToVisibilityConverter}}"
-                           Margin="10"
-                           Source="{Binding CurrentPicturePath}"
-                           Stretch="Uniform">
-                    </Image>
-                </Grid>
+                <Border Background="#04085b"
+                        CornerRadius="10"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="1"
+                        Grid.RowSpan="1">
+                    <Grid Margin="10">
+                        <TextBlock Text="{Binding CurrentQuestionText}"
+                                   TextWrapping="WrapWithOverflow"
+                                   FontSize="46"
+                                   TextAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="White"/>
+                        <Image Visibility="{Binding IsPictureInQuestion, Converter={StaticResource BoolToVisibilityConverter}}"
+                            Margin="10"
+                            Source="{Binding CurrentPicturePath}"
+                            Stretch="Uniform">
+                        </Image>
+                    </Grid>
+             </Border>
                 <!--</ScrollViewer>-->
-                <Grid Grid.Row="2" Grid.Column="1">
+                <Grid Grid.Row="2" Grid.Column="1" Margin="10, 0">
                     <Button Content="Answer given"
                             Command="{Binding AnswerGivenCommand}"
                             FontSize="26"

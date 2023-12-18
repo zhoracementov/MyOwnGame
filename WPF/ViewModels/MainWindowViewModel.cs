@@ -55,7 +55,7 @@ namespace WPF.ViewModels
                         if (responce)
                         {
                             NavigationService.NavigateTo<MainMenuViewModel>();
-                            newGameViewModel.UpdateTable();
+                            newGameViewModel.ResetTable();
                             playersViewModel.ResetPlayers();
                         }
                     }

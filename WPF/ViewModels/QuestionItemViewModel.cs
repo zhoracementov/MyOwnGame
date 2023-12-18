@@ -67,7 +67,7 @@ namespace WPF.ViewModels
 
                     await mainWindowViewModel.OpenCancelWaitWindow(message);
 
-                    newGameViewModel.UpdateTable();
+                    newGameViewModel.ResetTable();
                     playersViewModel.ResetPlayers();
                     navigationService.NavigateTo<MainMenuViewModel>();
                 }

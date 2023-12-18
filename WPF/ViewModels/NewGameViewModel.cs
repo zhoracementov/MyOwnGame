@@ -27,7 +27,7 @@ namespace WPF.ViewModels
             set
             {
                 if (value != null && Set(ref selectedSave, value))
-                    UpdateTable();
+                    ResetTable();
             }
         }
 
@@ -60,7 +60,7 @@ namespace WPF.ViewModels
             }
         }
 
-        public async void UpdateTable()
+        public async void ResetTable()
         {
             questionsTableViewModel.QuestionsTable = await selectedSave.GetQuestionsTableAsync(new JsonObjectSerializer());
         }
