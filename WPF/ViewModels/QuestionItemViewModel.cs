@@ -60,10 +60,10 @@ namespace WPF.ViewModels
 
                 if (questionsTableViewModel.QuestionsTable.IsCompleted())
                 {
-                    var message = string.Format("Game Over!\n\rScore Table:\n\r{0}",
+                    var message = string.Format("Game Over!\n\r{0}",
                         string.Join(Environment.NewLine, playersViewModel.Players
                         .OrderByDescending(x => x.Score)
-                        .Select(x => $"{x.Name}:\t{x.Score}")));
+                        .Select(x => string.Format("{0}\t: {1, 4}", x.Name, x.Score))));
 
                     await mainWindowViewModel.OpenCancelWaitWindow(message);
 

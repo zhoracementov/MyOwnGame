@@ -34,7 +34,7 @@
                       Grid.ColumnSpan="1"
                       Grid.RowSpan="1">
                     <TextBlock Text="{Binding MessageText}"
-                               TextWrapping="WrapWithOverflow"
+                               TextWrapping="Wrap"
                                FontSize="46"
                                TextAlignment="Center"
                                HorizontalAlignment="Center"

@@ -47,11 +47,15 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0"
-           Grid.Column="0"
-           Text="Saves"
-           Style="{StaticResource StylishTextBlock}">
-        </TextBlock>
+        <Grid>
+            <Border CornerRadius="15" Grid.Column="0"  Grid.Row="0">
+                <Border.Effect>
+                    <BlurEffect Radius="25"/>
+                </Border.Effect>
+                <TextBlock Text="Saves" Style="{StaticResource StylishTextBlock}" FontWeight="ExtraBold"/>
+            </Border>
+            <TextBlock Text="Saves" Style="{StaticResource StylishTextBlock}"/>
+        </Grid>
         <ScrollViewer Grid.Column="0"
                       Grid.Row="1"
                       Background="LightBlue"
