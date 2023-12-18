@@ -24,11 +24,13 @@
                             <ColumnDefinition Width="7*"/>
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0"
-                                Background="DodgerBlue"
-                                BorderBrush="Transparent"
-                                BorderThickness="3">
+                                Background="#11285b"
+                                BorderBrush="AntiqueWhite"
+                                BorderThickness="2">
                             <TextBlock Text="{Binding LineTitle}"
-                                       FontSize="26"
+                                       Foreground="LightGoldenrodYellow"
+                                       FontSize="24"
+                                       FontStyle="Italic"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        TextAlignment="Center"
@@ -45,10 +47,13 @@
                                 <DataTemplate>
                                         <Grid DataContext="{Binding Converter={StaticResource QuestionItemModelToViemModelConverter}}">
                                             <Button Content="{Binding Cost}"
-                                                    FontSize="52"
-                                                    BorderThickness="3"
-                                                    BorderBrush="Transparent"
-                                                    Background="DodgerBlue"
+                                                    Visibility="{Binding IsActive, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                    FontSize="50"
+                                                    FontStyle="Italic"
+                                                    Foreground="AntiqueWhite"
+                                                    BorderThickness="2"
+                                                    BorderBrush="LightGoldenrodYellow"
+                                                    Background="#11285b"
                                                     Command="{Binding TapToAnswerCommand}"
                                                     IsEnabled="{Binding IsActive}"/>
                                         </Grid>

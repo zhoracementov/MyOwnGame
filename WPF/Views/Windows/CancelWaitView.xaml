@@ -29,6 +29,8 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
                 <Border Background="#04085b"
+                        BorderBrush="MediumVioletRed"
+                        BorderThickness="2"
                         CornerRadius="10"
                         Grid.Row="1"
                         Grid.Column="1"
