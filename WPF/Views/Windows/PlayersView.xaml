@@ -12,6 +12,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <UniformGrid Grid.Column="0" Background="{Binding PreviousPlayer.BrushColor, Converter={StaticResource BrushNameToBrushConverter}}" Rows="2">
             <TextBlock Text="{Binding PreviousPlayer.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
@@ -25,5 +26,15 @@
             <TextBlock Text="{Binding NextPlayer.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
             <TextBlock Text="{Binding NextPlayer.Score}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26"/>
         </UniformGrid>
+        <StackPanel Grid.Column="3" Orientation="Vertical">
+            <Button Content="Добавить участника"
+                    Command="{Binding AddNewPlayerCommand}"
+                    Margin="5"
+                    Padding="10"/>
+            <Button Content="Удалить участника"
+                    Command="{Binding RemovePlayerCommand}"
+                    Margin="5"
+                    Padding="10"/>
+        </StackPanel>
     </Grid>
 </UserControl>
