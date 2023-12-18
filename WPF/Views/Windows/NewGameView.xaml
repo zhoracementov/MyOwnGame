@@ -33,7 +33,6 @@
         <Style TargetType="ListViewItem">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="Black"/>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -58,13 +57,14 @@
         </Grid>
         <ScrollViewer Grid.Column="0"
                       Grid.Row="1"
-                      Background="LightBlue"
+                      Background="#10224f"
                       Template="{DynamicResource ScrollViewerControlTemplate}">
             <ListView ItemsSource="{Binding Saves}"
                       IsSynchronizedWithCurrentItem="True"
                       DisplayMemberPath="Name"
                       Background="Transparent"
                       SelectedItem="{Binding SelectedSave}"
+                      Foreground="LightGoldenrodYellow"
                       FontSize="20">
             </ListView>
         </ScrollViewer>

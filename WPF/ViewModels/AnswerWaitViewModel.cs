@@ -49,12 +49,20 @@ namespace WPF.ViewModels
             set => Set(ref currentPicturePath, value);
         }
 
+        private string animationDataTrigger; // "Start", "Stop"
+        public string AnimationDataTrigger
+        {
+            get => animationDataTrigger;
+            set => Set(ref animationDataTrigger, value);
+        }
+
         public ICommand AnswerGivenCommand { get; }
 
         public AnswerWaitViewModel(IOptions<GameSettings> gameOptions)
         {
             //todo: make something with it
             CurrentPicturePath = "/Styles/placeholder.png";
+            AnimationDataTrigger = "Stop";
 
             AnswerGivenCommand = new RelayCommand(x => timer.Cancel());
             this.gameOptions = gameOptions;
@@ -67,6 +75,8 @@ namespace WPF.ViewModels
 
             TimeBefore = waitTime;
             Cost = questionItem.Cost;
+
+            AnimationDataTrigger = "Start";
 
             if (string.IsNullOrEmpty(questionItem.PicturePath))
             {
@@ -86,7 +96,11 @@ namespace WPF.ViewModels
             }
 
             timer ??= new AsyncTimer(delayTime, waitTime, () => TimeBefore -= delayTime);
-            return await timer.Start();
+            var result = await timer.Start();
+
+            AnimationDataTrigger = "Stop";
+
+            return result;
         }
     }
 }

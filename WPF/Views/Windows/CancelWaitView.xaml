@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Border Background="Black" Opacity="0.6"/>
-        <Border Margin="100, 20" CornerRadius="10" Background="#133778">
+        <Border Margin="100, 20" CornerRadius="10" Background="#10224f">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -28,8 +28,8 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                 </Grid>
-                <Border Background="#04085b"
-                        BorderBrush="MediumVioletRed"
+                <Border Background="#08213f"
+                        BorderBrush="LightGoldenrodYellow"
                         BorderThickness="2"
                         CornerRadius="10"
                         Grid.Row="1"
@@ -42,7 +42,7 @@
                                    TextAlignment="Center"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
-                                   Foreground="White"/>
+                                   Foreground="LightGoldenrodYellow"/>
                 </Border>
                 <Grid Grid.Row="2" Grid.Column="1" Margin="10, 0">
                     <Button Content="Close"

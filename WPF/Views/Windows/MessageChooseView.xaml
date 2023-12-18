@@ -27,7 +27,7 @@
     </UserControl.Resources>
     <Grid>
         <Border Background="Black" Opacity="0.6"/>
-        <Border Margin="100, 20" CornerRadius="10" Background="#133778">
+        <Border Margin="100, 20" CornerRadius="10" Background="#10224f">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -39,8 +39,8 @@
                     <RowDefinition Height="4*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Border Background="#04085b"
-                        BorderBrush="MediumVioletRed"
+                <Border Background="#08213f"
+                        BorderBrush="LightGoldenrodYellow"
                         BorderThickness="2"
                         Grid.Row="1"
                         Grid.Column="1"
@@ -53,7 +53,7 @@
                            FontSize="46"
                            TextAlignment="Center"
                            VerticalAlignment="Center"
-                           Foreground="White"/>
+                           Foreground="LightGoldenrodYellow"/>
                     <!--</ScrollViewer>-->
                 </Border>
                 <Grid Grid.Row="2" Grid.Column="1">
