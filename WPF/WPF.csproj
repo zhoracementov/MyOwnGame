@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>WPF.Program</StartupObject>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -12,7 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <None Remove="Styles\game.jpg" />
 	  <None Remove="Styles\game.png" />
 	  <None Remove="Styles\placeholder.png" />
 	  <None Remove="Styles\arrow-down.png" />
@@ -29,9 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <Resource Include="Styles\game.jpg">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Resource>
 	  <Resource Include="Styles\game.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Resource>
