@@ -1,4 +1,4 @@
-name: Getting archive with workflow run
+name: Debug
 
 on:
   push:
