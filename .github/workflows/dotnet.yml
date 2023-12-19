@@ -1,4 +1,4 @@
-name: Debug
+name: Release
 
 on:
   push:
@@ -28,10 +28,10 @@ jobs:
       run: dotnet test --no-build --verbosity normal
 
     - name: Publish artifacts
-      run: dotnet publish --configuration Debug --output ./publish -p:PublishSingleFile=true --self-contained false
+      run: dotnet publish --configuration Release --output ./publish -p:PublishSingleFile=true --self-contained false
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: Debug
+        name: Release
         path: ./publish
