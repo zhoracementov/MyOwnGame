@@ -50,7 +50,7 @@
                                                     Visibility="{Binding IsActive, Converter={StaticResource BoolToVisibilityConverter}}"
                                                     FontSize="50"
                                                     FontStyle="Italic"
-                                                    Foreground="AntiqueWhite"
+                                                    Foreground="LightGoldenrodYellow"
                                                     BorderThickness="2"
                                                     BorderBrush="LightGoldenrodYellow"
                                                     Background="#10224f"

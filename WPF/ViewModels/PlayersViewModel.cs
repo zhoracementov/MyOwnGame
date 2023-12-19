@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using WPF.Commands;
+﻿using System.Collections.ObjectModel;
+using WPF.Extenstions.EnumerablePickExtentions;
 using WPF.Models;
 
 namespace WPF.ViewModels
@@ -13,76 +10,40 @@ namespace WPF.ViewModels
         public ObservableCollection<Player> Players
         {
             get => players;
-            set => Set(ref players, value);
-        }
-
-        private QuestionItem lastQuestion;
-        public QuestionItem LastQuestion
-        {
-            get => lastQuestion;
-            set => Set(ref lastQuestion, value);
-        }
-
-        private int currentIndex;
-        public int CurrentIndex
-        {
-            get => currentIndex;
             set
             {
-                var val = value % Players.Count;
-                if (Set(ref currentIndex, val))
+                var list = new ObservableCollection<Player>(value.ShakeAll());
+                if (Set(ref players, list))
                 {
-                    //...
+
                 }
             }
         }
 
-        public ICommand AddNewPlayerCommand { get; }
-        public ICommand RemovePlayerCommand { get; }
-        public ICommand ResetPlayersCommand { get; }
-
         public PlayersViewModel()
         {
-            ResetPlayersCommand = new RelayCommand(x => ResetPlayers());
-
-            players = new ObservableCollection<Player>();
-
-            var curr = new Player("Current", "Red");
-            var prev = new Player("Previous", "Yellow");
-            var next = new Player("Next", "Green");
-            var loh = new Player("LOH", "Brown");
-
-            players.Add(prev);
-            players.Add(curr);
-            players.Add(next);
-            players.Add(loh);
-
-            CurrentIndex = 1;
-            //SwapPlayersQueue(CurrentIndex);
+            Players = new ObservableCollection<Player>();
         }
 
-        public void AddPlayer()
+        public void GameStart()
         {
-            throw new NotImplementedException();
+            Players = new ObservableCollection<Player>(Players.ShakeAll());
+            ResetScores();
         }
 
-        public void SuccessfullyAnswered(QuestionItem questionItem)
+        public void SuccessfullyAnswered(QuestionItem questionItem = null)
         {
-            LastQuestion = questionItem;
-            Players[CurrentIndex].Score += LastQuestion.Cost;
+            var pop = players[0];
 
-            //SwapPlayersQueue(CurrentIndex++);
-            CurrentIndex++;
+            if (questionItem != null)
+                pop.Score += questionItem.Cost;
+
+            Players.RemoveAt(0);
+            players.Add(pop);
         }
 
-        //public void SwapPlayersQueue(int index)
-        //{
-        //    PreviousPlayer = players[(index - 1) % players.Count];
-        //    CurrentPlayer = players[index % players.Count];
-        //    NextPlayer = players[(index + 1) % players.Count];
-        //}
 
-        public void ResetPlayers()
+        public void ResetScores()
         {
             foreach (var player in Players)
             {

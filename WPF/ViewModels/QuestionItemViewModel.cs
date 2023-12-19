@@ -57,24 +57,20 @@ namespace WPF.ViewModels
 
                 if (await mainWindowViewModel.OpenMessageChooseWindow(questionItem.Answer))
                     playersViewModel.SuccessfullyAnswered(QuestionItem);
+                else
+                    playersViewModel.SuccessfullyAnswered();
 
                 if (questionsTableViewModel.QuestionsTable.IsCompleted())
                 {
                     var message = string.Format("Game Over!\n\r{0}",
                         string.Join(Environment.NewLine, playersViewModel.Players
                         .OrderByDescending(x => x.Score)
-                        .Select(x => string.Format("{0}\t: {1, 4}", x.Name, x.Score))));
+                        .Select(x => string.Format("{0, -4}\t: {1, 4}", x.Name, x.Score))));
 
                     await mainWindowViewModel.OpenCancelWaitWindow(message);
 
                     newGameViewModel.ResetTable();
-                    playersViewModel.ResetPlayers();
                     navigationService.NavigateTo<MainMenuViewModel>();
-                }
-                else
-                {
-                    //playerRouletteService.Move();
-                    //questionsTableViewModel.Update();
                 }
 
                 mainWindowViewModel.CloseMessageWindow();

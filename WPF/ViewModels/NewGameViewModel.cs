@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using WPF.Commands;
 using WPF.Models;
+using WPF.Services;
 using WPF.Services.Navigation;
 using WPF.Services.Serialization;
 
@@ -12,8 +14,8 @@ namespace WPF.ViewModels
     public class NewGameViewModel : ViewModel
     {
         private readonly QuestionsTableViewModel questionsTableViewModel;
-
         private ObservableCollection<Save> saves;
+
         public ObservableCollection<Save> Saves
         {
             get => saves;
@@ -31,33 +33,55 @@ namespace WPF.ViewModels
             }
         }
 
+        public ICommand AddPlayerCommand { get; }
+        public ICommand ResetPlayersCommand { get; }
         public ICommand MoveToGameCommand { get; }
 
-        public NewGameViewModel(INavigationService navigationService, QuestionsTableViewModel questionsTableViewModel)
+        public NewGameViewModel(INavigationService navigationService, BrushesRouletteService brushesRouletteService,
+            MainWindowViewModel mainWindowViewModel, QuestionsTableViewModel questionsTableViewModel, PlayersViewModel playersViewModel)
         {
             this.questionsTableViewModel = questionsTableViewModel;
 
             MoveToGameCommand = new RelayCommand(x =>
             {
-                if (questionsTableViewModel.QuestionsTable is null || questionsTableViewModel.QuestionsTable.TableLines.Count == 0)
+                if (questionsTableViewModel.QuestionsTable is null)
+                    throw new ArgumentException();
+
+                if (questionsTableViewModel.QuestionsTable.TableLines.Count == 0)
                     throw new ArgumentException();
 
                 if (SelectedSave is null)
                     return;
 
+                if (playersViewModel.Players.Count < 2)
+                    return;
+
+                playersViewModel.ResetScores();
+
                 navigationService.NavigateTo<GameViewModel>();
             });
 
-            Saves = new ObservableCollection<Save>(Save.GetSaves(App.SavesDataDirectory, new JsonObjectSerializer()));
+            AddPlayerCommand = new RelayCommand(async x =>
+            {
+                var playerName = await mainWindowViewModel.OpenAddPlayerWindow();
+                mainWindowViewModel.CloseMessageWindow();
 
-            if (Saves.Count == 0)
+                if (!string.IsNullOrWhiteSpace(playerName))
+                {
+                    var playerBrush = brushesRouletteService.Next;
+                    var player = new Player(playerName, playerBrush);
+
+                    playersViewModel.Players.Add(player);
+                }
+            });
+
+            ResetPlayersCommand = new RelayCommand(x =>
             {
-                //MessageBox.Show("Go to editor!)");
-            }
-            else
-            {
-                SelectedSave = Saves.First();
-            }
+                playersViewModel.Players.Clear();
+            });
+
+            Saves = new ObservableCollection<Save>(Save.GetSaves(App.SavesDataDirectory, new JsonObjectSerializer()));
+            SelectedSave = Saves.FirstOrDefault();
         }
 
         public async void ResetTable()

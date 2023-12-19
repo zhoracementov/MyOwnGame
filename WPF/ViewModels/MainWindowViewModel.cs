@@ -11,6 +11,7 @@ namespace WPF.ViewModels
         private readonly AnswerWaitViewModel answerWaitWindowViewModel;
         private readonly MessageChooseViewModel messageChooseGameWindow;
         private readonly CancelWaitViewModel cancelWaitViewModel;
+        private readonly AddPlayerViewModel addPlayerViewModel;
 
         private ViewModel messageViewModel;
         public ViewModel MessageViewModel
@@ -30,33 +31,42 @@ namespace WPF.ViewModels
 
         public MainWindowViewModel(INavigationService navigationService, GameViewModel gameViewModel,
             AnswerWaitViewModel answerWaitWindowViewModel, MessageChooseViewModel messageChooseGameWindow,
-            NewGameViewModel newGameViewModel, CancelWaitViewModel cancelWaitViewModel, PlayersViewModel playersViewModel)
+            /*NewGameViewModel newGameViewModel, */CancelWaitViewModel cancelWaitViewModel,
+            PlayersViewModel playersViewModel, AddPlayerViewModel addPlayerViewModel)
         {
             NavigationService = navigationService;
 
             this.answerWaitWindowViewModel = answerWaitWindowViewModel;
             this.messageChooseGameWindow = messageChooseGameWindow;
             this.cancelWaitViewModel = cancelWaitViewModel;
+            this.addPlayerViewModel = addPlayerViewModel;
 
             NavigateBackCommand = new RelayCommand(async x =>
             {
                 if (navigationService.CurrentViewModel != gameViewModel)
                 {
-                    NavigationService.NavigateTo<MainMenuViewModel>();
+                    if (messageViewModel != addPlayerViewModel)
+                    {
+                        NavigationService.NavigateTo<MainMenuViewModel>();
+                    }
+                    else
+                    {
+                        CloseMessageWindow();
+                    }
                 }
                 else
                 {
                     if (messageViewModel != messageChooseGameWindow)
                     {
                         var responce = await OpenMessageChooseWindow("Escape from this game? Progress will be lost.");
-                        
+
                         CloseMessageWindow();
 
                         if (responce)
                         {
                             NavigationService.NavigateTo<MainMenuViewModel>();
-                            newGameViewModel.ResetTable();
-                            playersViewModel.ResetPlayers();
+                            //newGameViewModel.ResetTable();
+                            //playersViewModel.ResetPlayers();
                         }
                     }
                 }
@@ -81,6 +91,12 @@ namespace WPF.ViewModels
         {
             MessageViewModel = cancelWaitViewModel;
             return await cancelWaitViewModel.Wait(messageText);
+        }
+
+        public async Task<string> OpenAddPlayerWindow()
+        {
+            MessageViewModel = addPlayerViewModel;
+            return await addPlayerViewModel.Wait();
         }
 
         public void CloseMessageWindow()

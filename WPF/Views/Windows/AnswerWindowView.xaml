@@ -38,7 +38,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Margin="0, 25, 0, 10">
-                                    <TextBlock Text="{Binding TimeBefore, StringFormat=\{0:hh\\:mm\\:ss\}}"
+                                    <TextBlock Text="{Binding TimeBefore, StringFormat=\{0:mm\\:ss\}}"
                                                Margin="10"
                                                FontSize="52"
                                                Foreground="LightGoldenrodYellow"/>

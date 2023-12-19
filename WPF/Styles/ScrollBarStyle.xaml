@@ -1,6 +1,84 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Style x:Key="AddButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                                BorderBrush="Transparent"
+                                Background="DarkOrange"
+                                CornerRadius="20">
+                        <Path Data="M0.5,0 L0.5,1 M0,0.5 L1,0.5"
+                                  Margin="5"
+                                  StrokeThickness="10"
+                                  Stretch="Uniform"
+                                  Stroke="LightGoldenrodYellow"
+                                  StrokeEndLineCap="Round"
+                                  StrokeStartLineCap="Round"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="orange" TargetName="border"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="CloseButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                                BorderBrush="Transparent"
+                                Background="DarkRed"
+                                CornerRadius="20">
+                        <Path Data="M0.0,1 L1.0,0 M0,0.0 L1,1.0"
+                                  Margin="5"
+                                  StrokeThickness="10"
+                                  Stretch="Uniform"
+                                  Stroke="LightGoldenrodYellow"
+                                  StrokeEndLineCap="Round"
+                                  StrokeStartLineCap="Round"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Red" TargetName="border"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PlayButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                                BorderBrush="Transparent"
+                                Background="DarkGreen"
+                                CornerRadius="20">
+                        <Path Data="M0.0,1 L1,0.5 M0,0.0 L1,0.5 M0,0.0 L0,1.0"
+                                  Margin="10, 10, 5, 10"
+                                  StrokeThickness="10"
+                                  Stretch="Uniform"
+                                  Stroke="LightGoldenrodYellow"
+                                  StrokeEndLineCap="Round"
+                                  StrokeStartLineCap="Round"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Green" TargetName="border"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="ScrollBarLineTopButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Cursor" Value="Hand" />

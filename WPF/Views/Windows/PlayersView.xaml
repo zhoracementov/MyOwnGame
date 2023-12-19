@@ -7,23 +7,41 @@
              mc:Ignorable="d" 
              DataContext="{Binding PlayersViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <Style x:Key="AddButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#FF738000"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
-        <Style x:Key="RemoveButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#FF710519"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
-    </UserControl.Resources>
     <Grid>
-        
+        <ItemsControl ItemsSource="{Binding Players}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel DataContext="{Binding}" Orientation="Horizontal">
+                    </StackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Border Background="{Binding BrushColor}"
+                        CornerRadius="5"
+                        HorizontalAlignment="Center"
+                        MaxWidth="300"
+                        Margin="2, 2">
+                        <UniformGrid Rows="3">
+                            <TextBlock Text="{Binding Score}"
+                                   FontSize="26"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Name}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   FontSize="26"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Center"/>
+                            <Image Source="/Styles/user_icon.png"
+                                   VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Center"/>
+                    </UniformGrid>
+                </Border>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>
