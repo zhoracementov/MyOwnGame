@@ -7,15 +7,15 @@ using WPF.Services.Navigation;
 
 namespace WPF.ViewModels
 {
-    public class QuestionItemViewModel : ViewModel
+    public class QuestionItemViewModel : ViewModel   // код для ячеек
     {
         private QuestionItem questionItem;
-        public QuestionItem QuestionItem
+        public QuestionItem QuestionItem //свойства
         {
             get => questionItem;
             set
             {
-                if (Set(ref questionItem, value))
+                if (Set(ref questionItem, value))  //questionItem хранит в себе все данные(вопрос, ответ, баллы)
                 {
                     IsActive = true;
                 }
@@ -30,7 +30,7 @@ namespace WPF.ViewModels
         }
 
         private bool isActive;
-        public bool IsActive
+        public bool IsActive   //проверка на активность кнопки
         {
             get => isActive;
             //set => Set(ref isActive, value);
