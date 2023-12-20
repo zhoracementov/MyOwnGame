@@ -89,7 +89,7 @@
             <ListView ItemsSource="{Binding Saves}"
                       IsSynchronizedWithCurrentItem="True"
                       DisplayMemberPath="Name"
-                      Background="Transparent"
+                      Background="#08213f"
                       SelectedItem="{Binding SelectedSave}"
                       Foreground="LightGoldenrodYellow"
                       FontSize="20">
