@@ -62,8 +62,7 @@ namespace WPF.ViewModels
 
                 if (questionsTableViewModel.QuestionsTable.IsCompleted())
                 {
-                    playersViewModel.IsGameActive = false;
-                    playersViewModel.Players.Add(playersViewModel.CurrentPlayer);
+                    playersViewModel.GameEnds();
 
                     var message = string.Format("Game Over!\n\r{0}",
                         string.Join(Environment.NewLine, playersViewModel.Players
@@ -72,6 +71,7 @@ namespace WPF.ViewModels
 
                     await mainWindowViewModel.OpenCancelWaitWindow(message);
 
+                    playersViewModel.ResetScores();
                     newGameViewModel.ResetTable();
                     navigationService.NavigateTo<MainMenuViewModel>();
                 }
