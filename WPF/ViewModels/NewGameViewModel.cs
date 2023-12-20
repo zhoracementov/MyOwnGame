@@ -56,7 +56,7 @@ namespace WPF.ViewModels
                 if (playersViewModel.Players.Count < 2)
                     return;
 
-                playersViewModel.ResetScores();
+                playersViewModel.GameStarts();
 
                 navigationService.NavigateTo<GameViewModel>();
             });
@@ -78,6 +78,7 @@ namespace WPF.ViewModels
             ResetPlayersCommand = new RelayCommand(x =>
             {
                 playersViewModel.Players.Clear();
+                playersViewModel.CurrentPlayer = null;
             });
 
             Saves = new ObservableCollection<Save>(Save.GetSaves(App.SavesDataDirectory, new JsonObjectSerializer()));

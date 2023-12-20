@@ -8,7 +8,35 @@
              DataContext="{Binding PlayersViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ItemsControl ItemsSource="{Binding Players}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="12*"/>
+        </Grid.ColumnDefinitions>
+        <Border Background="{Binding CurrentPlayer.BrushColor}"
+                Visibility="{Binding IsGameActive, Converter={StaticResource BoolToVisibilityConverter}}"
+                CornerRadius="5"
+                HorizontalAlignment="Center"
+                MaxWidth="300"
+                Margin="2, 2">
+            <UniformGrid Rows="3">
+                <TextBlock Text="{Binding CurrentPlayer.Score}"
+                                   FontSize="26"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding CurrentPlayer.Name}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   FontSize="26"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Center"/>
+                <Image Source="/Styles/user_icon.png"
+                                   VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Center"/>
+            </UniformGrid>
+        </Border>
+        <ItemsControl ItemsSource="{Binding Players}" Focusable="False" Grid.Column="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel DataContext="{Binding}" Orientation="Horizontal">

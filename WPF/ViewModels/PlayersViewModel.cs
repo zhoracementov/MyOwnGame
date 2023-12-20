@@ -10,36 +10,47 @@ namespace WPF.ViewModels
         public ObservableCollection<Player> Players
         {
             get => players;
-            set
-            {
-                var list = new ObservableCollection<Player>(value.ShakeAll());
-                if (Set(ref players, list))
-                {
-
-                }
-            }
+            set => Set(ref players, value);
         }
+
+        private Player currentPlayer;
+        public Player CurrentPlayer
+        {
+            get => currentPlayer;
+            set => Set(ref currentPlayer, value);
+        }
+
+        private bool isGameActive;
+        public bool IsGameActive
+        {
+            get => isGameActive;
+            set => Set(ref isGameActive, value);
+        }
+
 
         public PlayersViewModel()
         {
-            Players = new ObservableCollection<Player>();
+            players = new ObservableCollection<Player>();
         }
 
-        public void GameStart()
+        public void GameStarts()
         {
             Players = new ObservableCollection<Player>(Players.ShakeAll());
+            CurrentPlayer = Players[0];
+            players.RemoveAt(0);
+            IsGameActive = true;
+
             ResetScores();
         }
 
         public void SuccessfullyAnswered(QuestionItem questionItem = null)
         {
-            var pop = players[0];
-
             if (questionItem != null)
-                pop.Score += questionItem.Cost;
+                CurrentPlayer.Score += questionItem.Cost;
 
+            Players.Add(CurrentPlayer);
+            CurrentPlayer = Players[0];
             Players.RemoveAt(0);
-            players.Add(pop);
         }
 
 

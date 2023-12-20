@@ -62,6 +62,9 @@ namespace WPF.ViewModels
 
                 if (questionsTableViewModel.QuestionsTable.IsCompleted())
                 {
+                    playersViewModel.IsGameActive = false;
+                    playersViewModel.Players.Add(playersViewModel.CurrentPlayer);
+
                     var message = string.Format("Game Over!\n\r{0}",
                         string.Join(Environment.NewLine, playersViewModel.Players
                         .OrderByDescending(x => x.Score)
