@@ -17,12 +17,12 @@
     </UserControl.Resources>
     <Grid>
         <Border Background="Black" Opacity="0.6"/>
-        <Grid Margin="100, 20">
+        <Grid Margin="150, 25">
             <Border CornerRadius="10" Background="#10224f" Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="16*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>

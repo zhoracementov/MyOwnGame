@@ -27,11 +27,11 @@
     </UserControl.Resources>
     <Grid>
         <Border Background="Black" Opacity="0.6"/>
-        <Border Margin="100, 20" CornerRadius="10" Background="#10224f">
+        <Border Margin="150, 25" CornerRadius="10" Background="#10224f">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="16*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>

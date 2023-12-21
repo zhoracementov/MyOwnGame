@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -14,8 +13,8 @@ namespace WPF.ViewModels
     public class NewGameViewModel : ViewModel
     {
         private readonly QuestionsTableViewModel questionsTableViewModel;
-        private ObservableCollection<Save> saves;
 
+        private ObservableCollection<Save> saves;
         public ObservableCollection<Save> Saves
         {
             get => saves;
