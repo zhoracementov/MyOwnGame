@@ -48,20 +48,44 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="3">
-            <UniformGrid Columns="3">
+            <UniformGrid Columns="3" Rows="2">
+                <TextBlock Text="Start game"
+                       DockPanel.Dock="Top"
+                       Foreground="LightGoldenrodYellow"
+                       FontSize="24"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+                <TextBlock Text="Add Player"
+                       DockPanel.Dock="Top"
+                       Foreground="LightGoldenrodYellow"
+                       FontSize="24"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+                <TextBlock Text="Delete players"
+                       DockPanel.Dock="Top"
+                       Foreground="LightGoldenrodYellow"
+                       FontSize="24"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
                 <Button Command="{Binding MoveToGameCommand}"
                         Style="{DynamicResource PlayButtonStyle}"
-                        Margin="5, 5"
+                        Margin="1, 1"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"/>
                 <Button Command="{Binding AddPlayerCommand}"
                         Style="{DynamicResource AddButtonStyle}"
-                        Margin="5, 5"
+                        Margin="1, 1"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"/>
                 <Button Command="{Binding ResetPlayersCommand}"
                         Style="{DynamicResource CloseButtonStyle}"
-                        Margin="5, 5"
+                        Margin="1, 1"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"/>
             </UniformGrid>
@@ -96,31 +120,14 @@
             </ListView>
         </ScrollViewer>
 
-        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
-            <Grid>
-                <!--<Button Background="Green"
-                        Grid.Column="1"
-                        Margin="15"
-                        BorderBrush="Transparent"
-                        Command="{Binding MoveToGameCommand}"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center">
-                    <Path Data="M0.0,1 L1,0.5 M0,0.0 L1,0.5 M0,0.0 L0,1.0"
-                          StrokeThickness="14"
-                          Stretch="Uniform"
-                          Stroke="LightGoldenrodYellow"
-                          StrokeEndLineCap="Round"
-                          StrokeStartLineCap="Round"/>
-                </Button>-->
-                <Border Grid.Column="0"
-                        Margin="0, 10, 10, 10"
-                        BorderThickness="1"
-                        CornerRadius="2"
-                        BorderBrush="LightGoldenrodYellow">
-                    <v:PlayersView/>
-                </Border>
-            </Grid>
-        </Grid>
+        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                Margin="0, 10, 10, 10"
+                BorderThickness="1"
+                CornerRadius="2"
+                BorderBrush="LightGoldenrodYellow">
+            <v:PlayersView/>
+        </Border>
+
         <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
             <v:QuestionsTableView/>
             <Grid Background="Transparent"/>
