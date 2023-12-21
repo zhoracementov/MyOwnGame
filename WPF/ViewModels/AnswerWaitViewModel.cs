@@ -12,7 +12,9 @@ namespace WPF.ViewModels
     public class AnswerWaitViewModel : ViewModel
     {
         private AsyncTimer timer;
+
         private readonly IOptions<GameSettings> gameOptions;
+        private readonly PlayersViewModel playersViewModel;
 
         private TimeSpan timeBefore;
         public TimeSpan TimeBefore
@@ -56,16 +58,25 @@ namespace WPF.ViewModels
             set => Set(ref animationDataTrigger, value);
         }
 
+        private Player currentPlayer;
+        public Player CurrentPlayer
+        {
+            get => currentPlayer;
+            set => Set(ref currentPlayer, value);
+        }
+
         public ICommand AnswerGivenCommand { get; }
 
-        public AnswerWaitViewModel(IOptions<GameSettings> gameOptions)
+        public AnswerWaitViewModel(IOptions<GameSettings> gameOptions, PlayersViewModel playersViewModel)
         {
             //todo: make something with it
             CurrentPicturePath = "/Styles/placeholder.png";
             AnimationDataTrigger = "Stop";
 
             AnswerGivenCommand = new RelayCommand(x => timer.Cancel());
+
             this.gameOptions = gameOptions;
+            this.playersViewModel = playersViewModel;
         }
 
         public async Task<bool> WaitAnswerAsync(QuestionItem questionItem)
@@ -73,6 +84,7 @@ namespace WPF.ViewModels
             var delayTime = AsyncTimer.DefaultDelay;
             var waitTime = gameOptions.Value.AnswerWaitingTimeSpan;
 
+            CurrentPlayer = playersViewModel.CurrentPlayer;
             TimeBefore = waitTime;
             Cost = questionItem.Cost;
 
