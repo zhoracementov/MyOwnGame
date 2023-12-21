@@ -94,20 +94,44 @@
                                 Grid.Column="1"
                                 Grid.ColumnSpan="1"
                                 Grid.RowSpan="1">
-                                <Grid Margin="10">
-                                    <TextBlock Text="{Binding CurrentQuestionText}"
+                                <Grid Margin="15">
+                                <TextBlock Text="{Binding CurrentQuestionText}"
                                                TextWrapping="WrapWithOverflow"
                                                FontSize="46"
                                                TextAlignment="Center"
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
-                                               Foreground="LightGoldenrodYellow"/>
-                                               <Image Visibility="{Binding IsPictureInQuestion, Converter={StaticResource BoolToVisibilityConverter}}"
-                                                    Margin="10"
-                                                    Source="{Binding CurrentPicturePath}"
-                                                    Stretch="Uniform">
-                                               </Image>
-                                </Grid>
+                                               Foreground="LightGoldenrodYellow" Margin="10"/>
+                                <Border Visibility="{Binding IsPictureInQuestion, Converter={StaticResource BoolToVisibilityConverter}}">
+                                    <Border.Effect>
+                                            <DropShadowEffect BlurRadius="5"
+                                                              Opacity=".5"
+                                                              ShadowDepth="3" />
+                                        </Border.Effect>
+                                        <Border Name="ReceiverColor"
+                                                BorderBrush="Transparent"
+                                                BorderThickness="3"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                CornerRadius="15">
+                                            <Grid>
+                                                <Border Name="Mask"
+                                                        Background="White"
+                                                        BorderBrush="Transparent"
+                                                        BorderThickness="0"
+                                                        CornerRadius="15">
+                                                </Border>
+                                                <Image Name="Receiver"
+                                                        Source="{Binding CurrentPicturePath}" Stretch="Uniform">
+                                                    <Image.OpacityMask>
+                                                        <VisualBrush Visual="{Binding ElementName=Mask}" />
+                                                    </Image.OpacityMask>
+                                                </Image>
+                                            </Grid>
+                                        </Border>
+                                    </Border>
+
+                            </Grid>
                         </Border>
                     </Grid>
                     <!--</ScrollViewer>-->
