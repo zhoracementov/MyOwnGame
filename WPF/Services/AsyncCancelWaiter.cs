@@ -33,7 +33,7 @@ namespace WPF.Services
             return await Wait(Timeout.InfiniteTimeSpan);
         }
 
-        public void Cancel(T result = default)
+        public void Cancel(T result)
         {
             waitResult = result;
             cancellationTokenSource?.Cancel();

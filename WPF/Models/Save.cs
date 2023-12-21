@@ -26,7 +26,22 @@ namespace WPF.Models
         {
             return Directory
                 .GetFiles(dirPath, $"*{objectSerializer.FileFormat}", SearchOption.TopDirectoryOnly)
-                .Select(file => new Save(file));
+                .Select(file => new Save(file))
+                .Where(save =>
+                {
+                    var res = true;
+
+                    try
+                    {
+                        var table = objectSerializer.Deserialize<QuestionsTable>(save.FilePath);
+                    }
+                    catch
+                    {
+                        res = false;
+                    }
+
+                    return res;
+                });
         }
     }
 }
