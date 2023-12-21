@@ -8,7 +8,10 @@
              DataContext="{Binding GameEditorViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="In progress..."
+        <TextBlock Text="In progress... Enter Esc button"
+                   Foreground="Red"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="76"/>
