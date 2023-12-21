@@ -7,7 +7,7 @@ namespace WPF.ViewModels
 {
     public class AddPlayerViewModel : ViewModel
     {
-        private readonly AsyncCancelWaiter<bool> waiter = new AsyncCancelWaiter<bool>();
+        private readonly AsyncCancelWaiter<bool> waiter = new AsyncCancelWaiter<bool>(); //синхронное ожидание после нажатия close окно закрывается
 
         public ICommand NavigateBackCommand { get; }
 
@@ -26,7 +26,7 @@ namespace WPF.ViewModels
             });
         }
 
-        public async Task<string> Wait()
+        public async Task<string> Wait() //после закрытия возвращает строчку
         {
             await waiter.Wait();
             var res = PlayerName;
