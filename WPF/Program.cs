@@ -52,6 +52,11 @@ namespace WPF
                 {
                     opt.AnswerWaitingTimeSpan = TimeSpan.FromMinutes(1);
                 }
+
+                if (opt.MaxPlayerNameLength <= 0)
+                {
+                    opt.MaxPlayerNameLength = 12;
+                }
             });
     }
 }

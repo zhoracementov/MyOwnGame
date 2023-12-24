@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WPF.Commands;
+using WPF.Models;
 using WPF.Services;
 
 namespace WPF.ViewModels
@@ -18,8 +20,17 @@ namespace WPF.ViewModels
             set => Set(ref playerName, value);
         }
 
-        public AddPlayerViewModel()
+        private int maxPlayerNameLength;
+        public int MaxPlayerNameLength
         {
+            get => maxPlayerNameLength;
+            set => Set(ref maxPlayerNameLength, value);
+        }
+
+        public AddPlayerViewModel(IOptions<GameSettings> options)
+        {
+            MaxPlayerNameLength = options.Value.MaxPlayerNameLength;
+
             NavigateBackCommand = new RelayCommand(x =>
             {
                 waiter.Cancel(true);
