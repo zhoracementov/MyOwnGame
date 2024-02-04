@@ -57,6 +57,11 @@ namespace WPF
                 {
                     opt.MaxPlayerNameLength = 12;
                 }
+
+                if (opt.MaxPlayersCount <= 0)
+                {
+                    opt.MaxPlayersCount = 8;
+                }
             });
     }
 }

@@ -6,5 +6,6 @@ namespace WPF.Models
     {
         public TimeSpan AnswerWaitingTimeSpan { get; set; }
         public int MaxPlayerNameLength { get; set; }
+        public int MaxPlayersCount { get; set; }
     }
 }

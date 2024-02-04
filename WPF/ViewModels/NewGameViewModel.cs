@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -37,9 +38,12 @@ namespace WPF.ViewModels
         public ICommand MoveToGameCommand { get; }
 
         public NewGameViewModel(INavigationService navigationService, BrushesRouletteService brushesRouletteService,
-            MainWindowViewModel mainWindowViewModel, QuestionsTableViewModel questionsTableViewModel, PlayersViewModel playersViewModel)
+            MainWindowViewModel mainWindowViewModel, QuestionsTableViewModel questionsTableViewModel,
+            PlayersViewModel playersViewModel, IOptions<GameSettings> options)
         {
             this.questionsTableViewModel = questionsTableViewModel;
+
+            var minPlayersCount = 2;
 
             MoveToGameCommand = new RelayCommand(x =>
             {
@@ -52,7 +56,7 @@ namespace WPF.ViewModels
                 if (SelectedSave is null)
                     return;
 
-                if (playersViewModel.Players.Count < 2)
+                if (playersViewModel.Players.Count < minPlayersCount)
                     return;
 
                 playersViewModel.GameStarts();
@@ -62,6 +66,12 @@ namespace WPF.ViewModels
 
             AddPlayerCommand = new RelayCommand(async x =>
             {
+                if (playersViewModel.Players.Count >= options.Value.MaxPlayersCount)
+                {
+                    await mainWindowViewModel.OpenCancelWaitWindow("Players Count Limit!");
+                    return;
+                }
+
                 var playerName = await mainWindowViewModel.OpenAddPlayerWindow();
                 mainWindowViewModel.CloseMessageWindow();
 
