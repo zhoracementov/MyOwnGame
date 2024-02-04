@@ -45,7 +45,7 @@ namespace WPF.ViewModels
 
             var minPlayersCount = 2;
 
-            MoveToGameCommand = new RelayCommand(x =>
+            MoveToGameCommand = new RelayCommand(async x =>
             {
                 if (questionsTableViewModel.QuestionsTable is null)
                     throw new ArgumentException();
@@ -57,7 +57,11 @@ namespace WPF.ViewModels
                     return;
 
                 if (playersViewModel.Players.Count < minPlayersCount)
+                {
+                    await mainWindowViewModel.OpenCancelWaitWindow($"Players count should be more than {minPlayersCount}!");
+                    mainWindowViewModel.CloseMessageWindow();
                     return;
+                }
 
                 playersViewModel.GameStarts();
 
@@ -69,6 +73,7 @@ namespace WPF.ViewModels
                 if (playersViewModel.Players.Count >= options.Value.MaxPlayersCount)
                 {
                     await mainWindowViewModel.OpenCancelWaitWindow("Players Count Limit!");
+                    mainWindowViewModel.CloseMessageWindow();
                     return;
                 }
 

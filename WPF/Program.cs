@@ -60,7 +60,7 @@ namespace WPF
 
                 if (opt.MaxPlayersCount <= 0)
                 {
-                    opt.MaxPlayersCount = 8;
+                    opt.MaxPlayersCount = 6;
                 }
             });
     }
