@@ -47,6 +47,7 @@
                                    VerticalAlignment="Center"
                                    Foreground="LightGoldenrodYellow"/>
                         <TextBox Text="{Binding PlayerName, Mode=TwoWay}"
+                                 MaxLength="{Binding MaxPlayerNameLength}"
                                  Background="Transparent"
                                  FontFamily="Franklin Gothic Medium"
                                  Margin="10"
