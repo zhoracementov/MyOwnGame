@@ -45,7 +45,7 @@ namespace WPF.ViewModels
             {
                 if (navigationService.CurrentViewModel != gameViewModel)
                 {
-                    if (messageViewModel != addPlayerViewModel)
+                    if (MessageViewModel != addPlayerViewModel)
                     {
                         NavigationService.NavigateTo<MainMenuViewModel>();
                     }
@@ -56,8 +56,9 @@ namespace WPF.ViewModels
                 }
                 else
                 {
-                    if (messageViewModel != messageChooseGameWindow)
+                    if (MessageViewModel != messageChooseGameWindow)
                     {
+                        var currMessageVM = MessageViewModel;
                         var responce = await OpenMessageChooseWindow("Escape from this game? Progress will be lost.");
 
                         CloseMessageWindow();
@@ -66,6 +67,10 @@ namespace WPF.ViewModels
                         {
                             NavigationService.NavigateTo<MainMenuViewModel>();
                             playersViewModel.GameEnds();
+                        }
+                        else
+                        {
+                            MessageViewModel = currMessageVM;
                         }
                     }
                 }
