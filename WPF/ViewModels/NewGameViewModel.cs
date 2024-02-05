@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using WPF.Commands;
@@ -36,6 +38,9 @@ namespace WPF.ViewModels
         public ICommand AddPlayerCommand { get; }
         public ICommand ResetPlayersCommand { get; }
         public ICommand MoveToGameCommand { get; }
+        public ICommand CreateEmptyGameCommand { get; }
+        public ICommand UpdateSaveDataCommand { get; }
+        public ICommand OpenSaveDataFolderCommand { get; }
 
         public NewGameViewModel(INavigationService navigationService, BrushesRouletteService brushesRouletteService,
             MainWindowViewModel mainWindowViewModel, QuestionsTableViewModel questionsTableViewModel,
@@ -95,6 +100,51 @@ namespace WPF.ViewModels
                 playersViewModel.CurrentPlayer = null;
             });
 
+            UpdateSaveDataCommand = new RelayCommand(x =>
+            {
+                UpdateSaves();
+            });
+
+            OpenSaveDataFolderCommand = new RelayCommand(x =>
+            {
+                Process.Start("explorer.exe", App.SavesDataDirectory);
+            });
+
+            var baseRowCount = 5;
+            var baseRowLength = 6;
+
+            CreateEmptyGameCommand = new RelayCommand(async x =>
+            {
+                var json = new JsonObjectSerializer();
+
+                var name = $"Empty instance {DateTime.Now:HH.mm.ss dd.mm.yyyy-FFFFFFF}{json.FileFormat}";
+                var instance = QuestionsTable.CreateEmpty(name, baseRowCount, baseRowLength);
+                var path = Path.Combine(App.SavesDataDirectory, name);
+
+                using var watcher = new FileSystemWatcher();
+                watcher.Path = App.SavesDataDirectory;
+                watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.Size | NotifyFilters.FileName | NotifyFilters.LastAccess;
+                watcher.Changed += (s, e) => UpdateEditingSaves();
+                watcher.Created += (s, e) => UpdateEditingSaves();
+                watcher.EnableRaisingEvents = true;
+
+                await instance.SaveAsync(path, json);
+
+                using var p = new Process { StartInfo = new ProcessStartInfo(path) { UseShellExecute = true } };
+                p.Start();
+            });
+
+            UpdateSaves();
+        }
+
+        public void UpdateEditingSaves()
+        {
+            Saves = new ObservableCollection<Save>(Save.GetSaves(App.SavesDataDirectory, new JsonObjectSerializer()));
+            ResetTable();
+        }
+
+        public void UpdateSaves()
+        {
             Saves = new ObservableCollection<Save>(Save.GetSaves(App.SavesDataDirectory, new JsonObjectSerializer()));
             SelectedSave = Saves.FirstOrDefault();
         }

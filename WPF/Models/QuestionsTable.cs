@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using WPF.Services.Serialization;
@@ -20,9 +21,37 @@ namespace WPF.Models
             await objectSerializer.SerializeAsync(this, filePath);
         }
 
+        public void Save(string filePath, IObjectSerializer objectSerializer)
+        {
+            objectSerializer.Serialize(this, filePath);
+        }
+
         public bool IsCompleted()
         {
             return TableRows.SelectMany(x => x.RowItems).All(x => x.IsClosed == true);
+        }
+
+        public static QuestionsTable CreateEmpty(string name, int rowsCount, int rowLength)
+        {
+            return new QuestionsTable
+            {
+                Name = name,
+                TableRows = new ObservableCollection<QuestionsLine>(Enumerable
+                .Range(1, rowsCount)
+                .Select(rowNumber => new QuestionsLine
+                {
+                    RowTitle = $"Row number {rowNumber}",
+                    RowItems = new ObservableCollection<QuestionItem>(Enumerable
+                    .Range(1, rowLength)
+                    .Select(i => new QuestionItem
+                    {
+                        Cost = i * 100,
+                        Answer = "Answer text",
+                        Description = "Description",
+                        PicturePath = "none",
+                    }))
+                }))
+            };
         }
     }
 }

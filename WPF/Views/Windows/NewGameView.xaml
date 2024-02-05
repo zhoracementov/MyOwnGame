@@ -92,7 +92,12 @@
         </Grid>
 
         <Grid Grid.Column="0" Grid.Row="0">
-            <Border CornerRadius="15">
+            <UniformGrid Columns="3">
+                <Button Content="Create Empty" Command="{Binding CreateEmptyGameCommand}"/>
+                <Button Content="Update" Command="{Binding UpdateSaveDataCommand}"/>
+                <Button Content="Open Folder" Command="{Binding OpenSaveDataFolderCommand}"/>
+            </UniformGrid>
+            <!--<Border CornerRadius="15">
                 <Border.Effect>
                     <BlurEffect Radius="25"/>
                 </Border.Effect>
@@ -100,23 +105,33 @@
                            Style="{StaticResource StylishTextBlock}"
                            Foreground="LightGoldenrodYellow"
                            FontWeight="ExtraBold"/>
-            </Border>
-            <TextBlock Text="Saves"
+            </Border>-->
+            
+            <!--<TextBlock Text="Saves"
                        Style="{StaticResource StylishTextBlock}"
                        Foreground="LightGoldenrodYellow"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center"/>-->
         </Grid>
         <ScrollViewer Grid.Column="0"
                       Grid.Row="1"
                       Template="{DynamicResource ScrollViewerControlTemplate}">
             <ListView ItemsSource="{Binding Saves}"
                       IsSynchronizedWithCurrentItem="True"
-                      DisplayMemberPath="Name"
                       Background="#08213f"
                       SelectedItem="{Binding SelectedSave}"
                       Foreground="LightGoldenrodYellow"
+                      HorizontalContentAlignment="Stretch"
+                      SelectionMode="Single"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       FontSize="20">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"
+                                   TextWrapping="Wrap">
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </ScrollViewer>
 
