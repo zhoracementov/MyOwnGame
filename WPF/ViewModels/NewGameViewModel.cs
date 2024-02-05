@@ -50,7 +50,7 @@ namespace WPF.ViewModels
                 if (questionsTableViewModel.QuestionsTable is null)
                     throw new ArgumentException();
 
-                if (questionsTableViewModel.QuestionsTable.TableLines.Count == 0)
+                if (questionsTableViewModel.QuestionsTable.TableRows.Count == 0)
                     throw new ArgumentException();
 
                 if (SelectedSave is null)

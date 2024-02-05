@@ -4,7 +4,7 @@ namespace WPF.Models
 {
     public class QuestionsLine
     {
-        public string LineTitle { get; set; }
-        public ObservableCollection<QuestionItem> LineItems { get; set; }
+        public string RowTitle { get; set; }
+        public ObservableCollection<QuestionItem> RowItems { get; set; }
     }
 }

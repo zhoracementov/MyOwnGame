@@ -8,7 +8,7 @@ namespace WPF.Models
     public class QuestionsTable
     {
         public string Name { get; set; }
-        public ObservableCollection<QuestionsLine> TableLines { get; set; }
+        public ObservableCollection<QuestionsLine> TableRows { get; set; }
 
         public static async Task<QuestionsTable> LoadAsync(string filePath, IObjectSerializer objectSerializer)
         {
@@ -22,7 +22,7 @@ namespace WPF.Models
 
         public bool IsCompleted()
         {
-            return TableLines.SelectMany(x => x.LineItems).All(x => x.IsClosed == true);
+            return TableRows.SelectMany(x => x.RowItems).All(x => x.IsClosed == true);
         }
     }
 }

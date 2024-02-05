@@ -7,12 +7,12 @@
              DataContext="{Binding QuestionsTableViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ItemsControl ItemsSource="{Binding QuestionsTable.TableLines}">
+        <ItemsControl ItemsSource="{Binding QuestionsTable.TableRows}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid DataContext="{Binding}"
                         Columns="1"
-                        Rows="{Binding QuestionsTableViewModel.QuestionsTable.TableLines.Count, Source={StaticResource ViewModelsLocator}}">
+                        Rows="{Binding QuestionsTableViewModel.QuestionsTable.TableRows.Count, Source={StaticResource ViewModelsLocator}}">
                     </UniformGrid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
@@ -27,7 +27,7 @@
                                 Background="#10224f"
                                 BorderBrush="LightGoldenrodYellow"
                                 BorderThickness="2">
-                            <TextBlock Text="{Binding LineTitle}"
+                            <TextBlock Text="{Binding RowTitle}"
                                        Foreground="LightGoldenrodYellow"
                                        FontSize="24"
                                        FontStyle="Italic"
@@ -37,7 +37,7 @@
                                        TextWrapping="Wrap"/>
                         </Border>
                         <Grid Grid.Column="1">
-                        <ItemsControl ItemsSource="{Binding LineItems}">
+                        <ItemsControl ItemsSource="{Binding RowItems}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                         <UniformGrid DataContext="{Binding}" Rows="1"/>
