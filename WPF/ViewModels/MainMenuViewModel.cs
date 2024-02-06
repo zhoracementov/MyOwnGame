@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
 using WPF.Commands;
 using WPF.Services.Navigation;
@@ -10,6 +11,7 @@ namespace WPF.ViewModels
         public ICommand CloseAppCommand { get; }
         public ICommand MoveToNewGameCommand { get; }
         public ICommand MoveToGameEditCommand { get; }
+        public ICommand OpenGitHubCommand { get; }
 
         public MainMenuViewModel(INavigationService navigationService)
         {
@@ -26,6 +28,15 @@ namespace WPF.ViewModels
             MoveToGameEditCommand = new RelayCommand(x =>
             {
                 navigationService.NavigateTo<GameEditorViewModel>();
+            });
+
+            OpenGitHubCommand = new RelayCommand(x =>
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "https://github.com/zhoracementov/MyOwnGame",
+                    UseShellExecute = true
+                });
             });
         }
     }

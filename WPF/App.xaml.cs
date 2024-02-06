@@ -67,6 +67,9 @@ namespace WPF
                 ? Path.GetDirectoryName(GetSourceCodePath())
                 : Environment.CurrentDirectory;
 
+        public static string GitHubLink =>
+                ConfigurationManager.AppSettings["githublink"];
+
         public static string GetSourceCodePath([CallerFilePath] string path = null) => path;
     }
 }
