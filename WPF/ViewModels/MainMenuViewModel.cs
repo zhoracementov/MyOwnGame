@@ -34,7 +34,7 @@ namespace WPF.ViewModels
             {
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = "https://github.com/zhoracementov/MyOwnGame",
+                    FileName = App.GitHubLink,
                     UseShellExecute = true
                 });
             });
