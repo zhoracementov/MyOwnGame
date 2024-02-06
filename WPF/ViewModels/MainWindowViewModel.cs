@@ -16,9 +16,8 @@ namespace WPF.ViewModels
         public ICommand NavigateBackCommand { get; }
 
         public MainWindowViewModel(INavigationService navigationService, GameViewModel gameViewModel,
-            MessageChooseViewModel messageChooseGameWindow,
-            MessageBoxViewModel messageBoxViewModel,
-            PlayersViewModel playersViewModel, AddPlayerViewModel addPlayerViewModel)
+            MessageChooseViewModel messageChooseGameWindow, MessageBoxViewModel messageBoxViewModel,
+            PlayersViewModel playersViewModel, AddPlayerViewModel addPlayerViewModel, CancelWaitViewModel cancelWaitViewModel)
         {
             NavigationService = navigationService;
 
@@ -26,7 +25,7 @@ namespace WPF.ViewModels
             {
                 if (navigationService.CurrentViewModel != gameViewModel)
                 {
-                    if (messageBoxViewModel.AttachedViewModel != addPlayerViewModel)
+                    if (messageBoxViewModel.AttachedViewModel != addPlayerViewModel && messageBoxViewModel.AttachedViewModel != cancelWaitViewModel)
                     {
                         NavigationService.NavigateTo<MainMenuViewModel>();
                     }
