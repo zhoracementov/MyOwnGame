@@ -7,15 +7,15 @@ using WPF.Services.Navigation;
 
 namespace WPF.ViewModels
 {
-    public class QuestionItemViewModel : ViewModel   // код для ячеек
+    public class QuestionItemViewModel : ViewModel
     {
         private QuestionItem questionItem;
-        public QuestionItem QuestionItem //свойства
+        public QuestionItem QuestionItem
         {
             get => questionItem;
             set
             {
-                if (Set(ref questionItem, value))  //questionItem хранит в себе все данные(вопрос, ответ, баллы)
+                if (Set(ref questionItem, value))
                 {
                     IsActive = true;
                 }
@@ -30,10 +30,9 @@ namespace WPF.ViewModels
         }
 
         private bool isActive;
-        public bool IsActive   //проверка на активность кнопки
+        public bool IsActive
         {
             get => isActive;
-            //set => Set(ref isActive, value);
             set
             {
                 if (Set(ref isActive, value))
@@ -45,7 +44,7 @@ namespace WPF.ViewModels
 
         public ICommand TapToAnswerCommand { get; }
 
-        public QuestionItemViewModel(INavigationService navigationService, MainWindowViewModel mainWindowViewModel,
+        public QuestionItemViewModel(INavigationService navigationService, MessageBoxViewModel messageBoxViewModel,
             QuestionsTableViewModel questionsTableViewModel, NewGameViewModel newGameViewModel, PlayersViewModel playersViewModel)
         {
             TapToAnswerCommand = new RelayCommand(async x =>
@@ -53,9 +52,9 @@ namespace WPF.ViewModels
                 IsActive = false;
                 QuestionItem.IsClosed = true;
 
-                var skip = await mainWindowViewModel.OpenWaitAnswerWindow(QuestionItem);
+                var skip = await messageBoxViewModel.OpenWaitAnswerWindow(QuestionItem);
 
-                if (await mainWindowViewModel.OpenMessageChooseWindow(questionItem.Answer))
+                if (await messageBoxViewModel.OpenMessageChooseWindow(questionItem.Answer))
                     playersViewModel.SuccessfullyAnswered(QuestionItem);
                 else
                     playersViewModel.SuccessfullyAnswered();
@@ -69,14 +68,14 @@ namespace WPF.ViewModels
                         .OrderByDescending(x => x.Score)
                         .Select(x => string.Format("{0, -4}\t: {1, 4}", x.Name, x.Score))));
 
-                    await mainWindowViewModel.OpenCancelWaitWindow(message);
+                    await messageBoxViewModel.OpenCancelWaitWindow(message);
 
                     playersViewModel.ResetScores();
                     newGameViewModel.ResetTable();
                     navigationService.NavigateTo<MainMenuViewModel>();
                 }
 
-                mainWindowViewModel.CloseMessageWindow();
+                messageBoxViewModel.CloseMessageWindow();
             });
         }
     }

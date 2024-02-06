@@ -8,27 +8,24 @@
              DataContext="{Binding AddPlayerViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Border Background="Black" Opacity="0.6"/>
-        <Border Margin="150, 25" CornerRadius="10" Background="#10224f">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="16*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="4*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0"
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="16*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
                       Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                </Grid>
-                <Border Background="#08213f"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Border Background="#08213f"
                         BorderBrush="LightGoldenrodYellow"
                         BorderThickness="2"
                         CornerRadius="10"
@@ -36,8 +33,8 @@
                         Grid.Column="1"
                         Grid.ColumnSpan="1"
                         Grid.RowSpan="1">
-                    <DockPanel LastChildFill="True">
-                        <TextBlock Text="Enter the name"
+                <DockPanel LastChildFill="True">
+                    <TextBlock Text="Enter the name"
                                    Margin="0, 5, 0, 0"
                                    DockPanel.Dock="Top"
                                    TextWrapping="Wrap"
@@ -46,7 +43,7 @@
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
                                    Foreground="LightGoldenrodYellow"/>
-                        <TextBox Text="{Binding PlayerName, Mode=TwoWay}"
+                    <TextBox Text="{Binding PlayerName, Mode=TwoWay}"
                                  MaxLength="{Binding MaxPlayerNameLength}"
                                  Background="Transparent"
                                  FontFamily="Franklin Gothic Medium"
@@ -54,28 +51,26 @@
                                  BorderBrush="LightGoldenrodYellow"
                                  TextAlignment="Center"
                                  Foreground="LightGoldenrodYellow">
-                            <TextBox.Style>
-                                <Style TargetType="TextBox">
-                                    <Setter Property="Foreground" Value="LightGoldenrodYellow"/>
-                                    <Setter Property="FontSize" Value="52"/>
-                                    <Setter Property="CaretBrush" Value="Transparent"/>
-                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                    <Setter Property="SelectionTextBrush" Value="Transparent"/>
-                                    <Setter Property="SelectionBrush" Value="Transparent"/>
-                                    <Setter Property="TextWrapping" Value="Wrap"/>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
-                    </DockPanel>
-                </Border>
-                <Grid Grid.Row="2" Grid.Column="1" Margin="10, 0">
-                    <Button Content="Close"
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Foreground" Value="LightGoldenrodYellow"/>
+                                <Setter Property="FontSize" Value="52"/>
+                                <Setter Property="CaretBrush" Value="Transparent"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="SelectionTextBrush" Value="Transparent"/>
+                                <Setter Property="SelectionBrush" Value="Transparent"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </DockPanel>
+            </Border>
+        <Grid Grid.Row="2" Grid.Column="1" Margin="10, 0">
+            <Button Content="Close"
                             Command="{Binding NavigateBackCommand}"
                             FontSize="26"
                             BorderBrush="Transparent"/>
-                </Grid>
-            </Grid>
-        </Border>
+        </Grid>
     </Grid>
 </UserControl>

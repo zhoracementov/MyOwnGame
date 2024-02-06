@@ -12,8 +12,9 @@
                         Stretch="Fill"
                         Grid.Row="0"/>
             <Button Content="New Game"
-                        FontWeight="UltraBold"
-                        FontSize="52"
+                        FontWeight="Bold"
+                        FontSize="128"
+                        FontFamily="Miriam"
                         Command="{Binding MoveToNewGameCommand}"
                         Grid.Row="1"
                         Foreground="#080808"
@@ -28,8 +29,9 @@
             <Button Content="Exit"
                         Command="{Binding CloseAppCommand}"
                         Grid.Row="3"
-                        FontWeight="UltraBold"
-                        FontSize="52"
+                        FontFamily="Miriam"
+                        FontWeight="Bold"
+                        FontSize="128"
                         Foreground="#080808"
                         Background="#aaabad"/>
         </UniformGrid>

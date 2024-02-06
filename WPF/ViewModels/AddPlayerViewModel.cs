@@ -9,7 +9,7 @@ namespace WPF.ViewModels
 {
     public class AddPlayerViewModel : ViewModel
     {
-        private readonly AsyncCancelWaiter<bool> waiter = new AsyncCancelWaiter<bool>(); //синхронное ожидание после нажатия close окно закрывается
+        private readonly AsyncCancelWaiter<bool> waiter = new AsyncCancelWaiter<bool>();
 
         public ICommand NavigateBackCommand { get; }
 

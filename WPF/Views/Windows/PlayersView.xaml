@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              DataContext="{Binding PlayersViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="#08213f">
+    <Grid Background="#071134">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="12*"/>
@@ -23,9 +23,9 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"/>
             <Border Background="{Binding CurrentPlayer.BrushColor}"
-                CornerRadius="5"
-                HorizontalAlignment="Center"
-                Margin="2, 2">
+                    CornerRadius="5"
+                    HorizontalAlignment="Center"
+                    Margin="2, 2">
                 <UniformGrid Rows="3">
                     <TextBlock Text="{Binding CurrentPlayer.Score}"
                                    FontSize="26"
@@ -55,11 +55,11 @@
                 <Border Background="{Binding BrushColor}"
                         CornerRadius="5"
                         HorizontalAlignment="Center"
-                        MinHeight="200"
+                        MaxHeight="300"
                         Margin="2, 2">
                         <UniformGrid Rows="3">
                             <TextBlock Text="{Binding Score}"
-                                   FontSize="26"
+                                   FontSize="22"
                                    TextAlignment="Center"
                                    TextWrapping="Wrap"
                                    VerticalAlignment="Center"
@@ -67,7 +67,7 @@
                             <TextBlock Text="{Binding Name}"
                                    TextAlignment="Center"
                                    TextWrapping="Wrap"
-                                   FontSize="26"
+                                   FontSize="22"
                                    VerticalAlignment="Top"
                                    HorizontalAlignment="Center"/>
                             <Image Source="/Styles/user_icon.png"

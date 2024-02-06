@@ -24,7 +24,7 @@
                             <ColumnDefinition Width="7*"/>
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0"
-                                Background="#10224f"
+                                Background="#071134"
                                 BorderBrush="LightGoldenrodYellow"
                                 BorderThickness="2">
                             <TextBlock Text="{Binding RowTitle}"
@@ -53,7 +53,7 @@
                                                     Foreground="LightGoldenrodYellow"
                                                     BorderThickness="2"
                                                     BorderBrush="LightGoldenrodYellow"
-                                                    Background="#10224f"
+                                                    Background="#071134"
                                                     Command="{Binding TapToAnswerCommand}"
                                                     IsEnabled="{Binding IsActive}"/>
                                         </Grid>

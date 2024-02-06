@@ -22,21 +22,22 @@ namespace WPF.Services
             }
         }
 
+        public static IObjectSerializer BrushesSerializer { get; set; } = new JsonObjectSerializer();
+
         public BrushesRouletteService()
         {
             filePath = App.BrushesFile;
 
             IEnumerable<string> colors;
-            var json = new JsonObjectSerializer();
 
             if (!File.Exists(filePath))
             {
                 colors = GetAllColors();
-                json.Serialize(colors, filePath);
+                BrushesSerializer.Serialize(colors, filePath);
             }
             else
             {
-                colors = LoadBasicColors(json);
+                colors = LoadBasicColors(BrushesSerializer);
             }
 
             brushes = new Queue<string>(colors);

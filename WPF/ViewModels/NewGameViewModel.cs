@@ -9,7 +9,6 @@ using WPF.Commands;
 using WPF.Models;
 using WPF.Services;
 using WPF.Services.Navigation;
-using WPF.Services.Serialization;
 
 namespace WPF.ViewModels
 {
@@ -30,8 +29,14 @@ namespace WPF.ViewModels
             get => selectedSave;
             set
             {
-                if (value != null && Set(ref selectedSave, value))
+                if (!File.Exists(value.FilePath))
+                {
+                    Saves.Remove(value);
+                }
+                else if (value != null & Set(ref selectedSave, value))
+                {
                     ResetTable();
+                }
             }
         }
 
@@ -43,7 +48,7 @@ namespace WPF.ViewModels
         public ICommand OpenSaveDataFolderCommand { get; }
 
         public NewGameViewModel(INavigationService navigationService, BrushesRouletteService brushesRouletteService,
-            MainWindowViewModel mainWindowViewModel, QuestionsTableViewModel questionsTableViewModel,
+            MessageBoxViewModel messageBoxViewModel, QuestionsTableViewModel questionsTableViewModel,
             PlayersViewModel playersViewModel, IOptions<GameSettings> options)
         {
             this.questionsTableViewModel = questionsTableViewModel;
@@ -63,8 +68,8 @@ namespace WPF.ViewModels
 
                 if (playersViewModel.Players.Count < minPlayersCount)
                 {
-                    await mainWindowViewModel.OpenCancelWaitWindow($"Players count should be more than {minPlayersCount}!");
-                    mainWindowViewModel.CloseMessageWindow();
+                    await messageBoxViewModel.OpenCancelWaitWindow($"Players count should be more than {minPlayersCount}!");
+                    messageBoxViewModel.CloseMessageWindow();
                     return;
                 }
 
@@ -77,13 +82,13 @@ namespace WPF.ViewModels
             {
                 if (playersViewModel.Players.Count >= options.Value.MaxPlayersCount)
                 {
-                    await mainWindowViewModel.OpenCancelWaitWindow("Players Count Limit!");
-                    mainWindowViewModel.CloseMessageWindow();
+                    await messageBoxViewModel.OpenCancelWaitWindow("Players Count Limit!");
+                    messageBoxViewModel.CloseMessageWindow();
                     return;
                 }
 
-                var playerName = await mainWindowViewModel.OpenAddPlayerWindow();
-                mainWindowViewModel.CloseMessageWindow();
+                var playerName = await messageBoxViewModel.OpenAddPlayerWindow();
+                messageBoxViewModel.CloseMessageWindow();
 
                 if (!string.IsNullOrWhiteSpace(playerName))
                 {
@@ -115,20 +120,20 @@ namespace WPF.ViewModels
 
             CreateEmptyGameCommand = new RelayCommand(async x =>
             {
-                var json = new JsonObjectSerializer();
-
-                var name = $"Empty instance {DateTime.Now:HH.mm.ss dd.mm.yyyy-FFFFFFF}{json.FileFormat}";
+                var name = $"Empty instance {DateTime.Now:HH.mm.ss dd.mm.yyyy-FFFFFFF}{Save.SavesSerializer.FileFormat}";
                 var instance = QuestionsTable.CreateEmpty(name, baseRowCount, baseRowLength);
                 var path = Path.Combine(App.SavesDataDirectory, name);
 
                 using var watcher = new FileSystemWatcher();
                 watcher.Path = App.SavesDataDirectory;
                 watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.Size | NotifyFilters.FileName | NotifyFilters.LastAccess;
-                watcher.Changed += (s, e) => UpdateEditingSaves();
-                watcher.Created += (s, e) => UpdateEditingSaves();
+                watcher.Changed += (s, e) => UpdateSaves();
+                watcher.Created += (s, e) => UpdateSaves();
+                //System.Windows.Application.Current.Activated += (s, e) => UpdateSaves();
+
                 watcher.EnableRaisingEvents = true;
 
-                await instance.SaveAsync(path, json);
+                await instance.SaveAsync(path, Save.SavesSerializer);
 
                 using var p = new Process { StartInfo = new ProcessStartInfo(path) { UseShellExecute = true } };
                 p.Start();
@@ -137,21 +142,15 @@ namespace WPF.ViewModels
             UpdateSaves();
         }
 
-        public void UpdateEditingSaves()
-        {
-            Saves = new ObservableCollection<Save>(Save.GetSaves(App.SavesDataDirectory, new JsonObjectSerializer()));
-            ResetTable();
-        }
-
         public void UpdateSaves()
         {
-            Saves = new ObservableCollection<Save>(Save.GetSaves(App.SavesDataDirectory, new JsonObjectSerializer()));
+            Saves = new ObservableCollection<Save>(Save.GetSaves(App.SavesDataDirectory, Save.SavesSerializer));
             SelectedSave = Saves.FirstOrDefault();
         }
 
         public async void ResetTable()
         {
-            questionsTableViewModel.QuestionsTable = await selectedSave.GetQuestionsTableAsync(new JsonObjectSerializer());
+            questionsTableViewModel.QuestionsTable = await selectedSave.GetQuestionsTableAsync(Save.SavesSerializer);
         }
     }
 }

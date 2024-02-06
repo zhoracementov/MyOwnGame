@@ -15,6 +15,7 @@ namespace WPF.ViewModels
         public PlayersViewModel PlayersViewModel => GetViewModel<PlayersViewModel>();
         public CancelWaitViewModel CancelWaitViewModel => GetViewModel<CancelWaitViewModel>();
         public AddPlayerViewModel AddPlayerViewModel => GetViewModel<AddPlayerViewModel>();
+        public MessageBoxViewModel MessageBoxViewModel => GetViewModel<MessageBoxViewModel>();
 
         private TViewModel GetViewModel<TViewModel>() where TViewModel : ViewModel
         {

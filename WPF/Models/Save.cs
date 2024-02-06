@@ -11,6 +11,8 @@ namespace WPF.Models
         public string Name { get; set; }
         public string FilePath { get; set; }
 
+        public static IObjectSerializer SavesSerializer { get; set; } = new JsonObjectSerializer();
+
         public Save(string filePath)
         {
             FilePath = filePath;

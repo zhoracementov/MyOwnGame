@@ -8,10 +8,7 @@
              DataContext="{Binding CancelWaitViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Border Background="Black" Opacity="0.6"/>
-        <Border Margin="150, 25" CornerRadius="10" Background="#10224f">
-            <Grid>
-                <Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="16*"/>
                     <ColumnDefinition Width="1*"/>
@@ -36,7 +33,7 @@
                         Grid.Column="1"
                         Grid.ColumnSpan="1"
                         Grid.RowSpan="1">
-                        <TextBlock Text="{Binding MessageText}"
+                    <TextBlock Text="{Binding MessageText}"
                                    TextWrapping="Wrap"
                                    FontSize="46"
                                    TextAlignment="Center"
@@ -44,14 +41,12 @@
                                    VerticalAlignment="Center"
                                    Foreground="LightGoldenrodYellow"/>
                 </Border>
-                <Grid Grid.Row="2" Grid.Column="1" Margin="10, 0">
-                    <Button Content="Close"
+        <Grid Grid.Row="2" Grid.Column="1" Margin="10, 0">
+            <Button Content="Close"
                             Command="{Binding NavigateBackCommand}"
                             FontSize="26"
                             BorderBrush="Transparent"/>
-                </Grid>
-            </Grid>
-        </Border>
+        </Grid>
     </Grid>
     <UserControl.InputBindings>
         <KeyBinding Key="End" Command="{Binding NavigateBackCommand}"/>

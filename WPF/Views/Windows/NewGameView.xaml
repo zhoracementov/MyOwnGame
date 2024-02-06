@@ -37,14 +37,14 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="3">
@@ -52,7 +52,7 @@
                 <TextBlock Text="Start Game"
                        DockPanel.Dock="Top"
                        Foreground="LightGoldenrodYellow"
-                       FontSize="24"
+                       FontSize="22"
                        TextAlignment="Center"
                        TextWrapping="Wrap"
                        VerticalAlignment="Center"
@@ -60,7 +60,7 @@
                 <TextBlock Text="Add Player"
                        DockPanel.Dock="Top"
                        Foreground="LightGoldenrodYellow"
-                       FontSize="24"
+                       FontSize="22"
                        TextAlignment="Center"
                        TextWrapping="Wrap"
                        VerticalAlignment="Center"
@@ -68,7 +68,7 @@
                 <TextBlock Text="Delete Players"
                        DockPanel.Dock="Top"
                        Foreground="LightGoldenrodYellow"
-                       FontSize="24"
+                       FontSize="22"
                        TextAlignment="Center"
                        TextWrapping="Wrap"
                        VerticalAlignment="Center"
@@ -115,10 +115,13 @@
         </Grid>
         <ScrollViewer Grid.Column="0"
                       Grid.Row="1"
-                      Template="{DynamicResource ScrollViewerControlTemplate}">
+                      Template="{DynamicResource ScrollViewerControlTemplate}"
+                      Background="#071134"
+                      BorderBrush="LightGoldenrodYellow"
+                      BorderThickness="2">
             <ListView ItemsSource="{Binding Saves}"
                       IsSynchronizedWithCurrentItem="True"
-                      Background="#08213f"
+                      Background="Transparent"
                       SelectedItem="{Binding SelectedSave}"
                       Foreground="LightGoldenrodYellow"
                       HorizontalContentAlignment="Stretch"
@@ -135,7 +138,7 @@
             </ListView>
         </ScrollViewer>
 
-        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1"
                 Margin="0, 10, 10, 10"
                 BorderThickness="2"
                 CornerRadius="2"
@@ -143,7 +146,7 @@
             <v:PlayersView/>
         </Border>
 
-        <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+        <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Margin="5">
             <v:QuestionsTableView/>
             <Grid Background="Transparent"/>
         </Grid>

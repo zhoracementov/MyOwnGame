@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF"
+        xmlns:v="clr-namespace:WPF.Views.Windows"
         mc:Ignorable="d"
         DataContext="{Binding MainWindowViewModel, Source={StaticResource ViewModelsLocator}}"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         WindowStyle="None"
-        Background="#06163c"
+        Background="#030624"
         Height="450" Width="800">
     <Window.InputBindings>
         <KeyBinding Key="Esc" Command="{Binding NavigateBackCommand}"/>
@@ -18,8 +18,9 @@
         <Border>
             <ContentControl Content="{Binding NavigationService.CurrentViewModel}"/>
         </Border>
-        <Grid>
+        <v:MessageBoxView/>
+        <!--<Grid>
             <ContentControl Content="{Binding MessageViewModel}"/>
-        </Grid>
+        </Grid>-->
     </Grid>
 </Window>

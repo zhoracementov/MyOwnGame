@@ -7,14 +7,14 @@ namespace WPF.ViewModels
     public class PlayersViewModel : ViewModel
     {
         private ObservableCollection<Player> players;
-        public ObservableCollection<Player> Players //все игроки
+        public ObservableCollection<Player> Players
         {
             get => players;
             set => Set(ref players, value);
         }
 
         private Player currentPlayer;
-        public Player CurrentPlayer //текущий игрок, который отвечает
+        public Player CurrentPlayer
         {
             get => currentPlayer;
             set => Set(ref currentPlayer, value);
@@ -22,7 +22,7 @@ namespace WPF.ViewModels
 
         public PlayersViewModel()
         {
-            players = new ObservableCollection<Player>();  //создана пустая коллекция
+            players = new ObservableCollection<Player>();
         }
 
         public void GameStarts()
@@ -30,7 +30,7 @@ namespace WPF.ViewModels
             Players = new ObservableCollection<Player>(Players.ShakeAll());
             CurrentPlayer = Players[0];
             ResetScores();
-            players.RemoveAt(0);  //смещение очереди после назначения текущего
+            players.RemoveAt(0);
         }
 
         public void GameEnds()

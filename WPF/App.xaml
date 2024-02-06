@@ -74,6 +74,9 @@
             <DataTemplate DataType="{x:Type TypeName=vm:AddPlayerViewModel}">
                 <v:AddPlayerView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=vm:MessageBoxViewModel}">
+                <v:MessageBoxView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
