@@ -11,6 +11,7 @@ namespace WPF.ViewModels
 {
     public class AnswerWaitViewModel : ViewModel
     {
+        private const string placeholderPicture = "/Styles/placeholder.png";
         private AsyncTimer timer;
 
         private readonly IOptions<GameSettings> gameOptions;
@@ -70,7 +71,7 @@ namespace WPF.ViewModels
         public AnswerWaitViewModel(IOptions<GameSettings> gameOptions, PlayersViewModel playersViewModel)
         {
             //todo: make something with it
-            CurrentPicturePath = "/Styles/placeholder.png";
+            CurrentPicturePath = placeholderPicture;
             AnimationDataTrigger = "Stop";
 
             AnswerGivenCommand = new RelayCommand(x => timer?.Cancel());
@@ -110,12 +111,14 @@ namespace WPF.ViewModels
                 if (IsPictureInQuestion)
                     CurrentPicturePath = picPath;
 
-                CurrentQuestionText = string.Empty;
+                CurrentQuestionText = null;
             }
 
             timer ??= new AsyncTimer(delayTime, waitTime, () => TimeBefore -= delayTime);
             var result = await timer.Start();
 
+            IsPictureInQuestion = false;
+            CurrentPicturePath = placeholderPicture;
             AnimationDataTrigger = "Stop";
 
             return result;
