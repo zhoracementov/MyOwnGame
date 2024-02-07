@@ -73,7 +73,7 @@ namespace WPF.ViewModels
             CurrentPicturePath = "/Styles/placeholder.png";
             AnimationDataTrigger = "Stop";
 
-            AnswerGivenCommand = new RelayCommand(x => timer.Cancel());
+            AnswerGivenCommand = new RelayCommand(x => timer?.Cancel());
 
             this.gameOptions = gameOptions;
             this.playersViewModel = playersViewModel;

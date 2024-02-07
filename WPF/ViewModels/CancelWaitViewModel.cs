@@ -20,7 +20,7 @@ namespace WPF.ViewModels
 
         public CancelWaitViewModel()
         {
-            NavigateBackCommand = new RelayCommand(x => waiter.Cancel(true));
+            NavigateBackCommand = new RelayCommand(x => waiter?.Cancel(true));
         }
 
         public async Task<bool> Wait(string messageText)

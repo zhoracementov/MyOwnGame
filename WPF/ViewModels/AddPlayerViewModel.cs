@@ -33,7 +33,7 @@ namespace WPF.ViewModels
 
             NavigateBackCommand = new RelayCommand(x =>
             {
-                waiter.Cancel(true);
+                waiter?.Cancel(true);
             });
         }
 

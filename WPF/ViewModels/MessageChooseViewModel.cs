@@ -20,7 +20,7 @@ namespace WPF.ViewModels
 
         public MessageChooseViewModel()
         {
-            AnswerCommand = new RelayCommand(boolStr => waiter.Cancel(bool.Parse((string)boolStr)));
+            AnswerCommand = new RelayCommand(boolStr => waiter?.Cancel(bool.Parse((string)boolStr)));
         }
 
         public async Task<bool> GetResponce(string messageText)
