@@ -7,7 +7,7 @@ namespace WPF.Services
     public class AsyncTimer
     {
         public static readonly TimeSpan DefaultWait = TimeSpan.FromSeconds(60);
-        public static readonly TimeSpan DefaultDelay = TimeSpan.FromMilliseconds(30);
+        public static readonly TimeSpan DefaultDelay = TimeSpan.FromSeconds(1);
 
         private Action callbackAction;
         private CancellationTokenSource cancellationTokenSource;
