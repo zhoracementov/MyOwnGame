@@ -9,7 +9,7 @@ namespace WPF.Models
     public class QuestionsTable
     {
         public string Name { get; set; }
-        public ObservableCollection<QuestionsLine> TableRows { get; set; }
+        public ObservableCollection<QuestionsRow> TableRows { get; set; }
 
         public static async Task<QuestionsTable> LoadAsync(string filePath, IObjectSerializer objectSerializer)
         {
@@ -36,9 +36,9 @@ namespace WPF.Models
             return new QuestionsTable
             {
                 Name = name,
-                TableRows = new ObservableCollection<QuestionsLine>(Enumerable
+                TableRows = new ObservableCollection<QuestionsRow>(Enumerable
                 .Range(1, rowsCount)
-                .Select(rowNumber => new QuestionsLine
+                .Select(rowNumber => new QuestionsRow
                 {
                     RowTitle = $"Row number {rowNumber}",
                     RowItems = new ObservableCollection<QuestionItem>(Enumerable

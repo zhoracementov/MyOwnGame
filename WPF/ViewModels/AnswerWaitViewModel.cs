@@ -88,6 +88,12 @@ namespace WPF.ViewModels
             TimeBefore = waitTime;
             Cost = questionItem.Cost;
 
+            var wait = 2250;
+            CurrentQuestionText = questionItem.RowTitle;
+            await Task.Delay(wait);
+            CurrentQuestionText = questionItem.Cost.ToString();
+            await Task.Delay(wait);
+
             AnimationDataTrigger = "Start";
 
             if (string.IsNullOrEmpty(questionItem.PicturePath))

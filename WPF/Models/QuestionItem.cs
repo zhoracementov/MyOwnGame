@@ -1,4 +1,6 @@
-﻿namespace WPF.Models
+﻿using System.Text.Json.Serialization;
+
+namespace WPF.Models
 {
     public class QuestionItem
     {
@@ -7,5 +9,7 @@
         public string PicturePath { get; set; }
         public string Answer { get; set; }
         public bool? IsClosed { get; set; }
+        [JsonIgnore]
+        public string RowTitle { get; set; }
     }
 }
