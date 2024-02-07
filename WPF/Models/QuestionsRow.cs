@@ -4,6 +4,8 @@ namespace WPF.Models
 {
     public class QuestionsRow
     {
+        public string RowTitle { get; set; }
+
         private ObservableCollection<QuestionItem> rowItems;
         public ObservableCollection<QuestionItem> RowItems
         {
@@ -12,11 +14,11 @@ namespace WPF.Models
             {
                 foreach (var item in value)
                 {
-                    item.RowTitle = RowTitle;
+                    item.Row = this;
                 }
+
                 rowItems = value;
             }
         }
-        public string RowTitle { get; set; }
     }
 }

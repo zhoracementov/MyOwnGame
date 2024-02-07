@@ -22,24 +22,11 @@ namespace WPF.ViewModels
             }
         }
 
-        private int? cost;
-        public int? Cost
-        {
-            get => cost;
-            set => Set(ref cost, value);
-        }
-
         private bool isActive;
         public bool IsActive
         {
             get => isActive;
-            set
-            {
-                if (Set(ref isActive, value))
-                {
-                    Cost = value ? questionItem.Cost : (int?)null;
-                }
-            }
+            set => Set(ref isActive, value);
         }
 
         public ICommand TapToAnswerCommand { get; }

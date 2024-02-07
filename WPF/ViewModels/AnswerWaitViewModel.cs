@@ -12,6 +12,7 @@ namespace WPF.ViewModels
     public class AnswerWaitViewModel : ViewModel
     {
         private const string placeholderPicture = "/Styles/placeholder.png";
+
         private AsyncTimer timer;
 
         private readonly IOptions<GameSettings> gameOptions;
@@ -89,36 +90,34 @@ namespace WPF.ViewModels
             TimeBefore = waitTime;
             Cost = questionItem.Cost;
 
-            var wait = 2250;
-            CurrentQuestionText = questionItem.RowTitle;
+            IsPictureInQuestion = false;
+            CurrentPicturePath = placeholderPicture;
+
+            var wait = TimeSpan.FromSeconds(2);
+
+            CurrentQuestionText = questionItem.Row.RowTitle;
             await Task.Delay(wait);
             CurrentQuestionText = questionItem.Cost.ToString();
             await Task.Delay(wait);
 
             AnimationDataTrigger = "Start";
 
-            if (string.IsNullOrEmpty(questionItem.PicturePath))
+            var picPath = Path.Combine(App.SavesDataDirectory, questionItem.PicturePath);
+            IsPictureInQuestion = !string.IsNullOrEmpty(questionItem.PicturePath) && File.Exists(picPath);
+
+            if (IsPictureInQuestion)
             {
-                IsPictureInQuestion = false;
-                CurrentQuestionText = questionItem.Description;
+                CurrentPicturePath = picPath;
+                CurrentQuestionText = string.Empty;
             }
             else
             {
-                var picPath = Path.Combine(App.SavesDataDirectory, questionItem.PicturePath);
-
-                IsPictureInQuestion = questionItem.PicturePath != null && File.Exists(picPath);
-
-                if (IsPictureInQuestion)
-                    CurrentPicturePath = picPath;
-
-                CurrentQuestionText = null;
+                CurrentQuestionText = questionItem.Description;
             }
 
             timer ??= new AsyncTimer(delayTime, waitTime, () => TimeBefore -= delayTime);
             var result = await timer.Start();
 
-            IsPictureInQuestion = false;
-            CurrentPicturePath = placeholderPicture;
             AnimationDataTrigger = "Stop";
 
             return result;

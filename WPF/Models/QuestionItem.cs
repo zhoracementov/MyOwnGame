@@ -10,6 +10,6 @@ namespace WPF.Models
         public string Answer { get; set; }
         public bool? IsClosed { get; set; }
         [JsonIgnore]
-        public string RowTitle { get; set; }
+        public QuestionsRow Row { get; set; }
     }
 }
