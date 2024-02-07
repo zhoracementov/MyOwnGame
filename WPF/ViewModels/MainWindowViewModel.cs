@@ -41,10 +41,9 @@ namespace WPF.ViewModels
                         var currMessageVM = messageBoxViewModel.AttachedViewModel;
                         var responce = await messageBoxViewModel.OpenMessageChooseWindow("Escape from this game? Progress will be lost.");
 
-                        messageBoxViewModel.CloseMessageWindow();
-
                         if (responce)
                         {
+                            messageBoxViewModel.CloseMessageWindow();
                             NavigationService.NavigateTo<MainMenuViewModel>();
                             playersViewModel.GameEnds();
                         }
