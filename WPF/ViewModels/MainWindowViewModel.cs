@@ -16,7 +16,7 @@ namespace WPF.ViewModels
         public ICommand NavigateBackCommand { get; }
 
         public MainWindowViewModel(INavigationService navigationService, GameViewModel gameViewModel,
-            MessageChooseViewModel messageChooseGameWindow, MessageBoxViewModel messageBoxViewModel,
+            MessageChooseViewModel messageChooseGameWindow, MessageBoxViewModel messageBoxViewModel, AnswerWaitViewModel answerWaitViewModel,
             PlayersViewModel playersViewModel, AddPlayerViewModel addPlayerViewModel, CancelWaitViewModel cancelWaitViewModel)
         {
             NavigationService = navigationService;
@@ -44,7 +44,10 @@ namespace WPF.ViewModels
                         if (responce)
                         {
                             messageBoxViewModel.CloseMessageWindow();
-                            NavigationService.NavigateTo<MainMenuViewModel>();
+
+                            answerWaitViewModel.AnswerGivenCommand.Execute(bool.FalseString);
+
+                            NavigationService.NavigateTo<NewGameViewModel>();
                             playersViewModel.GameEnds();
                         }
                         else

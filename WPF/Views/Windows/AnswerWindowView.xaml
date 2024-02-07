@@ -139,6 +139,7 @@
         <Grid Grid.Row="2" Grid.Column="1" Margin="10, 0">
             <Button Content="Answer given"
                             Command="{Binding AnswerGivenCommand}"
+                            CommandParameter="true"
                             FontSize="26"
                             BorderBrush="Transparent"/>
         </Grid>

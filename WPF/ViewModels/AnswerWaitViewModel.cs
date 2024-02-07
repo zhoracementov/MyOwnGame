@@ -13,8 +13,6 @@ namespace WPF.ViewModels
     {
         private const string placeholderPicture = "/Styles/placeholder.png";
 
-        private AsyncTimer timer;
-
         private readonly IOptions<GameSettings> gameOptions;
         private readonly PlayersViewModel playersViewModel;
 
@@ -68,6 +66,7 @@ namespace WPF.ViewModels
         }
 
         public ICommand AnswerGivenCommand { get; }
+        public AsyncTimer Timer { get; set; }
 
         public AnswerWaitViewModel(IOptions<GameSettings> gameOptions, PlayersViewModel playersViewModel)
         {
@@ -75,7 +74,19 @@ namespace WPF.ViewModels
             CurrentPicturePath = placeholderPicture;
             AnimationDataTrigger = "Stop";
 
-            AnswerGivenCommand = new RelayCommand(x => timer?.Cancel());
+            var delayTime = AsyncTimer.DefaultDelay;
+            var waitTime = gameOptions.Value.AnswerWaitingTimeSpan;
+
+            Timer = new AsyncTimer(() =>
+            {
+                TimeBefore -= delayTime;
+            });
+
+            AnswerGivenCommand = new RelayCommand(x =>
+            {
+                Timer.Cancel(bool.TryParse((string)x, out var res) && res);
+                AnimationDataTrigger = "Stop";
+            });
 
             this.gameOptions = gameOptions;
             this.playersViewModel = playersViewModel;
@@ -83,11 +94,10 @@ namespace WPF.ViewModels
 
         public async Task<bool> WaitAnswerAsync(QuestionItem questionItem)
         {
-            var delayTime = AsyncTimer.DefaultDelay;
-            var waitTime = gameOptions.Value.AnswerWaitingTimeSpan;
+            Timer = new AsyncTimer(() => TimeBefore -= AsyncTimer.DefaultDelay);
 
             CurrentPlayer = playersViewModel.CurrentPlayer;
-            TimeBefore = waitTime;
+            TimeBefore = gameOptions.Value.AnswerWaitingTimeSpan;
             Cost = questionItem.Cost;
 
             IsPictureInQuestion = false;
@@ -102,21 +112,28 @@ namespace WPF.ViewModels
 
             AnimationDataTrigger = "Start";
 
-            var picPath = Path.Combine(App.SavesDataDirectory, questionItem.PicturePath);
-            IsPictureInQuestion = !string.IsNullOrEmpty(questionItem.PicturePath) && File.Exists(picPath);
-
-            if (IsPictureInQuestion)
+            if (string.IsNullOrWhiteSpace(questionItem.PicturePath))
             {
-                CurrentPicturePath = picPath;
-                CurrentQuestionText = string.Empty;
+                IsPictureInQuestion = false;
+                CurrentQuestionText = questionItem.Description;
             }
             else
             {
-                CurrentQuestionText = questionItem.Description;
+                var picPath = Path.Combine(App.SavesDataDirectory, questionItem.PicturePath);
+                IsPictureInQuestion = !string.IsNullOrEmpty(questionItem.PicturePath) && File.Exists(picPath);
+
+                if (IsPictureInQuestion)
+                {
+                    CurrentPicturePath = picPath;
+                    CurrentQuestionText = string.Empty;
+                }
+                else
+                {
+                    CurrentQuestionText = questionItem.Description;
+                }
             }
 
-            timer ??= new AsyncTimer(delayTime, waitTime, () => TimeBefore -= delayTime);
-            var result = await timer.Start();
+            var result = await Timer.Start();
 
             AnimationDataTrigger = "Stop";
 

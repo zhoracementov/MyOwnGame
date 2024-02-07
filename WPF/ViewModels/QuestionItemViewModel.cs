@@ -41,6 +41,12 @@ namespace WPF.ViewModels
 
                 var skip = await messageBoxViewModel.OpenWaitAnswerWindow(QuestionItem);
 
+                if (!skip)
+                {
+                    messageBoxViewModel.CloseMessageWindow();
+                    return;
+                }
+
                 if (await messageBoxViewModel.OpenMessageChooseWindow(questionItem.Answer))
                     playersViewModel.SuccessfullyAnswered(QuestionItem);
                 else

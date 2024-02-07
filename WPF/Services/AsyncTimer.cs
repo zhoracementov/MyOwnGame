@@ -7,14 +7,19 @@ namespace WPF.Services
     public class AsyncTimer
     {
         public static readonly TimeSpan DefaultWait = TimeSpan.FromSeconds(60);
-        public static readonly TimeSpan DefaultDelay = TimeSpan.FromMilliseconds(500);
+        public static readonly TimeSpan DefaultDelay = TimeSpan.FromMilliseconds(30);
 
-        private readonly Action callbackAction;
+        private Action callbackAction;
         private CancellationTokenSource cancellationTokenSource;
         private bool exitCode;
 
         private readonly TimeSpan delay;
         private readonly TimeSpan wait;
+
+        public AsyncTimer(Action callbackAction) : this(DefaultDelay, DefaultWait, callbackAction)
+        {
+            //...
+        }
 
         public AsyncTimer(TimeSpan delay, TimeSpan wait, Action callbackAction)
         {
@@ -44,12 +49,14 @@ namespace WPF.Services
                     }
                     finally
                     {
-                        callbackAction.Invoke();
+                        callbackAction?.Invoke();
                     }
                 }
             }
 
             cancellationTokenSource = null;
+            callbackAction = null;
+
             return exitCode;
         }
 
