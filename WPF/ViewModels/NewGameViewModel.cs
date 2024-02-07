@@ -31,7 +31,7 @@ namespace WPF.ViewModels
             {
                 if (!File.Exists(value.FilePath))
                 {
-                    Saves.Remove(value);
+                    UpdateSaves();
                 }
                 else if (value != null & Set(ref selectedSave, value))
                 {
