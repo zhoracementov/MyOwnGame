@@ -20,6 +20,13 @@ namespace WPF.ViewModels
             set => Set(ref currentPlayer, value);
         }
 
+        private bool isGameActive;
+        public bool IsGameActive
+        {
+            get => isGameActive;
+            set => Set(ref isGameActive, value);
+        }
+
         public PlayersViewModel()
         {
             players = new ObservableCollection<Player>();
@@ -27,6 +34,7 @@ namespace WPF.ViewModels
 
         public void GameStarts()
         {
+            IsGameActive = true;
             Players = new ObservableCollection<Player>(Players.ShakeAll());
             CurrentPlayer = Players[0];
             ResetScores();
@@ -35,6 +43,7 @@ namespace WPF.ViewModels
 
         public void GameEnds()
         {
+            IsGameActive = false;
             players.Add(CurrentPlayer);
             CurrentPlayer = null;
         }
@@ -48,7 +57,6 @@ namespace WPF.ViewModels
             CurrentPlayer = Players[0];
             Players.RemoveAt(0);
         }
-
 
         public void ResetScores()
         {

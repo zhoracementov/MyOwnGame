@@ -13,7 +13,8 @@
             <ColumnDefinition Width="12*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <DockPanel LastChildFill="True">
+        <DockPanel LastChildFill="True"
+                   Visibility="{Binding IsGameActive, Converter={StaticResource BoolToVisibilityConverter}}">
             <TextBlock Text="Move now"
                        DockPanel.Dock="Top"
                        Foreground="LightGoldenrodYellow"
