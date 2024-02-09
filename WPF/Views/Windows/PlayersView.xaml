@@ -17,7 +17,7 @@
             <TextBlock Text="Move now"
                        DockPanel.Dock="Top"
                        Foreground="LightGoldenrodYellow"
-                       FontSize="14"
+                       FontSize="18"
                        TextAlignment="Center"
                        TextWrapping="Wrap"
                        VerticalAlignment="Center"

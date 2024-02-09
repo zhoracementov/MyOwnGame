@@ -24,37 +24,31 @@
                 <Button Content="start game"
                         Style="{StaticResource NewGameButton}"
                         Command="{Binding MoveToGameCommand}"
-                        FontSize="18"/>
+                        FontSize="22"/>
                 <Button Content="add player"
                         Style="{StaticResource NewGameButton}"
                         Command="{Binding AddPlayerCommand}"
-                        FontSize="18"
-                        FontFamily="HP Simplified Hans"/>
+                        FontSize="22"/>
                 <Button Content="delete players"
                         Style="{StaticResource NewGameButton}"
                         Command="{Binding ResetPlayersCommand}"
-                        FontSize="18"
-                        FontFamily="HP Simplified Hans"/>
+                        FontSize="22"/>
                 <Button Content="create empty game"
                         Style="{StaticResource NewGameButton}"
                         Command="{Binding CreateEmptyGameCommand}"
-                        FontSize="18"
-                        FontFamily="HP Simplified Hans"/>
+                        FontSize="22"/>
                 <Button Content="update games list"
                         Style="{StaticResource NewGameButton}"
                         Command="{Binding UpdateSaveDataCommand}"
-                        FontSize="18"
-                        FontFamily="HP Simplified Hans"/>
+                        FontSize="22"/>
                 <Button Content="open saves folder"
                         Style="{StaticResource NewGameButton}"
                         Command="{Binding OpenSaveDataFolderCommand}"
-                        FontSize="18"
-                        FontFamily="HP Simplified Hans"/>
+                        FontSize="22"/>
                 <Button Content="close"
                         Style="{StaticResource NewGameButton}"
                         Command="{Binding NavigateBackCommand}"
-                        FontSize="18"
-                        FontFamily="HP Simplified Hans"/>
+                        FontSize="22"/>
             </UniformGrid>
         </Grid>
         <ScrollViewer Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
@@ -83,7 +77,7 @@
         </ScrollViewer>
 
         <Border Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1"
-                Margin="10, 0, 10, 10"
+                Margin="10, 0, 25, 10"
                 BorderThickness="2"
                 CornerRadius="2"
                 BorderBrush="LightGoldenrodYellow">

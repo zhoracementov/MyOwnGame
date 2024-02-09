@@ -44,13 +44,13 @@
                                    VerticalAlignment="Center"
                                    Foreground="LightGoldenrodYellow"/>
                     <TextBox Text="{Binding PlayerName, Mode=TwoWay}"
-                                 MaxLength="{Binding MaxPlayerNameLength}"
-                                 Background="Transparent"
-                                 FontFamily="Franklin Gothic Medium"
-                                 Margin="10"
-                                 BorderBrush="LightGoldenrodYellow"
-                                 TextAlignment="Center"
-                                 Foreground="LightGoldenrodYellow">
+                             MaxLength="{Binding MaxPlayerNameLength}"
+                             Background="Transparent"
+                             FontFamily="Franklin Gothic Medium"
+                             Margin="10"
+                             BorderBrush="LightGoldenrodYellow"
+                             TextAlignment="Center"
+                             Foreground="LightGoldenrodYellow">
                         <TextBox.Style>
                             <Style TargetType="TextBox">
                                 <Setter Property="Foreground" Value="LightGoldenrodYellow"/>
@@ -67,9 +67,9 @@
                 </DockPanel>
             </Border>
         <Grid Grid.Row="2" Grid.Column="1" Margin="10, 0">
-            <Button Content="Close"
+            <Button Content="Close" Style="{StaticResource NewGameButton}"
                             Command="{Binding NavigateBackCommand}"
-                            FontSize="26"
+                            FontSize="52"
                             BorderBrush="Transparent"/>
         </Grid>
     </Grid>
