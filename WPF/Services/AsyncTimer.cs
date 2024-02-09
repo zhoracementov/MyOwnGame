@@ -60,7 +60,7 @@ namespace WPF.Services
             return exitCode;
         }
 
-        public void Cancel(bool exitCode = false)
+        public void Abort(bool exitCode = false)
         {
             this.exitCode = exitCode;
             cancellationTokenSource?.Cancel();
