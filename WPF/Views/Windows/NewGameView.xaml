@@ -7,119 +7,63 @@
              mc:Ignorable="d" 
              DataContext="{Binding NewGameViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <Style x:Key="GreenButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Green"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
-
-        <Style x:Key="GrayButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Gray"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
-
-        <Style x:Key="StylishTextBlock" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="32"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-
-        <Style TargetType="ListViewItem">
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
-    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="12*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="11*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="3">
-            <UniformGrid Columns="3" Rows="2">
-                <TextBlock Text="Start Game"
-                       DockPanel.Dock="Top"
-                       Foreground="LightGoldenrodYellow"
-                       FontSize="22"
-                       TextAlignment="Center"
-                       TextWrapping="Wrap"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
-                <TextBlock Text="Add Player"
-                       DockPanel.Dock="Top"
-                       Foreground="LightGoldenrodYellow"
-                       FontSize="22"
-                       TextAlignment="Center"
-                       TextWrapping="Wrap"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
-                <TextBlock Text="Delete Players"
-                       DockPanel.Dock="Top"
-                       Foreground="LightGoldenrodYellow"
-                       FontSize="22"
-                       TextAlignment="Center"
-                       TextWrapping="Wrap"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
-                <Button Command="{Binding MoveToGameCommand}"
-                        Style="{DynamicResource PlayButtonStyle}"
-                        Margin="1, 1"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"/>
-                <Button Command="{Binding AddPlayerCommand}"
-                        Style="{DynamicResource AddButtonStyle}"
-                        Margin="1, 1"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"/>
-                <Button Command="{Binding ResetPlayersCommand}"
-                        Style="{DynamicResource CloseButtonStyle}"
-                        Margin="1, 1"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"/>
+        <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
+            <UniformGrid Columns="1">
+                <Button Content="start game"
+                        Style="{StaticResource NewGameButton}"
+                        Command="{Binding MoveToGameCommand}"
+                        FontSize="18"/>
+                <Button Content="add player"
+                        Style="{StaticResource NewGameButton}"
+                        Command="{Binding AddPlayerCommand}"
+                        FontSize="18"
+                        FontFamily="HP Simplified Hans"/>
+                <Button Content="delete players"
+                        Style="{StaticResource NewGameButton}"
+                        Command="{Binding ResetPlayersCommand}"
+                        FontSize="18"
+                        FontFamily="HP Simplified Hans"/>
+                <Button Content="create empty game"
+                        Style="{StaticResource NewGameButton}"
+                        Command="{Binding CreateEmptyGameCommand}"
+                        FontSize="18"
+                        FontFamily="HP Simplified Hans"/>
+                <Button Content="update games list"
+                        Style="{StaticResource NewGameButton}"
+                        Command="{Binding UpdateSaveDataCommand}"
+                        FontSize="18"
+                        FontFamily="HP Simplified Hans"/>
+                <Button Content="open saves folder"
+                        Style="{StaticResource NewGameButton}"
+                        Command="{Binding OpenSaveDataFolderCommand}"
+                        FontSize="18"
+                        FontFamily="HP Simplified Hans"/>
+                <Button Content="close"
+                        Style="{StaticResource NewGameButton}"
+                        Command="{Binding NavigateBackCommand}"
+                        FontSize="18"
+                        FontFamily="HP Simplified Hans"/>
             </UniformGrid>
         </Grid>
-
-        <Grid Grid.Column="0" Grid.Row="0">
-            <UniformGrid Columns="3">
-                <Button Content="Create Empty" Command="{Binding CreateEmptyGameCommand}"/>
-                <Button Content="Update" Command="{Binding UpdateSaveDataCommand}"/>
-                <Button Content="Open Folder" Command="{Binding OpenSaveDataFolderCommand}"/>
-            </UniformGrid>
-            <!--<Border CornerRadius="15">
-                <Border.Effect>
-                    <BlurEffect Radius="25"/>
-                </Border.Effect>
-                <TextBlock Text="Saves"
-                           Style="{StaticResource StylishTextBlock}"
-                           Foreground="LightGoldenrodYellow"
-                           FontWeight="ExtraBold"/>
-            </Border>-->
-            
-            <!--<TextBlock Text="Saves"
-                       Style="{StaticResource StylishTextBlock}"
-                       Foreground="LightGoldenrodYellow"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>-->
-        </Grid>
-        <ScrollViewer Grid.Column="0"
-                      Grid.Row="1"
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
                       Template="{DynamicResource ScrollViewerControlTemplate}"
-                      Background="#071134"
                       BorderBrush="LightGoldenrodYellow"
                       BorderThickness="2">
             <ListView ItemsSource="{Binding Saves}"
+                      BorderThickness="0"
+                      BorderBrush="LightGoldenrodYellow"
                       IsSynchronizedWithCurrentItem="True"
                       Background="Transparent"
                       SelectedItem="{Binding SelectedSave}"
@@ -138,15 +82,18 @@
             </ListView>
         </ScrollViewer>
 
-        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1"
-                Margin="0, 10, 10, 10"
+        <Border Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1"
+                Margin="10, 0, 10, 10"
                 BorderThickness="2"
                 CornerRadius="2"
                 BorderBrush="LightGoldenrodYellow">
             <v:PlayersView/>
         </Border>
 
-        <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Margin="5">
+        <Grid Grid.Column="2"
+              Grid.Row="1"
+              Grid.ColumnSpan="1"
+              Margin="10, 10, 25, 10">
             <v:QuestionsTableView/>
             <Grid Background="Transparent"/>
         </Grid>

@@ -46,6 +46,7 @@ namespace WPF.ViewModels
         public ICommand CreateEmptyGameCommand { get; }
         public ICommand UpdateSaveDataCommand { get; }
         public ICommand OpenSaveDataFolderCommand { get; }
+        public ICommand NavigateBackCommand { get; }
 
         public NewGameViewModel(INavigationService navigationService, BrushesRouletteService brushesRouletteService,
             MessageBoxViewModel messageBoxViewModel, QuestionsTableViewModel questionsTableViewModel,
@@ -113,6 +114,11 @@ namespace WPF.ViewModels
             OpenSaveDataFolderCommand = new RelayCommand(x =>
             {
                 Process.Start("explorer.exe", App.SavesDataDirectory);
+            });
+
+            NavigateBackCommand = new RelayCommand(x =>
+            {
+                navigationService.NavigateTo<MainMenuViewModel>();
             });
 
             var baseRowCount = 5;

@@ -36,7 +36,7 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Border Background="#08213f"
+        <Border Background="#05132f"
                 BorderBrush="LightGoldenrodYellow"
                 BorderThickness="2"
                 CornerRadius="10"

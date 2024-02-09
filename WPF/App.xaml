@@ -11,6 +11,7 @@
             
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Buttons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <Style x:Key="CommonControlStyle" TargetType="{x:Type Control}">

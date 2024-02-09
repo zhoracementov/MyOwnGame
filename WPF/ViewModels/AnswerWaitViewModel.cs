@@ -74,17 +74,11 @@ namespace WPF.ViewModels
             CurrentPicturePath = placeholderPicture;
             AnimationDataTrigger = "Stop";
 
-            var delayTime = AsyncTimer.DefaultDelay;
-            var waitTime = gameOptions.Value.AnswerWaitingTimeSpan;
-
-            Timer = new AsyncTimer(() =>
-            {
-                TimeBefore -= delayTime;
-            });
+            Timer = new AsyncTimer(() => TimeBefore -= AsyncTimer.DefaultDelay);
 
             AnswerGivenCommand = new RelayCommand(x =>
             {
-                Timer.Cancel(bool.TryParse((string)x, out var res) && res);
+                Timer.Abort(bool.TryParse((string)x, out var res) && res);
                 AnimationDataTrigger = "Stop";
             });
 

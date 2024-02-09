@@ -7,18 +7,23 @@
              mc:Ignorable="d"
              DataContext="{Binding MainMenuViewModel, Source={StaticResource ViewModelsLocator}}">
     <Grid>
-        <UniformGrid Rows="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="450, 50">
+        <UniformGrid Rows="3"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Margin="600, 25">
             <Image Source="/Styles/game.png"
                         Stretch="Fill"
                         Grid.Row="0"/>
             <Button Content="New Game"
-                        FontWeight="Bold"
-                        FontSize="128"
-                        FontFamily="Miriam"
-                        Command="{Binding MoveToNewGameCommand}"
-                        Grid.Row="1"
-                        Foreground="#080808"
-                        Background="#aaabad"/>
+                    BorderThickness="12, 4"
+                    BorderBrush="#7a7d88"
+                    FontWeight="Bold"
+                    FontSize="128"
+                    FontFamily="HP Simplified Hans"
+                    Command="{Binding MoveToNewGameCommand}"
+                    Grid.Row="1"
+                    Foreground="#080808"
+                    Background="#aaabad"/>
             <!--<Button Content="Game Editor"
                         Command="{Binding MoveToGameEditCommand}"
                         Grid.Row="2"
@@ -27,18 +32,20 @@
                         Foreground="AntiqueWhite"
                         Background="#08213f"/>-->
             <Button Content="Exit"
-                        Command="{Binding CloseAppCommand}"
-                        Grid.Row="3"
-                        FontFamily="Miriam"
-                        FontWeight="Bold"
-                        FontSize="128"
-                        Foreground="#080808"
-                        Background="#aaabad"/>
+                    BorderThickness="12, 4"
+                    BorderBrush="#7a7d88"
+                    Command="{Binding CloseAppCommand}"
+                    Grid.Row="3"
+                    FontFamily="HP Simplified Hans"
+                    FontWeight="Bold"
+                    FontSize="128"
+                    Foreground="#080808"
+                    Background="#aaabad"/>
         </UniformGrid>
         <Button Command="{Binding OpenGitHubCommand}"
                     Style="{DynamicResource GitHubIcon}"
-                    Width="50"
-                    Height="50"
+                    Width="75"
+                    Height="75"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Right"/>
     </Grid>

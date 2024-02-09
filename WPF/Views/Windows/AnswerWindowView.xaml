@@ -87,7 +87,7 @@
                           Grid.Column="1"
                           Grid.ColumnSpan="1"
                           Grid.RowSpan="1">
-                <Border Background="#08213f"
+                <Border Background="#05132f"
                         BorderBrush="LightGoldenrodYellow"
                         BorderThickness="2"
                         CornerRadius="10"
