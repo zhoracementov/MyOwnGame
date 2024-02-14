@@ -11,10 +11,14 @@ namespace WPF.Services
 
         private Action callbackAction;
         private CancellationTokenSource cancellationTokenSource;
+        private AsyncCancelWaiter<object> asyncCancelWaiter;
+
         private bool exitCode;
 
         private readonly TimeSpan delay;
         private readonly TimeSpan wait;
+
+        public TimeSpan ActuallyWaited { get; set; }
 
         public AsyncTimer(Action callbackAction) : this(DefaultDelay, DefaultWait, callbackAction)
         {
@@ -34,14 +38,22 @@ namespace WPF.Services
         public async Task<bool> Start()
         {
             exitCode = true;
+            ActuallyWaited = TimeSpan.Zero;
 
-            using (cancellationTokenSource = new CancellationTokenSource(wait + delay))
+            using (cancellationTokenSource = new CancellationTokenSource(Timeout.InfiniteTimeSpan))
             {
                 while (!cancellationTokenSource.IsCancellationRequested)
                 {
+                    if (asyncCancelWaiter != null)
+                        await asyncCancelWaiter.Wait();
+
+                    if (ActuallyWaited >= wait + delay)
+                        cancellationTokenSource.Cancel();
+
                     try
                     {
                         await Task.Delay(delay, cancellationTokenSource.Token);
+                        ActuallyWaited += delay;
                     }
                     catch (TaskCanceledException)
                     {
@@ -60,7 +72,23 @@ namespace WPF.Services
             return exitCode;
         }
 
-        public void Abort(bool exitCode = false)
+        public void Stop()
+        {
+            asyncCancelWaiter = new AsyncCancelWaiter<object>();
+        }
+
+        public void Continue()
+        {
+            asyncCancelWaiter?.Cancel(null);
+            asyncCancelWaiter = null;
+        }
+
+        public void Restart()
+        {
+            ActuallyWaited = TimeSpan.Zero;
+        }
+
+        public void Cancel(bool exitCode = false)
         {
             this.exitCode = exitCode;
             cancellationTokenSource?.Cancel();

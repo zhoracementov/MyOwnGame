@@ -7,14 +7,14 @@
              mc:Ignorable="d"
              DataContext="{Binding AnswerWindowViewModel, Source={StaticResource ViewModelsLocator}}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <Storyboard x:Key="WidthAnimation">
             <DoubleAnimation Storyboard.TargetProperty="Width"
                              Duration="0:1:0"
                              To="0">
             </DoubleAnimation>
         </Storyboard>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     <Grid>
         <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -29,28 +29,42 @@
             <Grid Grid.Row="0" Grid.Column="1">
                 <DockPanel>
                     <Grid DockPanel.Dock="Top">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="8*"/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Grid.Column="0" Margin="0, 30, 5, 10">
                         <Border CornerRadius="15"
-                                Grid.Column="0"
+                                Margin="2"
+                                DockPanel.Dock="Left"
                                 Background="#08213f"
-                                HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Margin="0, 25, 0, 10">
+                                HorizontalAlignment="Center">
                             <TextBlock Text="{Binding TimeBefore, StringFormat=\{0:mm\\:ss\}}"
-                                       Margin="10"
-                                       FontSize="52"
+                                       FontSize="64"
                                        Foreground="LightGoldenrodYellow"/>
                         </Border>
+                        <Button Style="{StaticResource AddButtonStyle}"
+                                Command="{Binding AddTimeCommand}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="1"
+                                DockPanel.Dock="Top"/>
+                        <Button Style="{StaticResource RestartButtonStyle}"
+                                Command="{Binding RestartTimerCommand}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="1"
+                                DockPanel.Dock="Bottom"/>
+                    </DockPanel>
                         <Border CornerRadius="15" 
                                 Grid.Column="1"
                                 Background="{Binding CurrentPlayer.BrushColor}"
                                 Margin="0, 25, 0, 10">
                             <TextBlock Text="{Binding CurrentPlayer.Name}"
                                        TextAlignment="Center"
+                                       VerticalAlignment="Center"
                                        Margin="5"
                                        FontSize="52"/>
                         </Border>
@@ -65,7 +79,7 @@
                                        Foreground="LightGoldenrodYellow"/>
                         </Border>
                     </Grid>
-                    <Border Background="Red"
+                    <!--<Border Background="Red"
                             DockPanel.Dock="Bottom"
                             CornerRadius="5"
                             VerticalAlignment="Bottom"
@@ -82,7 +96,7 @@
                                 </Style.Triggers>
                             </Style>
                         </Border.Style>
-                    </Border>
+                    </Border>-->
                 </DockPanel>
             </Grid>
             <Grid Grid.Row="1"

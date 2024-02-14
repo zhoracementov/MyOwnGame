@@ -51,12 +51,12 @@ namespace WPF.ViewModels
             set => Set(ref currentPicturePath, value);
         }
 
-        private string animationDataTrigger; // "Start", "Stop"
-        public string AnimationDataTrigger
-        {
-            get => animationDataTrigger;
-            set => Set(ref animationDataTrigger, value);
-        }
+        //private string animationDataTrigger; // "Start", "Stop"
+        //public string AnimationDataTrigger
+        //{
+        //    get => animationDataTrigger;
+        //    set => Set(ref animationDataTrigger, value);
+        //}
 
         private Player currentPlayer;
         public Player CurrentPlayer
@@ -66,21 +66,49 @@ namespace WPF.ViewModels
         }
 
         public ICommand AnswerGivenCommand { get; }
+        public ICommand AddTimeCommand { get; }
+        public ICommand RestartTimerCommand { get; }
+        //public ICommand StopTimerCommand { get; }
+        //public ICommand ContinueTimerCommand { get; }
+
         public AsyncTimer Timer { get; set; }
 
         public AnswerWaitViewModel(IOptions<GameSettings> gameOptions, PlayersViewModel playersViewModel)
         {
             //todo: make something with it
             CurrentPicturePath = placeholderPicture;
-            AnimationDataTrigger = "Stop";
+            //AnimationDataTrigger = "Stop";
 
             Timer = new AsyncTimer(() => TimeBefore -= AsyncTimer.DefaultDelay);
 
             AnswerGivenCommand = new RelayCommand(x =>
             {
-                Timer.Abort(bool.TryParse((string)x, out var res) && res);
-                AnimationDataTrigger = "Stop";
+                Timer.Cancel(bool.TryParse((string)x, out var res) && res);
+                //AnimationDataTrigger = "Stop";
             });
+
+            AddTimeCommand = new RelayCommand(x =>
+            {
+                var increaseTime = TimeSpan.FromSeconds(15);
+                Timer.ActuallyWaited -= increaseTime;
+                TimeBefore += increaseTime;
+            });
+
+            RestartTimerCommand = new RelayCommand(x =>
+            {
+                Timer.Restart();
+                TimeBefore = gameOptions.Value.AnswerWaitingTimeSpan;
+            });
+
+            //StopTimerCommand = new RelayCommand(x =>
+            //{
+            //    Timer.Stop();
+            //});
+
+            //ContinueTimerCommand = new RelayCommand(x =>
+            //{
+            //    Timer.Continue();
+            //});
 
             this.gameOptions = gameOptions;
             this.playersViewModel = playersViewModel;
@@ -104,7 +132,7 @@ namespace WPF.ViewModels
             CurrentQuestionText = questionItem.Cost.ToString();
             await Task.Delay(wait);
 
-            AnimationDataTrigger = "Start";
+            //AnimationDataTrigger = "Start";
 
             if (string.IsNullOrWhiteSpace(questionItem.PicturePath))
             {
@@ -129,7 +157,7 @@ namespace WPF.ViewModels
 
             var result = await Timer.Start();
 
-            AnimationDataTrigger = "Stop";
+            //AnimationDataTrigger = "Stop";
 
             return result;
         }
