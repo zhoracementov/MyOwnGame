@@ -39,6 +39,7 @@ namespace WPF.ViewModels
                     if (messageBoxViewModel.AttachedViewModel != messageChooseGameWindow)
                     {
                         var currMessageVM = messageBoxViewModel.AttachedViewModel;
+                        var isEnabled = messageBoxViewModel.IsEnabled;
                         var responce = await messageBoxViewModel.OpenMessageChooseWindow("Escape from this game? Progress will be lost.");
 
                         if (responce)
@@ -52,7 +53,10 @@ namespace WPF.ViewModels
                         }
                         else
                         {
-                            messageBoxViewModel.AttachedViewModel = currMessageVM;
+                            if (isEnabled)
+                                messageBoxViewModel.AttachedViewModel = currMessageVM;
+                            else
+                                messageBoxViewModel.CloseMessageWindow();
                         }
                     }
                 }
