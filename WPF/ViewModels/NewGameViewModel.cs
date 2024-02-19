@@ -29,13 +29,16 @@ namespace WPF.ViewModels
             get => selectedSave;
             set
             {
-                if (!File.Exists(value.FilePath))
+                if (value != null)
                 {
-                    UpdateSaves();
-                }
-                else if (value != null & Set(ref selectedSave, value))
-                {
-                    ResetTable();
+                    if (!File.Exists(value.FilePath))
+                    {
+                        UpdateSaves();
+                    }
+                    else if (value != null & Set(ref selectedSave, value))
+                    {
+                        ResetTable();
+                    }
                 }
             }
         }
@@ -134,16 +137,9 @@ namespace WPF.ViewModels
 
                 var path = Path.Combine(App.SavesDataDirectory, name);
 
-                using var watcher = new FileSystemWatcher();
-                watcher.Path = App.SavesDataDirectory;
-                watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.Size | NotifyFilters.FileName | NotifyFilters.LastAccess;
-                watcher.Changed += (s, e) => UpdateSaves();
-                watcher.Created += (s, e) => UpdateSaves();
-                //System.Windows.Application.Current.Activated += (s, e) => UpdateSaves();
-
-                watcher.EnableRaisingEvents = true;
-
                 await instance.SaveAsync(path, Save.SavesSerializer);
+
+                UpdateSaves();
 
                 using var p = new Process { StartInfo = new ProcessStartInfo(path) { UseShellExecute = true } };
                 p.Start();
