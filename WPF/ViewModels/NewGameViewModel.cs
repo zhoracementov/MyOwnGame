@@ -128,6 +128,10 @@ namespace WPF.ViewModels
             {
                 var name = $"Empty instance {DateTime.Now:HH.mm.ss dd.mm.yyyy-FFFFFFF}{Save.SavesSerializer.FileFormat}";
                 var instance = QuestionsTable.CreateEmpty(name, baseRowCount, baseRowLength);
+
+                if (!Directory.Exists(App.SavesDataDirectory))
+                    Directory.CreateDirectory(App.SavesDataDirectory);
+
                 var path = Path.Combine(App.SavesDataDirectory, name);
 
                 using var watcher = new FileSystemWatcher();
