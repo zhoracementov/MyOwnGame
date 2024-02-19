@@ -72,7 +72,7 @@ namespace WPF.Services
             return exitCode;
         }
 
-        public void Stop()
+        public void Abort()
         {
             asyncCancelWaiter = new AsyncCancelWaiter<object>();
         }

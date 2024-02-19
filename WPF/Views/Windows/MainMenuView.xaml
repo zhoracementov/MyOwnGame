@@ -42,11 +42,11 @@
                     Foreground="#080808"
                     Background="#aaabad"/>
         </UniformGrid>
-        <Button Command="{Binding OpenGitHubCommand}"
+        <!--<Button Command="{Binding OpenGitHubCommand}"
                     Style="{DynamicResource GitHubIcon}"
                     Width="75"
                     Height="75"
                     VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right"/>
+                    HorizontalAlignment="Right"/>-->
     </Grid>
 </UserControl>

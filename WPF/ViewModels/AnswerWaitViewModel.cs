@@ -68,7 +68,7 @@ namespace WPF.ViewModels
         public ICommand AnswerGivenCommand { get; }
         public ICommand AddTimeCommand { get; }
         public ICommand RestartTimerCommand { get; }
-        //public ICommand StopTimerCommand { get; }
+        //public ICommand AbortTimerCommand { get; }
         //public ICommand ContinueTimerCommand { get; }
 
         public AsyncTimer Timer { get; set; }

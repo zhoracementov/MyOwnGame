@@ -34,30 +34,40 @@
                         <ColumnDefinition Width="8*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DockPanel Grid.Column="0" Margin="0, 30, 5, 10">
+                    <Grid Grid.Column="0"
+                          Margin="0, 30, 5, 10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
                         <Border CornerRadius="15"
-                                Margin="2"
-                                DockPanel.Dock="Left"
+                                Grid.ColumnSpan="2"
                                 Background="#08213f"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center">
                             <TextBlock Text="{Binding TimeBefore, StringFormat=\{0:mm\\:ss\}}"
+                                       Margin="1"
                                        FontSize="64"
                                        Foreground="LightGoldenrodYellow"/>
                         </Border>
                         <Button Style="{StaticResource AddButtonStyle}"
                                 Command="{Binding AddTimeCommand}"
                                 VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Margin="1"
-                                DockPanel.Dock="Top"/>
+                                HorizontalAlignment="Right"
+                                Margin="2"
+                                Grid.Row="2"
+                                DockPanel.Dock="Right"/>
                         <Button Style="{StaticResource RestartButtonStyle}"
                                 Command="{Binding RestartTimerCommand}"
                                 VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Margin="1"
-                                DockPanel.Dock="Bottom"/>
-                    </DockPanel>
+                                HorizontalAlignment="Left"
+                                Margin="1, 1, 0, 1"
+                                Grid.Row="2" Grid.Column="2"/>
+                    </Grid>
                         <Border CornerRadius="15" 
                                 Grid.Column="1"
                                 Background="{Binding CurrentPlayer.BrushColor}"
